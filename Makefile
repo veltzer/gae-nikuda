@@ -70,6 +70,10 @@ $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 install: all
 	$(info doing [$@])
 
+.PHONY: importdb_local
+importdb_local:
+	$(info doing [$@])
+
 .PHONY: clean
 clean:
 	$(info doing [$@])
