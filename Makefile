@@ -2,7 +2,7 @@
 # PARAMETERS # 
 ##############
 # target directory where all will be installed...
-WEB_ROOT:=/var/www
+WEB_ROOT:=~/public_html/public/nikuda
 # user to be used to access the application
 WEB_USER:=$(shell cat ~/.nikudarc | grep WEB_USER= | cut -d = -f 2)
 # password (generated using makepasswd)
@@ -69,6 +69,13 @@ $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 .PHONY: install
 install: all
 	$(info doing [$@])
+	$(Q)rm -rf $(WEB_ROOT)
+	$(Q)mkdir $(WEB_ROOT)
+	$(Q)cp -r html/index.html $(WEB_ROOT)
+	$(Q)cp -r css $(WEB_ROOT)
+	$(Q)cp -r js $(WEB_ROOT)
+	$(Q)cp -r images $(WEB_ROOT)
+	$(Q)cp -r php $(WEB_ROOT)
 
 .PHONY: importdb_local
 importdb_local:

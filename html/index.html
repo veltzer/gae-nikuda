@@ -1,8 +1,9 @@
 ﻿<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- nIkUdA by sagi 6/2005 -->
+    <!-- nikuda by sagi 6/2005 -->
     <!-- updated by doron 6/2010 -->
+    <!-- updated by mark 10/2013 -->
 
     <meta content="נקדה, תכנה לניקוד אוטומט" name="description" />
     <meta content="ניקוד, נקדה, אוטומט, עברית, נקדן, נקד, תכנה, תוכנה, חופשי, חפשי ,<key words>" name="keywords" />
@@ -11,11 +12,11 @@
     <meta content="Sagi Shoval" name="author" />
     <title>nIkUdA נִקֻּדַהּ </title>
 
-    <link rel="Stylesheet" type="text/css" href="nIkUdA.css" />
+    <link rel="Stylesheet" type="text/css" href="css/nikuda.css" />
 </head>
 
 <body dir="rtl">
-    <img class="nikuda_label" src="Images/nIkUdA.gif" alt="נִקֻּדַהּ"/>
+    <img class="nikuda_label" src="images/nikuda.gif" alt="נִקֻּדַהּ"/>
     <div class="access">
         <input id="NikudizeButton" type="button" class="access_button" value="נקד פסקה שלמה" title="נקד את כלל המלל בתיבה שמתחת" disabled="disabled" tabindex="2"/>
         <textarea class="access_text" id="MainText" style="font-size:1em; resize:none" rows="10" cols="50" disabled="disabled" tabindex="1"></textarea>
@@ -42,21 +43,21 @@
                 <!--  quicky answer -->
             </div>
             <div style="width:95%; margin:auto; overflow:hidden">
-                <img class="nikud_button" src="Images/nIkUd0.svg" alt="&#187;" onclick="insert_Draft(' ');" title="נקה ניקוד"/>
-                <img class="nikud_button" src="Images/nIkUd1.svg" alt="שׂ" onclick="insert_Draft('ׂ');" title="שׂין" noresize="noresize"/>
-                <img class="nikud_button" src="Images/nIkUd2.svg" alt="שׁ" onclick="insert_Draft('ׁ');" title="שׁין"/>
-                <img class="nikud_button" src="Images/nIkUd3.svg" alt="ֻ" onclick="insert_Draft('ֻ');" title="קובוץ"/>
-                <img class="nikud_button" src="Images/nIkUd4.svg" alt="ּ" onclick="insert_Draft('ּ');" title="דּגש, שוּרוק, מפיק"/>
-                <img class="nikud_button" src="Images/nIkUd5.svg" alt="ֹ" onclick="insert_Draft('ֹ');" title="חולם מלא"/>
-                <img class="nikud_button" src="Images/nIkUd6.svg" alt="ָ" onclick="insert_Draft('ָ');" title="קָמץ"/>
-                <img class="nikud_button" src="Images/nIkUd7.svg" alt="ַ" onclick="insert_Draft('ַ');" title="פַתח"/>
-                <img class="nikud_button" src="Images/nIkUd8.svg" alt="ֶ" onclick="insert_Draft('ֶ');" title="סֶגול"/>
-                <img class="nikud_button" src="Images/nIkUd9.svg" alt="ֵ" onclick="insert_Draft('ֵ');" title="צֵירי"/>
-                <img class="nikud_button" src="Images/nIkUdB.svg" alt="ִ" onclick="insert_Draft('ִ');" title="חִיריק"/>
-                <img class="nikud_button" src="Images/nIkUdC.svg" alt="ֳ" onclick="insert_Draft('ֳ');" title="חטף קֳמץ"/>
-                <img class="nikud_button" src="Images/nIkUdD.svg" alt="ֲ" onclick="insert_Draft('ֲ');" title="חטף פֲתח"/>
-                <img class="nikud_button" src="Images/nIkUdE.svg" alt="ֱ" onclick="insert_Draft('ֱ');" title="חטף סֱגול"/>
-                <img class="nikud_button" src="Images/nIkUdF.svg" alt="ְ" onclick="insert_Draft('ְ');" title="שְווא"/>
+                <img class="nikud_button" src="images/nikud_0.svg" alt="&#187;" onclick="insert_Draft(' ');" title="נקה ניקוד"/>
+                <img class="nikud_button" src="images/nikud_1.svg" alt="שׂ" onclick="insert_Draft('ׂ');" title="שׂין" noresize="noresize"/>
+                <img class="nikud_button" src="images/nikud_2.svg" alt="שׁ" onclick="insert_Draft('ׁ');" title="שׁין"/>
+                <img class="nikud_button" src="images/nikud_3.svg" alt="ֻ" onclick="insert_Draft('ֻ');" title="קובוץ"/>
+                <img class="nikud_button" src="images/nikud_4.svg" alt="ּ" onclick="insert_Draft('ּ');" title="דּגש, שוּרוק, מפיק"/>
+                <img class="nikud_button" src="images/nikud_5.svg" alt="ֹ""onclick="insert_Draft('ֹ');" title="חולם מלא"/>
+                <img class="nikud_button" src="images/nikud_6.svg" alt="ָ" onclick="insert_Draft('ָ');" title="קָמץ"/>
+                <img class="nikud_button" src="images/nikud_7.svg" alt="ַ" onclick="insert_Draft('ַ');" title="פַתח"/>
+                <img class="nikud_button" src="images/nikud_8.svg" alt="ֶ" onclick="insert_Draft('ֶ');" title="סֶגול"/>
+                <img class="nikud_button" src="images/nikud_9.svg" alt="ֵ" onclick="insert_Draft('ֵ');" title="צֵירי"/>
+                <img class="nikud_button" src="images/nikud_B.svg" alt="ִ" onclick="insert_Draft('ִ');" title="חִיריק"/>
+                <img class="nikud_button" src="images/nikud_C.svg" alt="ֳ" onclick="insert_Draft('ֳ');" title="חטף קֳמץ"/>
+                <img class="nikud_button" src="images/nikud_D.svg" alt="ֲ" onclick="insert_Draft('ֲ');" title="חטף פֲתח"/>
+                <img class="nikud_button" src="images/nikud_E.svg" alt="ֱ" onclick="insert_Draft('ֱ');" title="חטף סֱגול"/>
+                <img class="nikud_button" src="images/nikud_F.svg" alt="ְ" onclick="insert_Draft('ְ');" title="שְווא"/>
             </div>
             <div class="access_text" id="Draft" style="font-size:3em; cursor:pointer; text-align:center; margin: 0">
                 <!--  draft -->
@@ -133,7 +134,7 @@
         </p>
     </div>
 
-    <script src="JScript/jquery-1.5.min.js" type="text/javascript"></script>
-    <script src="JScript/nIkUdA.js" type="text/javascript"></script>
+    <script src="js/jquery-1.5.min.js" type="text/javascript"></script>
+    <script src="js/nikuda.js" type="text/javascript"></script>
 </body>
 </html>
