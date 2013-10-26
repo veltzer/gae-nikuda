@@ -1,9 +1,16 @@
-- create Makefile that will:
-	install to my site.
-	create the database.
+- diconnect problems in php should give errors and not return the data as part of the code.
+- see that these errors are shown to the user.
+- make the connect code shared between all the php scripts.
+- make the db name and user name be only in one place, easily overridable.
 
-- get to seeing the gui on my site.
+- I want to see errors in communication. at all levels. Log to the console if need be.
+
+- create Makefile that will:
+	create the database.
 
 - get to the site working on my machine.
 - add it so the makefile could push to the remote site.
 - push to the remote site and see that it is working.
+
+DONE
+- get to seeing the gui on my site.
