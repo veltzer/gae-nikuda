@@ -1,0 +1,6 @@
+- create Makefile that will:
+	install to my site.
+	create the database.
+- get to the site working on my machine.
+- add it so the makefile could push to the remote site.
+- push to the remote site and see that it is working.
