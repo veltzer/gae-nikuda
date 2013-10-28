@@ -3,23 +3,7 @@ var origElemRef = false;
 var draftElemRef = false;
 var letterElemRef = false;
 
-// Get the main constant participants by their ids to save searching the
-// DOM later
-var MainText = $('#MainText');
-var MeNaked = $('#MeNaked');
-var Quicky = $('#Quicky');
-var SuggestionBox = $('#SuggestionBox');
-var SuggestionList = $('#SuggestionList');
-var QuickyAns = $('#QuickyAns');
-var Draft = $('#Draft');
-var Answer = $('#Answer');
-var HelpBox = $('#HelpBox');
-var NikudizeButton = $('#NikudizeButton');
-var QuickyButton = $('#QuickyButton');
-var DraftUpdateButton = $('#DraftUpdateButton');
-var Status = $('#Status');
 // useful regular expressions
-
 var nikudABRegExp = /[אבגדהוזחטיכךלמםנןסעפףצץקרשתְֱֲֳִֵֶַָֹֻּׁׂ]/g;
 var notNikudABRegExp = /[^אבגדהוזחטיכךלמםנןסעפףצץקרשתְֱֲֳִֵֶַָֹֻּׁׂ]/g;
 var sinNikudRegExp = /[ׁׂ]/g;
@@ -29,6 +13,21 @@ var nikudRegExp = /[ְֱֲֳִֵֶַָֹֻֻּׁׂ]/g;
 var lastLettersRegExp = /[כמנפצ]$/g;
 var firstLettersRegExp = /^[בכלמשהו]/g;
 var ABRegExp = /[אבגדהוזחטיכךלמםנןסעפףצץקרשת]/g;
+
+// all dom elements
+var MainText = undefined;
+var MeNaked = undefined;
+var Quicky = undefined;
+var SuggestionBox = undefined;
+var SuggestionList = undefined;
+var QuickyAns = undefined;
+var Draft = undefined;
+var Answer = undefined;
+var HelpBox = undefined;
+var NikudizeButton = undefined;
+var QuickyButton = undefined;
+var DraftUpdateButton = undefined;
+var Status = undefined;
 
 // General purpose methods
 
@@ -633,6 +632,21 @@ function do_enders(word) {
 
 // On document ready event (to be run after document loading)
 $(document).ready(function() {
+  // Get the main constant participants by their ids to save searching the
+  // DOM later
+  MainText = $('#MainText');
+  MeNaked = $('#MeNaked');
+  Quicky = $('#Quicky');
+  SuggestionBox = $('#SuggestionBox');
+  SuggestionList = $('#SuggestionList');
+  QuickyAns = $('#QuickyAns');
+  Draft = $('#Draft');
+  Answer = $('#Answer');
+  HelpBox = $('#HelpBox');
+  NikudizeButton = $('#NikudizeButton');
+  QuickyButton = $('#QuickyButton');
+  DraftUpdateButton = $('#DraftUpdateButton');
+  Status = $('#Status');
   // Sometimes the browsers decide to save the latest state of the inputs
   // so override them
   MainText.removeAttr('disabled');
