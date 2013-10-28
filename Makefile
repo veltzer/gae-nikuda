@@ -13,6 +13,8 @@ DO_MAKEDEPS:=1
 DO_MKDBG:=0
 # do you want to check the javascript code?
 DO_CHECKJS:=1
+# do you want to validate html?
+DO_CHECKHTML:=1
 
 # tools
 TOOL_COMPILER:=~/install/closure/compiler.jar
@@ -24,6 +26,7 @@ TOOL_YUICOMPRESSOR:=yui-compressor
 TOOL_JSLINT:=jslint
 
 JSCHECK:=jscheck.stamp
+HTMLCHECK:=html.stamp
 
 ########
 # CODE #
@@ -35,6 +38,11 @@ ifeq ($(DO_CHECKJS),1)
 ALL:=$(ALL) $(JSCHECK)
 CLEAN:=$(CLEAN) $(JSCHECK)
 endif # DO_CHECKJS
+
+ifeq ($(DO_CHECKHTML),1)
+ALL:=$(ALL) $(HTMLCHECK)
+CLEAN:=$(CLEAN) $(HTMLCHECK)
+endif # DO_CHECKHTML
 
 # silent stuff
 ifeq ($(DO_MKDBG),1)
@@ -51,8 +59,8 @@ ifeq ($(DO_MAKEDEPS),1)
 	ALL_DEP:=$(ALL_DEP) Makefile
 endif
 
-SOURCES_JS:=$(shell find . -name "*.js")
-SOURCES_JS:=$(filter-out ./js/jquery-1.5.min.js, $(SOURCES_JS))
+SOURCES_JS:=$(shell find js -name "*.js")
+SOURCES_HTML:=$(shell find html -name "*.html")
 
 #########
 # RULES #
@@ -65,6 +73,10 @@ all: $(ALL)
 checkjs: $(JSCHECK)
 	$(info doing [$@])
 
+.PHONY: checkhtml
+checkhtml: $(HTMLCHECK)
+	$(info doing [$@])
+
 $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
@@ -73,12 +85,18 @@ $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
+$(HTMLCHECK): $(SOURCES_HTML) $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML) 
+	$(Q)mkdir -p $(dir $@)
+	$(Q)touch $(HTMLCHECK)
+
 .PHONY: install
 install: all
 	$(info doing [$@])
 	$(Q)rm -rf $(WEB_ROOT)
 	$(Q)mkdir $(WEB_ROOT)
-	$(Q)cp -r css js images php html/index.html $(WEB_ROOT)
+	$(Q)cp -r css js js_tp images php html/index.html $(WEB_ROOT)
 
 .PHONY: importdb_local
 importdb_local:
@@ -102,3 +120,4 @@ debug:
 	$(info WEB_USER is $(WEB_USER))
 	$(info WEB_PASSWORD is $(WEB_PASSWORD))
 	$(info SOURCES_JS is $(SOURCES_JS))
+	$(info SOURCES_HTML is $(SOURCES_HTML))
