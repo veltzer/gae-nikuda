@@ -3,7 +3,7 @@
 # run any command line and do not emit it's standard error or output unless there is an error
 
 import sys # for argv
-import subprocess # for Popen
+import subprocess # for Popen, PIPE
 
 # this function is here because python2.6 does not have subprocess.check_output
 def system_check_output(args):
