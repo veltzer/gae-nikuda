@@ -21,6 +21,7 @@ TOOL_JSDOC:=~/install/jsdoc/jsdoc
 TOOL_JSL:=~/install/jsl/jsl
 TOOL_GJSLINT:=~/install/gjslint/gjslint
 TOOL_YUICOMPRESSOR:=yui-compressor
+TOOL_JSLINT:=jslint
 
 JSCHECK:=jscheck.stamp
 
@@ -51,6 +52,7 @@ ifeq ($(DO_MAKEDEPS),1)
 endif
 
 SOURCES_JS:=$(shell find . -name "*.js")
+SOURCES_JS:=$(filter-out ./js/jquery-1.5.min.js, $(SOURCES_JS))
 
 #########
 # RULES #
@@ -59,10 +61,15 @@ SOURCES_JS:=$(shell find . -name "*.js")
 .PHONY: all
 all: $(ALL)
 
+.PHONY: checkjs
+checkjs: $(JSCHECK)
+	$(info doing [$@])
+
 $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-	$(Q)scripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+	$(Q)#scripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+	$(Q)#jslint $(SOURCES_JS)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
@@ -71,11 +78,7 @@ install: all
 	$(info doing [$@])
 	$(Q)rm -rf $(WEB_ROOT)
 	$(Q)mkdir $(WEB_ROOT)
-	$(Q)cp -r html/index.html $(WEB_ROOT)
-	$(Q)cp -r css $(WEB_ROOT)
-	$(Q)cp -r js $(WEB_ROOT)
-	$(Q)cp -r images $(WEB_ROOT)
-	$(Q)cp -r php $(WEB_ROOT)
+	$(Q)cp -r css js images php html/index.html $(WEB_ROOT)
 
 .PHONY: importdb_local
 importdb_local:
