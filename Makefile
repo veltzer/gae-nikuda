@@ -12,7 +12,7 @@ DO_MAKEDEPS:=1
 # do you want to see the commands executed ?
 DO_MKDBG:=0
 # do you want to check the javascript code?
-DO_CHECKJS:=0
+DO_CHECKJS:=1
 
 # tools
 TOOL_COMPILER:=~/install/closure/compiler.jar
