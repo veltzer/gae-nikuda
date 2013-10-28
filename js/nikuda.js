@@ -32,6 +32,11 @@ var ABRegExp = /[אבגדהוזחטיכךלמםנןסעפףצץקרשת]/g;
 
 // General purpose methods
 
+function show_to_user(text) {
+  Status.val(text);
+  //Status.text(text);
+}
+
 function fake_use(x) {
   if (x) {
     window.junkvar = 'junkval';
@@ -64,6 +69,7 @@ function validate_Hebrew(evt) {
   var keychar = String.fromCharCode(keynum);
   if (/\w/.test(keychar)) {
     // Do not allow english letters
+    show_to_user('אנא השתמש במקלדת עיברית...');
     evt.returnValue = false;
     if (evt.preventDefault) {
       evt.preventDefault();
@@ -74,7 +80,7 @@ function validate_Hebrew(evt) {
 // JSON AJAX punctuation function with success and error handlers
 function naked(sentWords, successHandler, doneHandler, errorHandler) {
   // Update status
-  Status.text('מנקד...');
+  show_to_user('מנקד...');
   // Go to the server with words & their respective IDs
   $.ajax({
     type: 'POST',
@@ -83,7 +89,7 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
     data: { Words: sentWords},
     success: function(replyWords) {
       // reset status
-      Status.text(' ');
+      show_to_user('');
       for (var i = 0; i < replyWords.length; i++) {
         var nikudim = replyWords[i].Nikudim;
         var original = replyWords[i].Naked;
@@ -94,7 +100,7 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
         }
         else {
           // Update status as failure
-          Status.text('השרת לא מצא ניקוד למילה [' +
+          show_to_user('השרת לא מצא ניקוד למילה [' +
                           original + ']');
         }
 
@@ -113,7 +119,7 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
         errorHandler(jqXHR, textStatus, errorThrown);
       } else {
         // Update status as failure
-        Status.text('השרת נכשל בניקוד ' + textStatus);
+        show_to_user('השרת נכשל בניקוד ' + textStatus);
       }
     }
   });
@@ -132,7 +138,7 @@ function Suggest(inaked) {
     return;
   }
 
-  Status.text('אוטומט: ' + inaked);
+  show_to_user('אוטומט: ' + inaked);
 
   // Increment suggestions counter so we can connect
   // request to appropriate reply
@@ -148,7 +154,7 @@ function Suggest(inaked) {
     }},
     success: function(replyWord) {
       // reset status
-      Status.text('');
+      show_to_user('');
 
       // Clear the old
       SuggestionList.children('li').remove();
@@ -177,7 +183,7 @@ function Suggest(inaked) {
       fake_use(textStatus);
       fake_use(jqXHR);
       // Update status as failure
-      Status.text('Auto suggest method failed: ' + errorThrown);
+      show_to_user('Auto suggest method failed: ' + errorThrown);
     }
   });
 }
@@ -358,7 +364,7 @@ function set_QuickyAns(nikudim, nikud, ID) {
 
 function set_Draft(nikud) {
   //Reset the status div
-  Status.text('');
+  show_to_user('');
   // Add each letter as a span element to the draft div
   // Remove current letters
   Draft.children('span').remove();
@@ -409,7 +415,7 @@ function set_Draft(nikud) {
 
 function update_Draft() {
   if (!draftElemRef) {
-    Status.text('ראשית כל יש להקליק על מילה בטקסט המנוקד.\n' +
+    show_to_user('ראשית כל יש להקליק על מילה בטקסט המנוקד.\n' +
         'אחכ אפשר לשנות אותה במשבצת.\n' +
         'ורק אז לחץ עלי כדי לעדכנה חזרה לטקסט המנוקד.');
     return false;
@@ -511,7 +517,7 @@ function insert_Draft(value, letter) {
         }
       }
     } else {
-      Status.text('error?!?');
+      show_to_user('error?!?');
     }
   }
   else if (value == 'ּ') {

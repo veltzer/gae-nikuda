@@ -1,3 +1,13 @@
+- move to mysqli or PDO (research which of them is better to use).
+- validate the html file as part of the build (how should I do that?)
+
+- unify all php code in packages.
+- all hebrew string should be taken out of the javascript code
+	and then the javascript code should be made ascii again and pass js checks.
+- compress the javascript code to make everything run faster.
+- make sure that jquery is the compressed version.
+- use a new version of jquery.
+
 - diconnect problems in php should give errors and not return the data as part of the code.
 - see that these errors are shown to the user.
 - make the connect code shared between all the php scripts.
@@ -5,8 +15,9 @@
 
 - I want to see errors in communication. at all levels. Log to the console if need be.
 
-- create Makefile that will:
-	create the database.
+- add it so the makefile could:
+	1) create the database.
+	2) dump the database back to the file.
 
 - get to the site working on my machine.
 - add it so the makefile could push to the remote site.
