@@ -1,5 +1,5 @@
-- validate the html file as part of the build (how should I do that?)
 - move to mysqli or PDO (research which of them is better to use).
+- see that I can connect to the db.
 
 - unify all php code in packages.
 - all hebrew string should be taken out of the javascript code
