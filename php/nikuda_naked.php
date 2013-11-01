@@ -12,19 +12,21 @@
 
 	$ReplyWords = array();
 
+	global $link;
+
 	// Iterate on words in request
 	foreach ($RequestedWords as $Word){
 		// Get word's possible punctuations from DB
 		$Naked = $Word['Naked'];
 		$ID = $Word['ID'];
 		$GetWord = 'SELECT Nikud FROM wordlist WHERE Naked = \''.$Naked.'\'';
-		$Nikudot = mysql_query($GetWord)
-			or die('Failed in selecting word:' . mysql_error());
+		$Nikudot = mysqli_query($link, $GetWord)
+			or die('Failed in selecting word:' . mysqli_error($link));
 
 		$Nikudim = array();
 
 		// Push the word's punctuations into the word's reply
-		while ($Nikud = mysql_fetch_array($Nikudot)) {
+		while ($Nikud = mysqli_fetch_array($Nikudot)) {
 			array_push($Nikudim, $Nikud[0]);
 		}
 
