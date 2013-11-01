@@ -13,28 +13,27 @@
 	$ReplyWords = array();
 
 	global $link;
+	$stmt=$link->prepare('SELECT Nikud FROM wordlist WHERE Naked = ?')
+		or die('Failed in preparing statement' . mysqli_error($link));
 
 	// Iterate on words in request
 	foreach ($RequestedWords as $Word){
 		// Get word's possible punctuations from DB
 		$Naked = $Word['Naked'];
 		$ID = $Word['ID'];
-		$GetWord = 'SELECT Nikud FROM wordlist WHERE Naked = \''.$Naked.'\'';
-		$Nikudot = mysqli_query($link, $GetWord)
-			or die('Failed in selecting word:' . mysqli_error($link));
 
+		$stmt->bind_param('s', $Naked);
+		$stmt->execute();
+		$stmt->bind_result($result);
 		$Nikudim = array();
-
-		// Push the word's punctuations into the word's reply
-		while ($Nikud = mysqli_fetch_array($Nikudot)) {
-			array_push($Nikudim, $Nikud[0]);
+		while($stmt->fetch()) {
+			array_push($Nikudim, $result);
 		}
 
 		$ReplyWord = array();
 		$ReplyWord['ID'] = $ID;
 		$ReplyWord['Naked'] = $Naked;
 		$ReplyWord['Nikudim'] = $Nikudim;
-
 		// Push the reply word into the reply
 		array_push($ReplyWords, $ReplyWord);
 	}

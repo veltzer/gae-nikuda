@@ -23,7 +23,7 @@
 	echo "<br/>";
 	echo "<br/>";
 
-// Get first 100 words
+	// Get first 100 words
 	echo "Getting first 100 words<br/>";
 	$GetWord = "SELECT Nikud FROM wordlist Limit 100";
 	$Nikudot = mysqli_query($link, $GetWord)
