@@ -1,3 +1,4 @@
+- do the database import also from my makefile to get everything deterministic.
 - see why im not getting any results from the db.
 
 - all hebrew string should be taken out of the javascript code
