@@ -1,4 +1,4 @@
-﻿<?PHP
+﻿<?php
 	// connect to host DataBase
 	mysql_connect("localhost","reemj_doron","doron15")
 		or die("Could not connect: " . mysql_error());
@@ -9,7 +9,7 @@
 		or die("Could not set Hebrew character set: " . mysql_error());
 
 	// get queried word
-	// decode JSON string to PHP object
+	// decode JSON string to php object
 	$QueriedWord = $_POST['Word'];
 
 	$Naked = $QueriedWord['Naked'];

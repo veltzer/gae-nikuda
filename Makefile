@@ -117,6 +117,7 @@ install: all
 	$(Q)rm -rf $(WEB_ROOT)
 	$(Q)mkdir $(WEB_ROOT)
 	$(Q)cp -r css js js_tp images php html/index.html $(WEB_ROOT)
+	$(Q)cp php/config_local.php $(WEB_ROOT)/php/config.php
 
 .PHONY: importdb_local
 importdb_local:

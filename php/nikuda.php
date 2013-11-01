@@ -1,4 +1,4 @@
-﻿<?PHP
+﻿<?php
 	function nIkUdA()
 	{
 	  // connect to host DataBase

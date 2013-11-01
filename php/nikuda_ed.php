@@ -1,4 +1,4 @@
-﻿<?PHP
+﻿<?php
 	// connect to host DataBase
 	mysql_connect("localhost","reemj_doron","doron15")
 		or die("Could not connect: " . mysql_error());
@@ -19,7 +19,7 @@
 	if (mysql_fetch_array($Valid)) {
 
 		// get inserted words
-		// decode JSON string to PHP object
+		// decode JSON string to php object
 		$RequestedWords = json_decode($Request->Words]);
 
 		foreach ($RequestedWords as $Word){
