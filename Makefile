@@ -126,12 +126,21 @@ importdb_local:
 	$(Q)mysqladmin create $(DB_NAME)
 	$(Q)mysql $(DB_NAME) < db/nikuda.mysqldump
 
+# notes about deploy:
+# we are not allowed to drop the database and create it so we don't
+# instead we just load the new data.
+# As far as existing table data is concerned this is ok since the mysql
+# dump removes the tables and recreates them with the data.
+# This is somewhat unclean since db tables which were in the old version
+# and are not in the new will remain there and will need to be removed
+# by hand...
 .PHNOY: deploy
 deploy:
 	$(info doing [$@])
+	$(Q)mysql $(REMOTE_DB_NAME) --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASSWORD) < db/nikuda.mysqldump
 
-.PHONY: backup
-backup:
+.PHONY: backup_remote
+backup_remote:
 	$(info doing [$@])
 	$(Q)wget -r ftp://$(REMOTE_FTP_HOST) --ftp-user=$(REMOTE_FTP_USER) --ftp-password=$(REMOTE_FTP_PASSWORD)
 
