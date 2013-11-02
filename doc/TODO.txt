@@ -1,6 +1,5 @@
-- check with doron that the site is usable.
-- make auto script to update to the site.
-- upload to the site.
+- the password to the php site is written in the source files. that is
+	not good. use some kind of templating to remove it.
 
 - all hebrew string should be taken out of the javascript code
 	and then the javascript code should be made ascii again and pass js checks.
