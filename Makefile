@@ -1,12 +1,10 @@
 ##############
 # PARAMETERS # 
 ##############
+include ~/.nikudarc
+
 # target directory where all will be installed...
-WEB_ROOT:=~/public_html/public/nikuda
-# user to be used to access the application
-WEB_USER:=$(shell cat ~/.nikudarc | grep WEB_USER= | cut -d = -f 2)
-# password (generated using makepasswd)
-WEB_PASSWORD:=$(shell cat ~/.nikudarc | grep WEB_PASSWORD= | cut -d = -f 2)
+LOCAL_ROOT:=~/public_html/public/nikuda
 # do you want dependency on the makefile itself ?
 DO_MAKEDEPS:=1
 # do you want to see the commands executed ?
@@ -116,17 +114,26 @@ $(CSSCHECK): $(SOURCES_CSS) $(ALL_DEP)
 .PHONY: install
 install: all
 	$(info doing [$@])
-	$(Q)rm -rf $(WEB_ROOT)
-	$(Q)mkdir $(WEB_ROOT)
-	$(Q)cp -r css js js_tp images php html/index.html $(WEB_ROOT)
-	$(Q)cp php/config_local.php $(WEB_ROOT)/php/config.php
+	$(Q)rm -rf $(LOCAL_ROOT)
+	$(Q)mkdir $(LOCAL_ROOT)
+	$(Q)cp -r css js js_tp images php html/index.html $(LOCAL_ROOT)
+	$(Q)cp php/config_local.php $(LOCAL_ROOT)/php/config.php
 
 .PHONY: importdb_local
 importdb_local:
 	$(info doing [$@])
-	$(Q)mysqladmin -f drop $(DB_NAME)
+	$(Q)mysqladmin -f drop $(DB_NAME) > /dev/null
 	$(Q)mysqladmin create $(DB_NAME)
 	$(Q)mysql $(DB_NAME) < db/nikuda.mysqldump
+
+.PHNOY: deploy
+deploy:
+	$(info doing [$@])
+
+.PHONY: backup
+backup:
+	$(info doing [$@])
+	$(Q)wget -r ftp://$(REMOTE_FTP_HOST) --ftp-user=$(REMOTE_FTP_USER) --ftp-password=$(REMOTE_FTP_PASSWORD)
 
 .PHONY: clean
 clean:
@@ -142,9 +149,14 @@ clean_manual:
 debug:
 	$(info ALL is $(ALL))
 	$(info CLEAN is $(CLEAN))
-	$(info WEB_ROOT is $(WEB_ROOT))
-	$(info WEB_USER is $(WEB_USER))
-	$(info WEB_PASSWORD is $(WEB_PASSWORD))
+	$(info LOCAL_ROOT is $(LOCAL_ROOT))
+	$(info REMOTE_FTP_USER is $(REMOTE_FTP_USER))
+	$(info REMOTE_FTP_PASSWORD is $(REMOTE_FTP_PASSWORD))
+	$(info REMOTE_FTP_HOST is $(REMOTE_FTP_HOST))
+	$(info REMOTE_DB_HOST is $(REMOTE_DB_HOST))
+	$(info REMOTE_DB_USER is $(REMOTE_DB_USER))
+	$(info REMOTE_DB_PASSWORD is $(REMOTE_DB_PASSWORD))
+	$(info REMOTE_DB_NAME is $(REMOTE_DB_NAME))
 	$(info SOURCES_JS is $(SOURCES_JS))
 	$(info SOURCES_HTML is $(SOURCES_HTML))
 	$(info SOURCES_CSS is $(SOURCES_CSS))
