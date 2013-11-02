@@ -134,10 +134,14 @@ importdb_local:
 # This is somewhat unclean since db tables which were in the old version
 # and are not in the new will remain there and will need to be removed
 # by hand...
-.PHNOY: deploy
+.PHONY: deploy
 deploy:
 	$(info doing [$@])
-	$(Q)#mysql $(REMOTE_DB_NAME) --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASSWORD) < db/nikuda.mysqldump
+	$(Q)mysql $(REMOTE_DB_NAME) --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASSWORD) < db/nikuda.mysqldump
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASSWORD) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images php html/index.html
+.PHONY: deploy_only_code
+deploy_only_code:
+	$(info doing [$@])
 	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASSWORD) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images php html/index.html
 
 .PHONY: backup_remote
