@@ -5,7 +5,7 @@ function nikuda_initpage() {
 	function fatal_error_handler($buffer) {
 		global $do_ob;
 		if ($do_ob) {
-			ob_end_clear();
+			ob_end_clean();
 			header('HTTP/1.1 500 Internal Server Fatal Error', true, 500);
 			header('buffer: '.$buffer);
 		} else {
@@ -16,7 +16,7 @@ function nikuda_initpage() {
 	function handle_error($errno, $errstr, $errfile, $errline){
 		global $do_ob;
 		if ($do_ob) {
-			ob_end_clear();
+			ob_end_clean();
 			header('HTTP/1.1 500 Internal Server Error', true, 500);
 			header('errstr: '.$errstr);
 			header('errno: '.$errno);
