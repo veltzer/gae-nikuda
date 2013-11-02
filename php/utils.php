@@ -5,9 +5,9 @@ function nikuda_initpage() {
 	function fatal_error_handler($buffer) {
 		global $do_ob;
 		if ($do_ob) {
-			ob_end_clean();
 			header('HTTP/1.1 500 Internal Server Fatal Error', true, 500);
 			header('buffer: '.$buffer);
+			ob_end_clean();
 		} else {
 			echo $buffer;
 		}
@@ -16,12 +16,12 @@ function nikuda_initpage() {
 	function handle_error($errno, $errstr, $errfile, $errline){
 		global $do_ob;
 		if ($do_ob) {
-			ob_end_clean();
 			header('HTTP/1.1 500 Internal Server Error', true, 500);
 			header('errstr: '.$errstr);
 			header('errno: '.$errno);
 			header('errfile: '.$errfile);
 			header('errline: '.$errline);
+			ob_end_clean();
 		} else {
 			echo $errno;
 			echo $errstr;
@@ -50,7 +50,10 @@ function nikuda_initpage() {
 		ob_start();
 	}
 
-	header('Content-Type: text/html; charset=utf-8');
+	global $do_utf_headers;
+	if ($do_utf_headers) {
+		header('Content-Type: text/html; charset=utf-8');
+	}
 }
 
 function nikuda_connect() {

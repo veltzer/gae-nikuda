@@ -8,5 +8,6 @@ $db_pass='doron15';
 $db_name='reemj_nikuda';
 $db_charset='utf8';
 $do_log_errors=false;
-$do_ob=true;
+$do_ob=false;
+$do_utf_headers=false;
 ?>

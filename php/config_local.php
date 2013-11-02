@@ -9,4 +9,5 @@ $db_name='nikuda';
 $db_charset='utf8';
 $do_log_errors=true;
 $do_ob=true;
+$do_utf_headers=true;
 ?>
