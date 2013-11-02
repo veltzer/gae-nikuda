@@ -137,7 +137,8 @@ importdb_local:
 .PHNOY: deploy
 deploy:
 	$(info doing [$@])
-	$(Q)mysql $(REMOTE_DB_NAME) --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASSWORD) < db/nikuda.mysqldump
+	$(Q)#mysql $(REMOTE_DB_NAME) --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASSWORD) < db/nikuda.mysqldump
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASSWORD) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images php html/index.html
 
 .PHONY: backup_remote
 backup_remote:
@@ -162,6 +163,7 @@ debug:
 	$(info REMOTE_FTP_USER is $(REMOTE_FTP_USER))
 	$(info REMOTE_FTP_PASSWORD is $(REMOTE_FTP_PASSWORD))
 	$(info REMOTE_FTP_HOST is $(REMOTE_FTP_HOST))
+	$(info REMOTE_FTP_DIR is $(REMOTE_FTP_DIR))
 	$(info REMOTE_DB_HOST is $(REMOTE_DB_HOST))
 	$(info REMOTE_DB_USER is $(REMOTE_DB_USER))
 	$(info REMOTE_DB_PASSWORD is $(REMOTE_DB_PASSWORD))

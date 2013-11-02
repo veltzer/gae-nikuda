@@ -7,5 +7,6 @@ $db_user='reemj_doron';
 $db_pass='doron15';
 $db_name='reemj_nikuda';
 $db_charset='utf8';
-#$db_charset='hebrew';
+$do_log_errors=false;
+$do_ob=true;
 ?>

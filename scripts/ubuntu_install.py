@@ -10,6 +10,7 @@ import subprocess # for check_call
 
 packs=[
 	'tidy', # for validating html
+	'ncftp', # for uploading via ftp
 ]
 
 args=['sudo','apt-get','install']
