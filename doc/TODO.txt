@@ -1,6 +1,3 @@
-- do the database import also from my makefile to get everything deterministic.
-- see why im not getting any results from the db.
-
 - all hebrew string should be taken out of the javascript code
 	and then the javascript code should be made ascii again and pass js checks.
 - compress the javascript code to make everything run faster.
@@ -21,6 +18,3 @@
 - get to the site working on my machine.
 - add it so the makefile could push to the remote site.
 - push to the remote site and see that it is working.
-
-DONE
-- get to seeing the gui on my site.
