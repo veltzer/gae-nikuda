@@ -17,6 +17,8 @@ DO_CHECKJS:=1
 DO_CHECKHTML:=1
 # do you want to validate css?
 DO_CHECKCSS:=1
+# what is the database name?
+DB_NAME:=nikuda
 
 # tools
 TOOL_COMPILER:=~/install/closure/compiler.jar
@@ -122,6 +124,9 @@ install: all
 .PHONY: importdb_local
 importdb_local:
 	$(info doing [$@])
+	$(Q)mysqladmin -f drop $(DB_NAME)
+	$(Q)mysqladmin create $(DB_NAME)
+	$(Q)mysql $(DB_NAME) < db/nikuda.mysqldump
 
 .PHONY: clean
 clean:

@@ -39,6 +39,8 @@ function nikuda_initpage() {
 
 	//ob_start('fatal_error_handler');
 	ob_start();
+
+	header('Content-Type: text/html; charset=utf-8');
 }
 
 function nikuda_connect() {
@@ -46,7 +48,7 @@ function nikuda_connect() {
 	$link=mysqli_connect($db_host,$db_user,$db_pass, $db_name)
 		or die('Could not connect: '.mysqli_connect_error());
 	mysqli_set_charset($link, $db_charset)
-		or die('Could not set Hebrew character set: '.mysqli_error());
+		or die('Could not set character set: '.mysqli_error());
 }
 
 function nikuda_disconnect() {
