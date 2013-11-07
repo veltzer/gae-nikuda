@@ -1,5 +1,6 @@
 - the password to the php site is written in the source files. that is
 	not good. use some kind of templating to remove it.
+- add google analytics to track comings and goings to the site.
 
 - all hebrew string should be taken out of the javascript code
 	and then the javascript code should be made ascii again and pass js checks.
@@ -14,10 +15,4 @@
 
 - I want to see errors in communication. at all levels. Log to the console if need be.
 
-- add it so the makefile could:
-	1) create the database.
-	2) dump the database back to the file.
-
-- get to the site working on my machine.
-- add it so the makefile could push to the remote site.
-- push to the remote site and see that it is working.
+- add it so the makefile could dump the database back to a file.
