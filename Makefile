@@ -109,8 +109,8 @@ $(CSSCHECK): $(SOURCES_CSS) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(CSSCHECK)
 
-.PHONY: install
-install: all
+.PHONY: install_local
+install_local: all
 	$(info doing [$@])
 	$(Q)rm -rf $(LOCAL_ROOT)
 	$(Q)mkdir $(LOCAL_ROOT)
