@@ -14,6 +14,9 @@ packs=[
 	'python', # for jsl and other stuff
 	'mysql-server', # for mysql
 	'apache2', # for local apache web server
+	'libapache2-mod-php5', # for php support for apache
+	'php5-mysql', # for mysql support for php
+	'php5-json', # for json support for php
 ]
 
 args=['sudo','apt-get','install']
