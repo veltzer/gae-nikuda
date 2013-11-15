@@ -3,8 +3,6 @@
 ##############
 include ~/.nikudarc
 
-# target directory where all will be installed...
-LOCAL_ROOT:=~/public_html/public/nikuda
 # do you want dependency on the makefile itself ?
 DO_MAKEDEPS:=1
 # do you want to see the commands executed ?
@@ -181,3 +179,4 @@ debug:
 	$(info LOCAL_DB_NAME is $(LOCAL_DB_NAME))
 	$(info LOCAL_DB_USER is $(LOCAL_DB_USER))
 	$(info LOCAL_DB_PASSWORD is $(LOCAL_DB_PASSWORD))
+	$(info LOCAL_ROOT is $(LOCAL_ROOT))
