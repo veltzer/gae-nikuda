@@ -17,6 +17,10 @@ DO_CHECKHTML:=1
 DO_CHECKCSS:=0
 # what is the database name?
 DB_NAME:=nikuda
+# what is the local database user name?
+DB_USER:=root
+# what is the password for the local database ?
+DB_PASS:=root
 
 # tools
 TOOL_COMPILER:=~/install/closure/compiler.jar
@@ -122,9 +126,9 @@ install: all
 .PHONY: importdb_local
 importdb_local:
 	$(info doing [$@])
-	$(Q)mysqladmin -f drop $(DB_NAME) > /dev/null
-	$(Q)mysqladmin create $(DB_NAME)
-	$(Q)mysql $(DB_NAME) < db/nikuda.mysqldump
+	$(Q)-mysqladmin --user=$(DB_USER) --password=$(DB_PASS) -f drop $(DB_NAME) > /dev/null
+	$(Q)mysqladmin --user=$(DB_USER) --password=$(DB_PASS) create $(DB_NAME)
+	$(Q)mysql --user=$(DB_USER) --password=$(DB_PASS) $(DB_NAME) < db/nikuda.mysqldump
 
 # notes about deploy:
 # we are not allowed to drop the database and create it so we don't
@@ -179,3 +183,6 @@ debug:
 	$(info SOURCES_JS is $(SOURCES_JS))
 	$(info SOURCES_HTML is $(SOURCES_HTML))
 	$(info SOURCES_CSS is $(SOURCES_CSS))
+	$(info DB_NAME is $(DB_NAME))
+	$(info DB_USER is $(DB_USER))
+	$(info DB_PASS is $(DB_PASS))
