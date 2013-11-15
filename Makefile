@@ -15,12 +15,6 @@ DO_CHECKJS:=0
 DO_CHECKHTML:=1
 # do you want to validate css?
 DO_CHECKCSS:=0
-# what is the database name?
-DB_NAME:=nikuda
-# what is the local database user name?
-DB_USER:=root
-# what is the password for the local database ?
-DB_PASS:=root
 
 # tools
 TOOL_COMPILER:=~/install/closure/compiler.jar
@@ -126,9 +120,9 @@ install: all
 .PHONY: importdb_local
 importdb_local:
 	$(info doing [$@])
-	$(Q)-mysqladmin --user=$(DB_USER) --password=$(DB_PASS) -f drop $(DB_NAME) > /dev/null
-	$(Q)mysqladmin --user=$(DB_USER) --password=$(DB_PASS) create $(DB_NAME)
-	$(Q)mysql --user=$(DB_USER) --password=$(DB_PASS) $(DB_NAME) < db/nikuda.mysqldump
+	$(Q)-mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) -f drop $(LOCAL_DB_NAME) > /dev/null
+	$(Q)mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) create $(LOCAL_DB_NAME)
+	$(Q)mysql --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) $(LOCAL_DB_NAME) < db/nikuda.mysqldump
 
 # notes about deploy:
 # we are not allowed to drop the database and create it so we don't
@@ -183,6 +177,7 @@ debug:
 	$(info SOURCES_JS is $(SOURCES_JS))
 	$(info SOURCES_HTML is $(SOURCES_HTML))
 	$(info SOURCES_CSS is $(SOURCES_CSS))
-	$(info DB_NAME is $(DB_NAME))
-	$(info DB_USER is $(DB_USER))
-	$(info DB_PASS is $(DB_PASS))
+	$(info LOCAL_DB_HOST is $(LOCAL_DB_HOST))
+	$(info LOCAL_DB_NAME is $(LOCAL_DB_NAME))
+	$(info LOCAL_DB_USER is $(LOCAL_DB_USER))
+	$(info LOCAL_DB_PASS is $(LOCAL_DB_PASS))
