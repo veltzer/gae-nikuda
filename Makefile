@@ -120,9 +120,9 @@ install: all
 .PHONY: importdb_local
 importdb_local:
 	$(info doing [$@])
-	$(Q)-mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) -f drop $(LOCAL_DB_NAME) > /dev/null
-	$(Q)mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) create $(LOCAL_DB_NAME)
-	$(Q)mysql --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) $(LOCAL_DB_NAME) < db/nikuda.mysqldump
+	$(Q)-mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASSWORD) -f drop $(LOCAL_DB_NAME) > /dev/null
+	$(Q)mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASSWORD) create $(LOCAL_DB_NAME)
+	$(Q)mysql --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASSWORD) $(LOCAL_DB_NAME) < db/nikuda.mysqldump
 
 # notes about deploy:
 # we are not allowed to drop the database and create it so we don't
@@ -180,4 +180,4 @@ debug:
 	$(info LOCAL_DB_HOST is $(LOCAL_DB_HOST))
 	$(info LOCAL_DB_NAME is $(LOCAL_DB_NAME))
 	$(info LOCAL_DB_USER is $(LOCAL_DB_USER))
-	$(info LOCAL_DB_PASS is $(LOCAL_DB_PASS))
+	$(info LOCAL_DB_PASSWORD is $(LOCAL_DB_PASSWORD))
