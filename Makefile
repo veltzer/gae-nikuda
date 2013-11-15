@@ -10,11 +10,11 @@ DO_MAKEDEPS:=1
 # do you want to see the commands executed ?
 DO_MKDBG:=0
 # do you want to check the javascript code?
-DO_CHECKJS:=1
+DO_CHECKJS:=0
 # do you want to validate html?
 DO_CHECKHTML:=1
 # do you want to validate css?
-DO_CHECKCSS:=1
+DO_CHECKCSS:=0
 # what is the database name?
 DB_NAME:=nikuda
 
