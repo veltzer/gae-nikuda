@@ -11,6 +11,9 @@ import subprocess # for check_call
 packs=[
 	'tidy', # for validating html
 	'ncftp', # for uploading via ftp
+	'python', # for jsl and other stuff
+	'mysql-server', # for mysql
+	'apache2', # for local apache web server
 ]
 
 args=['sudo','apt-get','install']
