@@ -27,6 +27,7 @@ var HelpBox = undefined;
 var NikudizeButton = undefined;
 var QuickyButton = undefined;
 var DraftUpdateButton = undefined;
+//var SelectAll = undefined;
 var Status = undefined;
 
 // General purpose methods
@@ -73,6 +74,9 @@ function validate_Hebrew(evt) {
     if (evt.preventDefault) {
       evt.preventDefault();
     }
+  }
+  else {
+    show_to_user('');
   }
 }
 
@@ -647,6 +651,7 @@ $(document).ready(function() {
   NikudizeButton = $('#NikudizeButton');
   QuickyButton = $('#QuickyButton');
   DraftUpdateButton = $('#DraftUpdateButton');
+  //SelectAll = $('#SelectAll');
   Status = $('#Status');
   // Sometimes the browsers decide to save the latest state of the inputs
   // so override them
@@ -858,12 +863,15 @@ $(document).ready(function() {
     }
   });
 
-
   DraftUpdateButton.click(function(evt) {
     fake_use(evt);
     update_Draft();
   });
 
+  //SelectAll.click(function(evt) {
+  //  fake_use(evt);
+  //  Answer.children().select();
+  //});
 
   // Punctuate the first introduction sentance while using the done handler
   // to select the 12th word's correct punctuation

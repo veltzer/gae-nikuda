@@ -21,15 +21,15 @@
         <input id="NikudizeButton" type="button" class="access_button" value="נקד פסקה שלמה" title="נקד את כלל המלל בתיבה שמתחת" disabled="disabled" tabindex="2"/>
         <textarea class="access_text" id="MainText" style="font-size:1em; resize:none" rows="10" cols="50" disabled="disabled" tabindex="1"></textarea>
         <div class="access_separator"></div>
-        <input id="QuickyButton" type="button" class="access_button" value="נקד מילה בודדת, אוטומטית" title="נקד את המילה הבודדת בשורה שמתחת" disabled="disabled" tabindex="4" />
-        <input class="access_text" id="Quicky" type="text" disabled="disabled" tabindex="3"/>
+        <input id="QuickyButton" type="button" class="access_button" value="נקד מילה בודדת, אוטומטית" title="נקד את המילה הבודדת בשורה שמתחת" disabled="disabled" tabindex="3" />
+        <input class="access_text" id="Quicky" type="text" disabled="disabled" tabindex="4"/>
         <div>
             <div id="SuggestionBox" style="display:none">
                 <table style="width:100%" summary='header'>
                     <tbody>
                         <tr>
                             <td>
-                                <ul id="SuggestionList">
+                                <ul id="SuggestionList" style="color:black">
                                 </ul>
                             </td>
                         </tr>
@@ -62,9 +62,10 @@
             <div class="access_text" id="Draft" style="font-size:3em; cursor:pointer; text-align:center; margin: 0">
                 <!--  draft -->
             </div>
-            <input id="DraftUpdateButton" type="button" class="access_button" value="עדכן מילה" title="עדכן מילה שנֻקדה למלל ולמאגר הניקוד המקומי" style="margin:0" tabindex="20"/>
-	    <input id="Status" type="text" disabled="disabled" tabindex="3" style="width:100%"/>
+            <input id="DraftUpdateButton" type="button" class="access_button" value="עדכן מילה לתוצאה" title="עדכן מילה שנֻקדה לתוצאה" style="margin:0" tabindex="5"/>
+            <!--<input id="SelectAll" type="button" class="access_button" value="העתק תוצאה" title="בחר בכל הטקסט שנֻקד" tabindex="6"/>-->
         </div>
+	<input id="Status" type="text" disabled="disabled" style="width:100%"/>
     </div>
     <div class="answer_text">
         <div>
@@ -89,17 +90,20 @@
         כיתבו מילה כלשהי בתיבה שמתחתי. לחיצה עלי תציג את אפשרויות הניקוד השונות למילה זו.<br />
         מופרדות ברווחים, ניתן לנקד מספר מילים המופרדות ברווחים."<br />
         <br />
-        <b><em>לחצן "עדכן מילה"</em></b><br />
+        <b><em>לחצן "עדכן מילה לתוצאה"</em></b><br />
         אני שימושי אם תרצו לעדכן תצורת ניקוד חדשה שאינה מופיעה במאגר המילים של ניקודה.
         <br />
         קודם כל יש ללחוץ על המילה שתרצו לעדכן בטקסט המנוקד משמאל. (אם לא לחצתם קודם על מילה
-        בטקסט המנוקד: אין לי כל שימוש!)
+        בטקסט המנֻקד: אין לי כל שימוש!)
         <br />
         המילה תופיע בתיבת הטיוטא מעליי. שם תוכלו לנקד אותה כרצונכם.
         <br />
         בכדי לעדכנה בחזרה לטקסט המנוקד ליחצו עלי.<br />
         <br />
-        <b><em>שתי דרכים לניקוד מילה בתיבת הטיוטא:</em></b><br />
+        <b><em>לחצן "העתק תוצאה"</em></b><br />
+        ליחצו עליי בכדי לסמן את התוצאה המנֻקדת.
+        <br />
+            <b><em>שתי דרכים לניקוד מילה בתיבת הטיוטא:</em></b><br />
         <b>א.</b> ידנית ע"י שימוש בלחיצי הניקוד מתחת לתיבת הטיוטא (ישנם גם קיצורי דרך בצורת שילובי מקשים, נסו ללחוץ על ctrl+shift ועל מקש מהשורה הראשונה של המקלדת, דהיינו שורת המספרים, ניקודי שׁ שׂ נעשים ע"י לחיצה על ctrl+shift+ש'.)<br />
         <b>ב.</b> חצי-אוטומטית בעזרת תיבת "נקד בודדת":
         <blockquote>
