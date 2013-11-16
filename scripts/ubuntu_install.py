@@ -17,6 +17,7 @@ packs=[
 	'libapache2-mod-php5', # for php support for apache
 	'php5-mysql', # for mysql support for php
 	'php5-json', # for json support for php
+	'openjdk-7-jdk', # for the css-validator (which is written in java) to work
 ]
 
 args=['sudo','apt-get','install']
