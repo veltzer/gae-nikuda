@@ -125,16 +125,17 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
 }
 
 var suggestID = 0;
-function Suggest(inaked) {
-  if (!inaked) {
-    inaked = Quicky.val();
-  }
+var currentInaked = "משתנות";
+function Suggest() {
+  var inaked = Quicky.val();
 
-  // Do not suggest when the words are too short.
-  if (inaked.length < 3) {
+  // Do not suggest when the words are too short or havent changed
+  if (inaked == currentInaked || inaked.length < 3) {
     SuggestionBox.fadeOut('slow');
     SuggestionList.children('li').remove();
     return;
+  } else {
+    currentInaked = inaked;
   }
 
   show_to_user('אוטומט: ' + inaked);
