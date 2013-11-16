@@ -1,5 +1,3 @@
-- the password to the php site is written in the source files. that is
-	not good. use some kind of templating to remove it.
 - add google analytics to track comings and goings to the site.
 
 - all hebrew string should be taken out of the javascript code
