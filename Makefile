@@ -1,6 +1,9 @@
 ##############
 # PARAMETERS # 
 ##############
+# remember all build in vars (must be before parameter definitions)
+BUILT_IN_VARS:=$(.VARIABLES)
+
 include ~/.nikudarc
 
 # do you want dependency on the makefile itself ?
@@ -28,6 +31,12 @@ JSCHECK:=jscheck.stamp
 HTMLCHECK:=html.stamp
 CSSCHECK:=css.stamp
 
+GPP_DIR_SOURCE:=gpp
+GPP_DIR_TARGET:=gpp_out
+
+# create a gpp command line of all vars (must be last after paramter definitions)
+DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
+GPP_PARAMS:=$(foreach v, $(DEFINED_VARS), -D$(v)="$($(v))")
 ########
 # CODE #
 ########
@@ -67,6 +76,11 @@ endif
 SOURCES_JS:=$(shell find js -name "*.js")
 SOURCES_HTML:=$(shell find html -name "*.html")
 SOURCES_CSS:=$(shell find css -name "*.css")
+
+GPP_SOURCES:=$(shell find $(GPP_DIR_SOURCE) -name "*.gpp")
+GPP_TARGETS:=$(addprefix $(GPP_DIR_TARGET)/,$(notdir $(basename $(GPP_SOURCES))))
+
+ALL:=$(ALL) $(GPP_TARGETS)
 
 #########
 # RULES #
@@ -113,14 +127,14 @@ install_local: all
 	$(Q)rm -rf $(LOCAL_ROOT)
 	$(Q)mkdir $(LOCAL_ROOT)
 	$(Q)cp -r css js js_tp images php html/index.html $(LOCAL_ROOT)
-	$(Q)cp php/config_local.php $(LOCAL_ROOT)/php/config.php
+	$(Q)cp gpp_out/config_local.php $(LOCAL_ROOT)/php/config.php
 
 .PHONY: importdb_local
 importdb_local:
 	$(info doing [$@])
-	$(Q)-mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASSWORD) -f drop $(LOCAL_DB_NAME) > /dev/null
-	$(Q)mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASSWORD) create $(LOCAL_DB_NAME)
-	$(Q)mysql --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASSWORD) $(LOCAL_DB_NAME) < db/nikuda.mysqldump
+	$(Q)-mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) -f drop $(LOCAL_DB_NAME) > /dev/null
+	$(Q)mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) create $(LOCAL_DB_NAME)
+	$(Q)mysql --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) $(LOCAL_DB_NAME) < db/nikuda.mysqldump
 
 # notes about deploy:
 # we are not allowed to drop the database and create it so we don't
@@ -133,17 +147,18 @@ importdb_local:
 .PHONY: deploy
 deploy:
 	$(info doing [$@])
-	$(Q)mysql $(REMOTE_DB_NAME) --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASSWORD) < db/nikuda.mysqldump
-	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASSWORD) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images php html/index.html
+	$(Q)mysql $(REMOTE_DB_NAME) --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASS) < db/nikuda.mysqldump
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images php html/index.html
 .PHONY: deploy_only_code
 deploy_only_code:
 	$(info doing [$@])
-	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASSWORD) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images php html/index.html
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images php html/index.html
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR)/php/config.php gpp_out/config_remote.php
 
 .PHONY: backup_remote
 backup_remote:
 	$(info doing [$@])
-	$(Q)wget -r ftp://$(REMOTE_FTP_HOST) --ftp-user=$(REMOTE_FTP_USER) --ftp-password=$(REMOTE_FTP_PASSWORD)
+	$(Q)wget -r ftp://$(REMOTE_FTP_HOST) --ftp-user=$(REMOTE_FTP_USER) --ftp-password=$(REMOTE_FTP_PASS)
 
 .PHONY: clean
 clean:
@@ -161,16 +176,16 @@ debug:
 	$(info CLEAN is $(CLEAN))
 	$(info LOCAL_ROOT is $(LOCAL_ROOT))
 	$(info REMOTE_FTP_USER is $(REMOTE_FTP_USER))
-	$(info REMOTE_FTP_PASSWORD is $(REMOTE_FTP_PASSWORD))
+	$(info REMOTE_FTP_PASS is $(REMOTE_FTP_PASS))
 	$(info REMOTE_FTP_HOST is $(REMOTE_FTP_HOST))
 	$(info REMOTE_FTP_DIR is $(REMOTE_FTP_DIR))
 	$(info REMOTE_DB_HOST is $(REMOTE_DB_HOST))
 	$(info REMOTE_DB_USER is $(REMOTE_DB_USER))
-	$(info REMOTE_DB_PASSWORD is $(REMOTE_DB_PASSWORD))
+	$(info REMOTE_DB_PASS is $(REMOTE_DB_PASS))
 	$(info REMOTE_DB_NAME is $(REMOTE_DB_NAME))
 	$(info REMOTE_DB_HOST is $(REMOTE_DB_HOST))
 	$(info REMOTE_DB_USER is $(REMOTE_DB_USER))
-	$(info REMOTE_DB_PASSWORD is $(REMOTE_DB_PASSWORD))
+	$(info REMOTE_DB_PASS is $(REMOTE_DB_PASS))
 	$(info REMOTE_DB_NAME is $(REMOTE_DB_NAME))
 	$(info SOURCES_JS is $(SOURCES_JS))
 	$(info SOURCES_HTML is $(SOURCES_HTML))
@@ -178,5 +193,17 @@ debug:
 	$(info LOCAL_DB_HOST is $(LOCAL_DB_HOST))
 	$(info LOCAL_DB_NAME is $(LOCAL_DB_NAME))
 	$(info LOCAL_DB_USER is $(LOCAL_DB_USER))
-	$(info LOCAL_DB_PASSWORD is $(LOCAL_DB_PASSWORD))
+	$(info LOCAL_DB_PASS is $(LOCAL_DB_PASS))
 	$(info LOCAL_ROOT is $(LOCAL_ROOT))
+	$(info GPP_SOURCES is $(GPP_SOURCES))
+	$(info GPP_TARGETS is $(GPP_TARGETS))
+	$(info GPP_PARAMS is $(GPP_PARAMS))
+
+#########
+# rules #
+#########
+
+$(GPP_TARGETS): $(GPP_DIR_TARGET)%: $(GPP_DIR_SOURCE)%.gpp $(ALL_DEP)
+	$(info doing [$@])
+	$(Q)-mkdir $(dir $@) 2> /dev/null || exit 0
+	$(Q)gpp $(GPP_PARAMS) $< > $@
