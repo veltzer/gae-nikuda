@@ -70,7 +70,7 @@ endif # DO_MKDBG
 # handle dependency on the makefile itself...
 ALL_DEP:=
 ifeq ($(DO_MAKEDEPS),1)
-	ALL_DEP:=$(ALL_DEP) Makefile
+	ALL_DEP:=$(ALL_DEP) Makefile ~/.nikudarc
 endif
 
 SOURCES_JS:=$(shell find js -name "*.js")
