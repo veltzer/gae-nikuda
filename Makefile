@@ -178,6 +178,16 @@ mysql_remote:
 	$(info doing [$@])
 	$(Q)mysql --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASS) $(REMOTE_DB_NAME)
 
+.PHONY: ftp_remote
+ftp_remote:
+	$(info doing [$@])
+	$(Q)ftp $(REMOTE_FTP_HOST)
+
+.PHONY: get_error_log
+get_error_log:
+	$(info doing [$@])
+	$(Q)ncftpget -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) /php/error_log error_log
+
 .PHONY: debug
 debug:
 	$(info ALL is $(ALL))
