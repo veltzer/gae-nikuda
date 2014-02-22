@@ -173,6 +173,11 @@ clean_manual:
 	$(info doing [$@])
 	$(Q)-rm -f $(CLEAN)
 
+.PHONY: mysql_remote
+mysql_remote:
+	$(info doing [$@])
+	$(Q)mysql --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASS) $(REMOTE_DB_NAME)
+
 .PHONY: debug
 debug:
 	$(info ALL is $(ALL))
