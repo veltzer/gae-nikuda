@@ -8,6 +8,6 @@ $db_pass='REMOTE_DB_PASS';
 $db_name='REMOTE_DB_NAME';
 $db_charset='utf8';
 $do_log_errors=true;
-$do_ob=true;
+$do_ob=false;
 $do_utf_headers=true;
 ?>

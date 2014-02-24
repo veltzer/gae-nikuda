@@ -144,17 +144,17 @@ importdb_local:
 # This is somewhat unclean since db tables which were in the old version
 # and are not in the new will remain there and will need to be removed
 # by hand...
-.PHONY: deploy
-deploy: deploy_only_code
+.PHONY: deploy_remote
+deploy_remote: deploy_remote_only_code
 	$(info doing [$@])
 	$(Q)mysql $(REMOTE_DB_NAME) --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASS) < db/nikuda.mysqldump
-.PHONY: deploy_only_code
-deploy_only_code:
+.PHONY: deploy_remote_only_code
+deploy_remote_only_code:
 	$(info doing [$@])
 	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images php html/index.html
 	$(Q)ncftpput -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) gpp_out/config_remote.php $(REMOTE_FTP_DIR)php/config.php
-.PHONY: deploy_config
-deploy_config:
+.PHONY: deploy_remote_config
+deploy_remote_config:
 	$(info doing [$@])
 	$(Q)ncftpput -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) gpp_out/config_remote.php $(REMOTE_FTP_DIR)php/config.php
 
@@ -186,7 +186,9 @@ ftp_remote:
 .PHONY: get_error_log
 get_error_log:
 	$(info doing [$@])
+	$(Q)rm -f error_log phperrors.txt
 	$(Q)ncftpget -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) /php/error_log error_log
+	$(Q)ncftpget -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) /php/phperrors.txt phperrors.txt
 
 .PHONY: debug
 debug:

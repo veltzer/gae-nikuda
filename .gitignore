@@ -1,3 +1,5 @@
 *.stamp
 *~
 /gpp_out
+/error_log
+/phperrors.txt

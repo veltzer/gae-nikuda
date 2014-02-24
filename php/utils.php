@@ -41,7 +41,7 @@ function nikuda_initpage() {
 		// log errors instead
 		ini_set('log_errors',1);
 		// error log file
-		ini_set('error_log','/tmp/phperrors.txt');
+		//ini_set('error_log','phperrors.txt');
 	}
 
 	global $do_ob;
