@@ -157,6 +157,10 @@ deploy_remote_only_code:
 deploy_remote_config:
 	$(info doing [$@])
 	$(Q)ncftpput -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) gpp_out/config_remote.php $(REMOTE_FTP_DIR)php/config.php
+.PHONY: deploy_under_construction
+deploy_under_construction:
+	$(info doing [$@])
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) under_construction/index.html
 
 .PHONY: backup_remote
 backup_remote:
