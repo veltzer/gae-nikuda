@@ -162,7 +162,7 @@ deploy_hack:
 	$(info doing [$@])
 	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) php/test_02_connect.php
 .PHONY: deploy_remote_config
-deploy_remote_config:
+deploy_remote_config: gpp_out/config_remote.php
 	$(info doing [$@])
 	$(Q)ncftpput -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) gpp_out/config_remote.php $(REMOTE_FTP_DIR)php/config.php
 .PHONY: deploy_under_construction

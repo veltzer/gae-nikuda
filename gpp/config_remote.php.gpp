@@ -9,6 +9,6 @@ $db_name='REMOTE_DB_NAME';
 $db_charset='utf8';
 $do_log_errors=true;
 $do_ob=true;
-$do_utf_headers=true;
+$do_utf_headers=false;
 $utf_charset='utf-8';
 ?>
