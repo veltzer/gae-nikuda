@@ -34,6 +34,7 @@ function nikuda_initpage() {
 	// ERROR HANDLING
 	error_reporting(E_ALL);
 	set_error_handler('handle_error');
+
 	global $do_log_errors;
 	if ($do_log_errors) {
 		// dont show errors to the user
@@ -51,8 +52,9 @@ function nikuda_initpage() {
 	}
 
 	global $do_utf_headers;
+	global $utf_charset;
 	if ($do_utf_headers) {
-		header('Content-Type: text/html; charset=utf-8');
+		header('Content-Type: text/html; charset='.$utf_charset);
 	}
 }
 

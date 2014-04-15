@@ -74,7 +74,8 @@ ifeq ($(DO_MAKEDEPS),1)
 endif
 
 SOURCES_JS:=$(shell find js -name "*.js")
-SOURCES_HTML:=$(shell find html -name "*.html")
+SOURCES_HTML:=php/index.php
+#SOURCE_HTML:=$(shell find html -name "*.html")
 SOURCES_CSS:=$(shell find css -name "*.css")
 
 GPP_SOURCES:=$(shell find $(GPP_DIR_SOURCE) -name "*.gpp")
@@ -121,16 +122,16 @@ $(CSSCHECK): $(SOURCES_CSS) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(CSSCHECK)
 
-.PHONY: install_local
-install_local: all
+.PHONY: deploy_local_code
+deploy_local_code: all
 	$(info doing [$@])
 	$(Q)rm -rf $(LOCAL_ROOT)
 	$(Q)mkdir $(LOCAL_ROOT)
-	$(Q)cp -r css js js_tp images php html/index.html $(LOCAL_ROOT)
+	$(Q)cp -r css js js_tp images php php/index.php $(LOCAL_ROOT)
 	$(Q)cp gpp_out/config_local.php $(LOCAL_ROOT)/php/config.php
 
-.PHONY: importdb_local
-importdb_local:
+.PHONY: deploy_local_db
+deploy_local_db:
 	$(info doing [$@])
 	$(Q)-mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) -f drop $(LOCAL_DB_NAME) > /dev/null
 	$(Q)mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) create $(LOCAL_DB_NAME)
@@ -145,14 +146,21 @@ importdb_local:
 # and are not in the new will remain there and will need to be removed
 # by hand...
 .PHONY: deploy_remote
-deploy_remote: deploy_remote_only_code
+deploy_remote: deploy_remote_code deploy_remote_db
+	$(info doing [$@])
+.PHONY: deploy_remote_db
+deploy_remote_db:
 	$(info doing [$@])
 	$(Q)mysql $(REMOTE_DB_NAME) --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASS) < db/nikuda.mysqldump
-.PHONY: deploy_remote_only_code
-deploy_remote_only_code:
+.PHONY: deploy_remote_code
+deploy_remote_code:
 	$(info doing [$@])
-	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images php html/index.html
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images php php/index.php
 	$(Q)ncftpput -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) gpp_out/config_remote.php $(REMOTE_FTP_DIR)php/config.php
+.PHONY: deploy_hack
+deploy_hack:
+	$(info doing [$@])
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) php/test_02_connect.php
 .PHONY: deploy_remote_config
 deploy_remote_config:
 	$(info doing [$@])
@@ -160,7 +168,7 @@ deploy_remote_config:
 .PHONY: deploy_under_construction
 deploy_under_construction:
 	$(info doing [$@])
-	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) under_construction/index.html
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) under_construction/index.php
 
 .PHONY: backup_remote
 backup_remote:
@@ -185,6 +193,8 @@ mysql_remote:
 .PHONY: ftp_remote
 ftp_remote:
 	$(info doing [$@])
+	$(info put remote user as $(REMOTE_FTP_USER))
+	$(info put remote password as $(REMOTE_FTP_PASS))
 	$(Q)ftp $(REMOTE_FTP_HOST)
 
 .PHONY: get_error_log

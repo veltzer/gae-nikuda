@@ -7,6 +7,13 @@
 	nikuda_connect();
 	// do something
 	echo "<p>hello</p>";
+	echo "<p>hello</p>";
+	echo "<p>hello</p>";
+	echo "<p>hello</p>";
+	echo "<p>hello</p>";
+	echo "<p>hello</p>";
+	echo "<p>hello</p>";
+	echo "<p>hello</p>";
 	// disconnect from the database
 	nikuda_disconnect();
 	// finish the page
