@@ -1,3 +1,7 @@
+- somehow the do_utf_headers var works on marks machine (local install)
+	and causes the real site to stop working.
+	It is currently enabled for local install and disabled for remote.
+
 - add google analytics to track comings and goings to the site.
 
 - all hebrew string should be taken out of the javascript code
