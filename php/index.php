@@ -136,7 +136,7 @@
             <a href="http://www.hebcal.com/converter/?hd=28&amp;hm=Av&amp;hy=5735&amp;h2g=Convert+Hebrew+to+Gregorian+date"> תרגום  תאריכים לועזי עברי</a>
             <br /><br /><br /><br />לטענות מענות ובקשות לשיפור ניתן לפנות ל
             <!--a href="mailto:veltzerdoron@gmail.com">דורון</a-->
-            <a href="https://bitbucket.org/veltzer/nikuda/issues">הצעות לשיפור</a-->
+            <a href="https://bitbucket.org/veltzer/nikuda/issues">הצעות לשיפור</a>
         </p>
     </div>
 	</body>
