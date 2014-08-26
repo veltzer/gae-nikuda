@@ -169,6 +169,10 @@ deploy_remote_config: gpp_out/config_remote.php
 deploy_under_construction:
 	$(info doing [$@])
 	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) under_construction/index.php
+.PHONY: undeploy_under_construction
+undeploy_under_construction:
+	$(info doing [$@])
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) php/index.php
 
 .PHONY: backup_remote
 backup_remote:
