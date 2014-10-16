@@ -1,11 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-'''
-this scrip will install all the required packages that you need on
-ubuntu to compile and work with this package.
-'''
+# this script will install all the required packages that you need on
+# ubuntu to compile and work with this package.
 
-from __future__ import print_function
 import subprocess # for check_call
 
 packs=[
