@@ -12,3 +12,5 @@ handlers:
   static_dir: js_tp
 - url: /
   script: php/index.php
+- url: /php/test_00_php.php
+  script: php/test_00_php.php
