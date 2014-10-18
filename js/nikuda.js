@@ -1,4 +1,4 @@
-﻿/* referencers */
+// references
 var origElemRef = false;
 var draftElemRef = false;
 var letterElemRef = false;
@@ -104,7 +104,7 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
         else {
           // Update status as failure
           show_to_user('השרת לא מצא ניקוד למילה [' +
-                          original + ']');
+                       original + ']');
         }
 
         // Add naked word to the punctuations at the end
@@ -129,7 +129,7 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
 }
 
 var suggestID = 0;
-var currentInaked = "משתנות";
+var currentInaked = 'משתנות';
 function Suggest() {
   var inaked = Quicky.val();
 

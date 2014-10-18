@@ -18,6 +18,9 @@ packs=[
 	'gpp', # for templating
 	'php5-cgi', # for the local gcloud server to be able to do php
 	'lftp', # other ftp client
+	'nodejs', # for jslint
+	'npm', # for jslint
+	'node', # for jslint
 ]
 
 args=['sudo','apt-get','install','--assume-yes']

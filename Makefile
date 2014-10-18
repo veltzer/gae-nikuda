@@ -1,11 +1,17 @@
+#################
+# local rc file #
+#################
+# remember all built in vars (must be before parameter definitions)
+# this is to remove these and get the variables defined in the rc file
+BUILT_IN_VARS:=$(.VARIABLES)
+include ~/.nikudarc
+# create a gpp command line of all vars (must be last after paramter definitions)
+DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
+GPP_PARAMS:=$(foreach v, $(DEFINED_VARS), -D$(v)="$($(v))")
+
 ##############
 # PARAMETERS # 
 ##############
-# remember all build in vars (must be before parameter definitions)
-BUILT_IN_VARS:=$(.VARIABLES)
-
-include ~/.nikudarc
-
 # do you want dependency on the makefile itself ?
 DO_MAKEDEPS:=1
 # do you want to see the commands executed ?
@@ -17,12 +23,14 @@ DO_CHECKHTML:=1
 # do you want to validate css?
 DO_CHECKCSS:=1
 
-# tools
+#########
+# tools #
+#########
 TOOL_COMPILER:=~/install/closure/compiler.jar
 TOOL_JSMIN:=~/install/jsmin/jsmin
 TOOL_JSDOC:=~/install/jsdoc/jsdoc
 TOOL_JSL:=~/install/jsl/jsl
-TOOL_GJSLINT:=~/install/gjslint/gjslint
+TOOL_GJSLINT:=gjslint
 TOOL_YUICOMPRESSOR:=yui-compressor
 TOOL_JSLINT:=jslint
 TOOL_CSS_VALIDATOR:=~/install/css-validator/css-validator.jar
@@ -34,9 +42,6 @@ CSSCHECK:=css.stamp
 GPP_DIR_SOURCE:=gpp
 GPP_DIR_TARGET:=gpp_out
 
-# create a gpp command line of all vars (must be last after paramter definitions)
-DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
-GPP_PARAMS:=$(foreach v, $(DEFINED_VARS), -D$(v)="$($(v))")
 ########
 # CODE #
 ########
@@ -105,8 +110,7 @@ checkcss: $(CSSCHECK)
 $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-	$(Q)#scripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
-	$(Q)#jslint $(SOURCES_JS)
+	$(Q)scripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
