@@ -2,10 +2,12 @@
 /*
  * Here is the php site configuration for nikuda
  */
-$db_host='LOCAL_DB_HOST';
-$db_user='LOCAL_DB_USER';
-$db_pass='LOCAL_DB_PASS';
-$db_name='LOCAL_DB_NAME';
+$db_host=LOCAL_DB_HOST;
+$db_user=LOCAL_DB_USER;
+$db_pass=LOCAL_DB_PASS;
+$db_name=LOCAL_DB_NAME;
+$db_port=LOCAL_DB_PORT;
+$db_socket=LOCAL_DB_SOCKET;
 $db_charset='utf8';
 $do_log_errors=true;
 $do_ob=true;

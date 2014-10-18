@@ -155,16 +155,14 @@ deploy_remote_db:
 .PHONY: deploy_remote_code
 deploy_remote_code:
 	$(info doing [$@])
-	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images php php/index.php
-	$(Q)ncftpput -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) gpp_out/config_remote.php $(REMOTE_FTP_DIR)php/config.php
-.PHONY: deploy_hack
-deploy_hack:
-	$(info doing [$@])
-	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) php/test_02_connect.php
+	$(Q)scripts/ftp_rmdir.py $(REMOTE_FTP_HOST) $(REMOTE_FTP_USER) $(REMOTE_FTP_PASS)
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images
+	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) php/*.php
+	$(Q)ncftpput -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) gpp_out/config_remote.php $(REMOTE_FTP_DIR)config.php
 .PHONY: deploy_remote_config
 deploy_remote_config: gpp_out/config_remote.php
 	$(info doing [$@])
-	$(Q)ncftpput -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) gpp_out/config_remote.php $(REMOTE_FTP_DIR)php/config.php
+	$(Q)ncftpput -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) gpp_out/config_remote.php $(REMOTE_FTP_DIR)config.php
 .PHONY: deploy_under_construction
 deploy_under_construction:
 	$(info doing [$@])

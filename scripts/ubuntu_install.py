@@ -17,6 +17,7 @@ packs=[
 	'openjdk-7-jdk', # for the css-validator (which is written in java) to work
 	'gpp', # for templating
 	'php5-cgi', # for the local gcloud server to be able to do php
+	'lftp', # other ftp client
 ]
 
 args=['sudo','apt-get','install','--assume-yes']

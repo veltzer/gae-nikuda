@@ -62,13 +62,13 @@ function nikuda_initpage() {
 }
 
 function nikuda_connect() {
-	global $db_host, $db_user, $db_pass, $db_name, $db_port, $db_socket, $db_charset, $link;
+	global $db_host, $db_user, $db_pass, $db_name, $db_port, $db_socket, $link;
 	$link=mysqli_connect($db_host, $db_user, $db_pass, $db_name, $db_port, $db_socket)
 		or die('Could not connect: '.mysqli_connect_error());
 	global $do_set_charset;
 	if ($do_set_charset) {
 		global $db_charset;
-		mysqli_set_charset($link, $db_charset)
+		$link->set_charset($db_charset)
 			or die('Could not set character set: '.mysqli_error());
 	}
 }
