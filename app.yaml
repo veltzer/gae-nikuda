@@ -1,0 +1,15 @@
+application: nikuda-web
+version: 1
+runtime: php
+api_version: 1
+
+handlers:
+- url: /css
+  static_dir: css
+- url: /js
+  static_dir: js
+- url: /js_tp
+  static_dir: js_tp
+
+- url: /.*
+  script: php/index.php
