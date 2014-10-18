@@ -1,9 +1,7 @@
+- after all the latest changes in deployment check that local deployment is still working.
+
 - google cloud progress:
-	- sql is not there. do it now.
-	- appid is nikuda-web
-	- appengine is working.
-	- requested to go into the google domain program to get a domain from google
-		(nikuda.com).
+	- handle the domain via google domain (already sent request)
 	- eclipse support is still not there.
 
 - somehow the do_utf_headers var works on marks machine (local install)
