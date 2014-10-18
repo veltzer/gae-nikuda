@@ -16,6 +16,7 @@
 		<script src="js/nikuda.js" type="text/javascript"></script>
 	</head>
 	<body dir="rtl">
+this is a change
     <img class="nikuda_label" src="images/nikuda.gif" alt="נִקֻּדַהּ"/>
     <div class="access">
         <input id="NikudizeButton" type="button" class="access_button" value="נקד פסקה שלמה" title="נקד את כלל המלל בתיבה שמתחת" disabled="disabled" tabindex="2"/>
