@@ -31,9 +31,11 @@ function nikuda_initpage() {
 		exit(0);
 	}
 
-	// ERROR HANDLING
-	error_reporting(E_ALL);
-	set_error_handler('handle_error');
+	global $do_error_handling;
+	if ($do_error_handling) {
+		error_reporting(E_ALL);
+		set_error_handler('handle_error');
+	}
 
 	global $do_log_errors;
 	if ($do_log_errors) {
@@ -52,8 +54,8 @@ function nikuda_initpage() {
 	}
 
 	global $do_utf_headers;
-	global $utf_charset;
 	if ($do_utf_headers) {
+		global $utf_charset;
 		header('Content-Type: text/html; charset='.$utf_charset);
 	}
 }
@@ -62,8 +64,12 @@ function nikuda_connect() {
 	global $db_host, $db_user, $db_pass, $db_name, $db_charset, $link;
 	$link=mysqli_connect($db_host,$db_user,$db_pass, $db_name)
 		or die('Could not connect: '.mysqli_connect_error());
-	mysqli_set_charset($link, $db_charset)
-		or die('Could not set character set: '.mysqli_error());
+	global $do_set_charset;
+	if ($do_set_charset) {
+		global $db_charset;
+		mysqli_set_charset($link, $db_charset)
+			or die('Could not set character set: '.mysqli_error());
+	}
 }
 
 function nikuda_disconnect() {

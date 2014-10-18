@@ -11,4 +11,6 @@ $do_log_errors=true;
 $do_ob=true;
 $do_utf_headers=true;
 $utf_charset='utf-8';
+$do_error_handling=true;
+$do_set_charset=true;
 ?>
