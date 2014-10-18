@@ -1,0 +1,8 @@
+real site (via appspot):
+	http://nikuda-web.appspot.com
+console for the project:
+	https://console.developers.google.com/project/nikuda-web
+local site:
+	http://localhost:8080
+local console:
+	http://localhost:8000

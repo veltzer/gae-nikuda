@@ -1,7 +1,10 @@
-- move this to the google cloud with:
-	- git integration.
-	- app engine.
-	- eclipse support.
+- google cloud progress:
+	- appid is nikuda-web
+	- appengine is working.
+	- requested to go into the google domain program to get a domain from google
+		(nikuda.com).
+	- eclipse support is still not there.
+	- sql is not there.
 
 - somehow the do_utf_headers var works on marks machine (local install)
 	and causes the real site to stop working.
