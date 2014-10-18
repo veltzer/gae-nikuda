@@ -6,9 +6,6 @@
 		(nikuda.com).
 	- eclipse support is still not there.
 
-- when deploying to the remote server (not gcloud but the hosting one)
-	the clean the remote folder before deplying.
-
 - somehow the do_utf_headers var works on marks machine (local install)
 	and causes the real site to stop working.
 	It is currently enabled for local install and disabled for remote.
