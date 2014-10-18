@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__.'/config.php';
+
+require_once 'config.php';
 
 function nikuda_initpage() {
 	function fatal_error_handler($buffer) {
@@ -61,8 +62,8 @@ function nikuda_initpage() {
 }
 
 function nikuda_connect() {
-	global $db_host, $db_user, $db_pass, $db_name, $db_charset, $link;
-	$link=mysqli_connect($db_host,$db_user,$db_pass, $db_name)
+	global $db_host, $db_user, $db_pass, $db_name, $db_port, $db_socket, $db_charset, $link;
+	$link=mysqli_connect($db_host, $db_user, $db_pass, $db_name, $db_port, $db_socket)
 		or die('Could not connect: '.mysqli_connect_error());
 	global $do_set_charset;
 	if ($do_set_charset) {
