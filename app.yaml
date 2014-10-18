@@ -8,9 +8,11 @@ handlers:
   static_dir: css
 - url: /js
   static_dir: js
+- url: /images
+  static_dir: images
 - url: /js_tp
   static_dir: js_tp
+- url: /(.*).php
+  script: php/\1.php
 - url: /
   script: php/index.php
-- url: /php/test_00_php.php
-  script: php/test_00_php.php

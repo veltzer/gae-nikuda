@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once __DIR__.'/config.php';
 
 function nikuda_initpage() {
 	function fatal_error_handler($buffer) {

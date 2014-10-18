@@ -1,5 +1,5 @@
 <?php
-	require_once 'utils.php';
+	require_once __DIR__.'/utils.php';
 
 	// start the page
 	nikuda_initpage();

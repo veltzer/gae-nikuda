@@ -1,0 +1,14 @@
+<?php
+/*
+ * Here is the php site configuration for nikuda
+ */
+$db_host='GCLOUD_INTERNAL_DB_HOST';
+$db_user='GCLOUD_INTERNAL_DB_USER';
+$db_pass='GCLOUD_INTERNAL_DB_PASS';
+$db_name='GCLOUD_INTERNAL_DB_NAME';
+$db_charset='utf8';
+$do_log_errors=true;
+$do_ob=true;
+$do_utf_headers=false;
+$utf_charset='utf-8';
+?>
