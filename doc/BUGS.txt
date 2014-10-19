@@ -1,0 +1,10 @@
+- ktiv haser: the claim is that the system knows how to put nikud for words
+	spelled out in ktiv haser but not in ktiv maleh.
+- the text that is shown by default on the site is badly punctuated.
+	is this because it is punctuated using the system and the system
+	simply chooses a puctuation per word by random with no context?
+	Maybe we should choose.
+- we don't know, in our database, which words are nouns and which are verbs.
+- we don't know how to handle prefixes. לשמור, ולשמור
+- there are words which are missing.
+- the process of preparing the database is not part of our workflow.
