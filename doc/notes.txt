@@ -1,11 +1,2 @@
 why is the index file called .php?
 	so that the server will not allow to cache its content by browsers.
-
-phpmyadmin to nicoyazoom:
-	url: http://www.nicoyazoom.com:2082/3rdparty/phpMyAdmin/index.php
-	Username: reemj
-	Password: rn1493js
-
-controlling access to the db:
-	http://www.nicoyazoom.com:2082/cpsess6990169767/frontend/x3/index.php
-	go to remote administration.
