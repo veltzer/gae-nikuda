@@ -1,5 +1,9 @@
 - after all the latest changes in deployment check that local deployment is still working.
 
+- we are not really using MySQL as an RDMBS and it is more expensive to handle
+	and less scalable than other solutions for data storage in the cloud.
+	Maybe we should move to one of those storages?
+
 - google cloud progress:
 	- handle the domain via google domain (already sent request)
 	- eclipse support is still not there.
