@@ -1,3 +1,5 @@
+- move this project to templar.
+
 - after all the latest changes in deployment check that local deployment is still working.
 
 - we are not really using MySQL as an RDMBS and it is more expensive to handle
