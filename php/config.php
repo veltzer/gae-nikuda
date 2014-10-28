@@ -2,11 +2,11 @@
 /*
  * Here is the php site configuration for nikuda
  */
-$db_host=null;
+$db_host='';
 $db_user='root';
-$db_pass=null;
+$db_pass='';
 $db_name='nikuda';
-$db_port=null;
+$db_port='';
 $db_socket='/cloudsql/nikuda-web:maindb';
 $db_charset='utf8';
 $do_log_errors=false;
