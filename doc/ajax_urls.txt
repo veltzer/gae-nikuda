@@ -23,3 +23,7 @@ So the names of the files need to be 'php/[file.php]' (relative, not absolute!)
 This works well in local deploy.
 
 Lets see how this works (I'm worried about the google cloud for now).
+
+References:
+Discussions of urls on the google app engine for php:
+http://stackoverflow.com/questions/22184211/google-app-engine-app-yaml-match-all-php-files-and-match-all-html-files-and-serv
