@@ -1,13 +1,14 @@
 <?php
 /*
  * Here is the php site configuration for nikuda
+ * ${attr.messages_dne}
  */
-$db_host='${attr.nikuda_gcloud_internal_db_host}';
-$db_user='${attr.nikuda_gcloud_internal_db_user}';
-$db_pass='${attr.nikuda_gcloud_internal_db_password}';
-$db_name='${attr.nikuda_gcloud_internal_db_name}';
-$db_port='${attr.nikuda_gcloud_internal_db_port}';
-$db_socket='${attr.nikuda_gcloud_internal_db_socket}';
+$db_host=empty('${attr.nikuda_gcloud_internal_db_host}') ? null : '${attr.nikuda_gcloud_internal_db_host}';
+$db_user=empty('${attr.nikuda_gcloud_internal_db_user}') ? null : '${attr.nikuda_gcloud_internal_db_user}';
+$db_pass=empty('${attr.nikuda_gcloud_internal_db_password}') ? null : '${attr.nikuda_gcloud_internal_db_password}';
+$db_name=empty('${attr.nikuda_gcloud_internal_db_name}') ? null : '${attr.nikuda_gcloud_internal_db_name}';
+$db_port=empty('${attr.nikuda_gcloud_internal_db_port}') ? null : '${attr.nikuda_gcloud_internal_db_port}';
+$db_socket=empty('${attr.nikuda_gcloud_internal_db_socket}') ? null : '${attr.nikuda_gcloud_internal_db_socket}';
 $db_charset='utf8';
 $do_log_errors=false;
 $do_ob=false;
