@@ -1,6 +1,6 @@
-- after all the latest changes in deployment check that local deployment is still working.
-
 - bring back security in the .attr.conf file.
+	This will probably be done by writing python scripts to wrap
+	all the ftp and other work that I'm doing.
 
 - we are not really using MySQL as an RDMBS and it is more expensive to handle
 	and less scalable than other solutions for data storage in the cloud.
