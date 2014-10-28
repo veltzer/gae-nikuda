@@ -1,0 +1,21 @@
+This is an analysis of the url issues embedded in ajax scripts in nikuda
+
+If the urls will be absolute (start with /) then we could not deploy the applications
+on machines where nikuda is not in the toplevel directory (say https://veltzer.net/nikuda/).
+
+This means the url must be relative.
+
+The urls must be relative AND correct.
+
+This is the tree structure:
+
+.
+├── js
+│   └── nikuda.js
+├── php
+│   ├── nikuda_naked.php
+
+the js is running in the context of the php so it is 'in the php folder'.
+so the name of the php can just be the php file?
+
+Lets see how this works (I'm worried about the google cloud for now).

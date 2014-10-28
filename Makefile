@@ -138,7 +138,7 @@ deploy_local_code: all
 	$(Q)rm -rf $(attr.nikuda_local_root)
 	$(Q)mkdir $(attr.nikuda_local_root)
 	$(Q)cp -r css js js_tp images php php/index.php $(attr.nikuda_local_root)
-	$(Q)cp gpp_out/config_local.php $(attr.nikuda_local_root)/php/config.php
+	$(Q)cp -f out/config_local.php $(attr.nikuda_local_root)/php/config.php
 
 .PHONY: deploy_local_db
 deploy_local_db:
@@ -170,12 +170,12 @@ deploy_remote_code:
 	$(Q)scripts/ftp_rmdir.py $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_user) $(attr.nikuda_remote_ftp_password) .
 	$(Q)ncftpput -R -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_dir) css js js_tp images
 	$(Q)ncftpput -R -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_dir) php/*.php
-	$(Q)ncftpput -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) gpp_out/config_remote.php $(attr.nikuda_remote_ftp_dir)config.php
+	$(Q)ncftpput -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) out/config_remote.php $(attr.nikuda_remote_ftp_dir)config.php
 
 .PHONY: deploy_remote_config
-deploy_remote_config: gpp_out/config_remote.php
+deploy_remote_config: out/config_remote.php
 	$(info doing [$@])
-	$(Q)ncftpput -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) gpp_out/config_remote.php $(attr.nikuda_remote_ftp_dir)config.php
+	$(Q)ncftpput -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) out/config_remote.php $(attr.nikuda_remote_ftp_dir)config.php
 
 .PHONY: deploy_under_construction
 deploy_under_construction:

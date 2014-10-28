@@ -12,7 +12,7 @@ handlers:
   static_dir: images
 - url: /js_tp
   static_dir: js_tp
-- url: /(.*).php
-  script: php/\1.php
+- url: /php
+  static_dir: php
 - url: /
   script: php/index.php
