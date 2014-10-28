@@ -17,6 +17,3 @@ __pycache__
 
 # generated files
 /out
-
-# generated file
-/php/config.php
