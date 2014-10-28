@@ -1,13 +1,14 @@
 <?php
 /*
  * Here is the php site configuration for nikuda
+ * THIS FILE IS AUTO GENERATED. DO NOT EDIT!!!
  */
-$db_host='';
-$db_user='root';
-$db_pass='';
-$db_name='nikuda';
-$db_port='';
-$db_socket='/cloudsql/nikuda-web:maindb';
+$db_host=empty('') ? null : '';
+$db_user=empty('root') ? null : 'root';
+$db_pass=empty('') ? null : '';
+$db_name=empty('nikuda') ? null : 'nikuda';
+$db_port=empty('') ? null : '';
+$db_socket=empty('/cloudsql/nikuda-web:maindb') ? null : '/cloudsql/nikuda-web:maindb';
 $db_charset='utf8';
 $do_log_errors=false;
 $do_ob=false;
