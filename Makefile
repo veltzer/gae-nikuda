@@ -1,3 +1,4 @@
+TEMPLAR_SEC:=0
 include /usr/share/templar/Makefile
 
 # remember all built in vars (must be before parameter definitions)
