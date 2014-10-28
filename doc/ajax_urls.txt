@@ -17,5 +17,9 @@ This is the tree structure:
 
 the js is running in the context of the php so it is 'in the php folder'.
 so the name of the php can just be the php file?
+Actually it isnt. Since it is running in the context of the index.php file
+which is in the root!
+So the names of the files need to be 'php/[file.php]' (relative, not absolute!)
+This works well in local deploy.
 
 Lets see how this works (I'm worried about the google cloud for now).
