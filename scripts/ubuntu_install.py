@@ -23,6 +23,9 @@ packs=[
 	'nodejs', # for jslint
 	'npm', # for jslint
 	'node', # for jslint
+
+	# my packages
+	'templar',
 ]
 
 args=['sudo','apt-get','install','--assume-yes']

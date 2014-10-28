@@ -1,19 +1,15 @@
-#################
-# local rc file #
-#################
+include /usr/share/templar/Makefile
+
 # remember all built in vars (must be before parameter definitions)
 # this is to remove these and get the variables defined in the rc file
 BUILT_IN_VARS:=$(.VARIABLES)
-include ~/.nikudarc
-# create a gpp command line of all vars (must be last after paramter definitions)
-DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
-GPP_PARAMS:=$(foreach v, $(DEFINED_VARS), -D$(v)="$($(v))")
+
+ALL:=$(TEMPLAR_ALL)
+ALL_DEP:=$(TEMPLAR_ALL_DEP)
 
 ##############
-# PARAMETERS # 
+# parameters #
 ##############
-# do you want dependency on the makefile itself ?
-DO_MAKEDEPS:=1
 # do you want to see the commands executed ?
 DO_MKDBG:=0
 # do you want to check the javascript code?
@@ -39,28 +35,24 @@ JSCHECK:=jscheck.stamp
 HTMLCHECK:=html.stamp
 CSSCHECK:=css.stamp
 
-GPP_DIR_SOURCE:=gpp
-GPP_DIR_TARGET:=gpp_out
-
 ########
-# CODE #
+# code #
 ########
-ALL:=
 CLEAN:=
 
 ifeq ($(DO_CHECKJS),1)
-ALL:=$(ALL) $(JSCHECK)
-CLEAN:=$(CLEAN) $(JSCHECK)
+ALL+=$(JSCHECK)
+CLEAN+=$(JSCHECK)
 endif # DO_CHECKJS
 
 ifeq ($(DO_CHECKHTML),1)
-ALL:=$(ALL) $(HTMLCHECK)
-CLEAN:=$(CLEAN) $(HTMLCHECK)
+ALL+=$(HTMLCHECK)
+CLEAN+=$(HTMLCHECK)
 endif # DO_CHECKHTML
 
 ifeq ($(DO_CHECKCSS),1)
-ALL:=$(ALL) $(CSSCHECK)
-CLEAN:=$(CLEAN) $(CSSCHECK)
+ALL+=$(CSSCHECK)
+CLEAN+=$(CSSCHECK)
 endif # DO_CHECKCSS
 
 # silent stuff
@@ -72,28 +64,39 @@ Q:=@
 #.SILENT:
 endif # DO_MKDBG
 
-# handle dependency on the makefile itself...
-ALL_DEP:=
-ifeq ($(DO_MAKEDEPS),1)
-	ALL_DEP:=$(ALL_DEP) Makefile ~/.nikudarc
-endif
-
 SOURCES_JS:=$(shell find js -name "*.js")
 SOURCES_HTML:=php/index.php
 #SOURCE_HTML:=$(shell find html -name "*.html")
 SOURCES_CSS:=$(shell find css -name "*.css")
 
-GPP_SOURCES:=$(shell find $(GPP_DIR_SOURCE) -name "*.gpp")
-GPP_TARGETS:=$(addprefix $(GPP_DIR_TARGET)/,$(notdir $(basename $(GPP_SOURCES))))
-
-ALL:=$(ALL) $(GPP_TARGETS)
-
-#########
-# RULES #
-#########
-
+# all variables between the snapshot of BUILD_IN_VARS and this place in the code
+DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
+###########
+# targets #
+###########
+.DEFAULT_GOAL=all
 .PHONY: all
 all: $(ALL)
+	$(info doing [$@])
+
+.PHONY: debug
+debug:
+	$(info doing [$@])
+	$(foreach v, $(DEFINED_VARS), $(info $(v) = $($(v))))
+
+# clean
+
+.PHONY: clean
+clean:
+	$(info doing [$@])
+	$(Q)git clean -fxd > /dev/null
+
+.PHONY: clean_manual
+clean_manual:
+	$(info doing [$@])
+	$(Q)-rm -f $(CLEAN)
+
+# checks
 
 .PHONY: checkjs
 checkjs: $(JSCHECK)
@@ -116,7 +119,7 @@ $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 
 $(HTMLCHECK): $(SOURCES_HTML) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML) 
+	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(HTMLCHECK)
 
@@ -126,20 +129,22 @@ $(CSSCHECK): $(SOURCES_CSS) $(ALL_DEP)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(CSSCHECK)
 
+# deploy
+
 .PHONY: deploy_local_code
 deploy_local_code: all
 	$(info doing [$@])
-	$(Q)rm -rf $(LOCAL_ROOT)
-	$(Q)mkdir $(LOCAL_ROOT)
-	$(Q)cp -r css js js_tp images php php/index.php $(LOCAL_ROOT)
-	$(Q)cp gpp_out/config_local.php $(LOCAL_ROOT)/php/config.php
+	$(Q)rm -rf $(attr.nikuda_local_root)
+	$(Q)mkdir $(attr.nikuda_local_root)
+	$(Q)cp -r css js js_tp images php php/index.php $(attr.nikuda_local_root)
+	$(Q)cp gpp_out/config_local.php $(attr.nikuda_local_root)/php/config.php
 
 .PHONY: deploy_local_db
 deploy_local_db:
 	$(info doing [$@])
-	$(Q)-mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) -f drop $(LOCAL_DB_NAME) > /dev/null
-	$(Q)mysqladmin --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) create $(LOCAL_DB_NAME)
-	$(Q)mysql --host=$(LOCAL_DB_HOST) --user=$(LOCAL_DB_USER) --password=$(LOCAL_DB_PASS) $(LOCAL_DB_NAME) < db/nikuda.mysqldump
+	$(Q)-mysqladmin --host=$(attr.nikuda_local_db_host) --user=$(attr.nikuda_local_db_user) --password=$(attr.nikuda_local_db_password) -f drop $(attr.nikuda_local_db_name) > /dev/null
+	$(Q)mysqladmin --host=$(attr.nikuda_local_db_host) --user=$(attr.nikuda_local_db_user) --password=$(attr.nikuda_local_db_password) create $(attr.nikuda_local_db_name)
+	$(Q)mysql --host=$(attr.nikuda_local_db_host) --user=$(attr.nikuda_local_db_user) --password=$(attr.nikuda_local_db_password) $(attr.nikuda_local_db_name) < db/nikuda.mysqldump
 
 # notes about deploy:
 # we are not allowed to drop the database and create it so we don't
@@ -152,98 +157,58 @@ deploy_local_db:
 .PHONY: deploy_remote
 deploy_remote: deploy_remote_code deploy_remote_db
 	$(info doing [$@])
+
 .PHONY: deploy_remote_db
 deploy_remote_db:
 	$(info doing [$@])
-	$(Q)mysql $(REMOTE_DB_NAME) --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASS) < db/nikuda.mysqldump
+	$(Q)mysql $(attr.nikuda_remote_db_name) --host=$(attr.nikuda_remote_db_host) --user=$(attr.nikuda_remote_db_user) --password=$(attr.nikuda_remote_db_password) < db/nikuda.mysqldump
+
 .PHONY: deploy_remote_code
 deploy_remote_code:
 	$(info doing [$@])
-	$(Q)scripts/ftp_rmdir.py $(REMOTE_FTP_HOST) $(REMOTE_FTP_USER) $(REMOTE_FTP_PASS)
-	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) css js js_tp images
-	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) php/*.php
-	$(Q)ncftpput -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) gpp_out/config_remote.php $(REMOTE_FTP_DIR)config.php
+	$(Q)scripts/ftp_rmdir.py $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_user) $(attr.nikuda_remote_ftp_password) .
+	$(Q)ncftpput -R -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_dir) css js js_tp images
+	$(Q)ncftpput -R -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_dir) php/*.php
+	$(Q)ncftpput -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) gpp_out/config_remote.php $(attr.nikuda_remote_ftp_dir)config.php
+
 .PHONY: deploy_remote_config
 deploy_remote_config: gpp_out/config_remote.php
 	$(info doing [$@])
-	$(Q)ncftpput -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) gpp_out/config_remote.php $(REMOTE_FTP_DIR)config.php
+	$(Q)ncftpput -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) gpp_out/config_remote.php $(attr.nikuda_remote_ftp_dir)config.php
+
 .PHONY: deploy_under_construction
 deploy_under_construction:
 	$(info doing [$@])
-	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) under_construction/index.php
+	$(Q)ncftpput -R -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_dir) under_construction/index.php
+
 .PHONY: undeploy_under_construction
 undeploy_under_construction:
 	$(info doing [$@])
-	$(Q)ncftpput -R -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) $(REMOTE_FTP_DIR) php/index.php
+	$(Q)ncftpput -R -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_dir) php/index.php
 
-.PHONY: backup_remote
-backup_remote:
+# remote stuff
+
+.PHONY: remote-backup
+remote-backup:
 	$(info doing [$@])
-	$(Q)wget -r ftp://$(REMOTE_FTP_HOST) --ftp-user=$(REMOTE_FTP_USER) --ftp-password=$(REMOTE_FTP_PASS)
+	$(Q)wget -r ftp://$(attr.nikuda_remote_ftp_host) --ftp-user=$(attr.nikuda_remote_ftp_user) --ftp-password=$(attr.nikuda_remote_ftp_password)
 
-.PHONY: clean
-clean:
+.PHONY: remote-mysql
+remote-mysql:
 	$(info doing [$@])
-	$(Q)git clean -fxd > /dev/null
+	$(Q)mysql --host=$(attr.nikuda_remote_db_host) --user=$(attr.nikuda_remote_db_user) --password=$(attr.nikuda_remote_db_password) $(attr.nikuda_remote_db_name)
 
-.PHONY: clean_manual
-clean_manual:
+.PHONY: remote-ftp
+remote-ftp:
 	$(info doing [$@])
-	$(Q)-rm -f $(CLEAN)
+	$(info put remote user as $(attr.nikuda_remote_ftp_user))
+	$(info put remote password as $(attr.nikuda_remote_ftp_password))
+	#$(Q)ftp $(attr.nikuda_remote_ftp_host)
+	$(Q)lftp $(attr.nikuda_remote_ftp_host) -u $(attr.nikuda_remote_ftp_user),$(attr.nikuda_remote_ftp_password)
 
-.PHONY: mysql_remote
-mysql_remote:
-	$(info doing [$@])
-	$(Q)mysql --host=$(REMOTE_DB_HOST) --user=$(REMOTE_DB_USER) --password=$(REMOTE_DB_PASS) $(REMOTE_DB_NAME)
-
-.PHONY: ftp_remote
-ftp_remote:
-	$(info doing [$@])
-	$(info put remote user as $(REMOTE_FTP_USER))
-	$(info put remote password as $(REMOTE_FTP_PASS))
-	$(Q)ftp $(REMOTE_FTP_HOST)
-
-.PHONY: get_error_log
-get_error_log:
+.PHONY: remote-errorlog
+remote-errorlog:
 	$(info doing [$@])
 	$(Q)rm -f error_log phperrors.txt
-	$(Q)ncftpget -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) /php/error_log error_log
-	$(Q)ncftpget -C -u $(REMOTE_FTP_USER) -p $(REMOTE_FTP_PASS) $(REMOTE_FTP_HOST) /php/phperrors.txt phperrors.txt
-
-.PHONY: debug
-debug:
-	$(info ALL is $(ALL))
-	$(info CLEAN is $(CLEAN))
-	$(info LOCAL_ROOT is $(LOCAL_ROOT))
-	$(info REMOTE_FTP_USER is $(REMOTE_FTP_USER))
-	$(info REMOTE_FTP_PASS is $(REMOTE_FTP_PASS))
-	$(info REMOTE_FTP_HOST is $(REMOTE_FTP_HOST))
-	$(info REMOTE_FTP_DIR is $(REMOTE_FTP_DIR))
-	$(info REMOTE_DB_HOST is $(REMOTE_DB_HOST))
-	$(info REMOTE_DB_USER is $(REMOTE_DB_USER))
-	$(info REMOTE_DB_PASS is $(REMOTE_DB_PASS))
-	$(info REMOTE_DB_NAME is $(REMOTE_DB_NAME))
-	$(info REMOTE_DB_HOST is $(REMOTE_DB_HOST))
-	$(info REMOTE_DB_USER is $(REMOTE_DB_USER))
-	$(info REMOTE_DB_PASS is $(REMOTE_DB_PASS))
-	$(info REMOTE_DB_NAME is $(REMOTE_DB_NAME))
-	$(info SOURCES_JS is $(SOURCES_JS))
-	$(info SOURCES_HTML is $(SOURCES_HTML))
-	$(info SOURCES_CSS is $(SOURCES_CSS))
-	$(info LOCAL_DB_HOST is $(LOCAL_DB_HOST))
-	$(info LOCAL_DB_NAME is $(LOCAL_DB_NAME))
-	$(info LOCAL_DB_USER is $(LOCAL_DB_USER))
-	$(info LOCAL_DB_PASS is $(LOCAL_DB_PASS))
-	$(info LOCAL_ROOT is $(LOCAL_ROOT))
-	$(info GPP_SOURCES is $(GPP_SOURCES))
-	$(info GPP_TARGETS is $(GPP_TARGETS))
-	$(info GPP_PARAMS is $(GPP_PARAMS))
-
-#########
-# rules #
-#########
-
-$(GPP_TARGETS): $(GPP_DIR_TARGET)%: $(GPP_DIR_SOURCE)%.gpp $(ALL_DEP)
-	$(info doing [$@])
-	$(Q)-mkdir $(dir $@) 2> /dev/null || exit 0
-	$(Q)gpp $(GPP_PARAMS) $< > $@
+	$(Q)ncftpget -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) /php/error_log error_log
+	$(Q)ncftpget -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) /php/phperrors.txt phperrors.txt
