@@ -6,7 +6,7 @@
 		<!-- updated by mark 10/2013 -->
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>nIkUdA נִקֻּדַהּ</title>
-		<link rel="shortcut icon" href="php/favicon.ico"/>
+		<link rel="shortcut icon" href="images/favicon.ico"/>
 		<meta content="נקדה, תכנה לניקוד אוטומט" name="description" />
 		<meta content="ניקוד, נקדה, אוטומט, עברית, נקדן, נקד, תכנה, תוכנה, חופשי, חפשי ,<key words>" name="keywords" />
 		<meta content="follow,index,imageindex" name="robots" />
