@@ -114,7 +114,7 @@ checkcss: $(CSSCHECK)
 $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-	$(Q)scripts/wrapper.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+	$(Q)scripts/wrapper_silent.py $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
@@ -126,7 +126,7 @@ $(HTMLCHECK): $(SOURCES_HTML) $(ALL_DEP)
 
 $(CSSCHECK): $(SOURCES_CSS) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)scripts/css-validator-wrapper.py java -jar $(TOOL_CSS_VALIDATOR) --vextwarning=true --output=text $(addprefix file:,$(SOURCES_CSS))
+	$(Q)scripts/wrapper_css_validator.py java -jar $(TOOL_CSS_VALIDATOR) --vextwarning=true --output=text $(addprefix file:,$(SOURCES_CSS))
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(CSSCHECK)
 
