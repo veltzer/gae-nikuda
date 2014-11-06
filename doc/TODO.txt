@@ -1,3 +1,5 @@
+- do a favicon for nikuda (the current favicon is the jschess
+	favicon I designed)
 - turn all scripts to python instead of shell.
 	Use attr to get the data i need (passwords, hosts, ports, usernames)
 - bring back security in the .attr.conf file.
