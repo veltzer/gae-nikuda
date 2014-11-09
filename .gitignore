@@ -12,8 +12,5 @@ __pycache__
 # output files
 *.out
 
-# template config file
-.attr.config
-
 # generated files
 /out
