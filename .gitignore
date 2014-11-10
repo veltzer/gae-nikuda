@@ -14,3 +14,6 @@ __pycache__
 
 # generated files
 /out
+
+# templar generated
+/.tdefs.config
