@@ -3,11 +3,11 @@
  * Here is the php site configuration for nikuda
  * THIS FILE IS AUTO GENERATED. DO NOT EDIT!!!
  */
-$db_host=(''=='') ? null : '';
+$db_host=('None'=='') ? null : 'None';
 $db_user=('root'=='') ? null : 'root';
-$db_pass=(''=='') ? null : '';
+$db_pass=('None'=='') ? null : 'None';
 $db_name=('nikuda'=='') ? null : 'nikuda';
-$db_port=(''=='') ? null : '';
+$db_port=('None'=='') ? null : 'None';
 $db_socket=('/cloudsql/nikuda-web:maindb'=='') ? null : '/cloudsql/nikuda-web:maindb';
 $db_charset='utf8';
 $do_log_errors=false;

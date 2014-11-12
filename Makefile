@@ -1,5 +1,5 @@
 TEMPLAR_SEC:=0
-include /usr/share/templar/Makefile
+include /usr/share/templar/make/Makefile
 
 # remember all built in vars (must be before parameter definitions)
 # this is to remove these and get the variables defined in the rc file
@@ -114,7 +114,7 @@ checkcss: $(CSSCHECK)
 $(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-	$(Q)wrapper_silent $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+	$(Q)make_helper wrapper-silent $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
@@ -126,7 +126,7 @@ $(HTMLCHECK): $(SOURCES_HTML) $(ALL_DEP)
 
 $(CSSCHECK): $(SOURCES_CSS) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)wrapper_css_validator java -jar $(TOOL_CSS_VALIDATOR) --vextwarning=true --output=text $(addprefix file:,$(SOURCES_CSS))
+	$(Q)make_helper wrapper-css-validator java -jar $(TOOL_CSS_VALIDATOR) --vextwarning=true --output=text $(addprefix file:,$(SOURCES_CSS))
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(CSSCHECK)
 
