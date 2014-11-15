@@ -1,3 +1,6 @@
+- add a new page in the site with word bubbles.
+	every word will be connected to similar words
+	(words close in edit distance).
 - do a favicon for nikuda (the current favicon is the jschess
 	favicon I designed)
 - turn all scripts to python instead of shell.
