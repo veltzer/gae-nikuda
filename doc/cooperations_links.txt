@@ -1,3 +1,5 @@
 software for the blind:
 	http://www.blind-mobile.com
 	http://philosoft.co.il
+another site for hebrew punctuation:
+	http://www.read-hebrew.com
