@@ -3,12 +3,12 @@
  * Here is the php site configuration for nikuda
  * ${tdefs.messages_dne}
  */
-$db_host=('${tdefs.nikuda_local_db_host}'=='') ? null : '${tdefs.nikuda_local_db_host}';
-$db_user=('${tdefs.nikuda_local_db_user}'=='') ? null : '${tdefs.nikuda_local_db_user}';
-$db_pass=('${tdefs.nikuda_local_db_password}'=='') ? null : '${tdefs.nikuda_local_db_password}';
-$db_name=('${tdefs.nikuda_local_db_name}'=='') ? null : '${tdefs.nikuda_local_db_name}';
-$db_port=('${tdefs.nikuda_local_db_port}'=='') ? null : '${tdefs.nikuda_local_db_port}';
-$db_socket=('${tdefs.nikuda_local_db_socket}'=='') ? null : '${tdefs.nikuda_local_db_socket}';
+$db_host=${tdefs.to_php(tdefs.nikuda_local_db_host)};
+$db_user=${tdefs.to_php(tdefs.nikuda_local_db_user)};
+$db_pass=${tdefs.to_php(tdefs.nikuda_local_db_password)};
+$db_name=${tdefs.to_php(tdefs.nikuda_local_db_name)};
+$db_port=${tdefs.to_php(tdefs.nikuda_local_db_port)};
+$db_socket=${tdefs.to_php(tdefs.nikuda_local_db_socket)};
 $db_charset='utf8';
 $do_log_errors=true;
 $do_ob=true;
