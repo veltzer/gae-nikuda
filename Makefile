@@ -43,16 +43,19 @@ CLEAN:=
 
 ifeq ($(DO_CHECKJS),1)
 ALL+=$(JSCHECK)
+all: $(ALL)
 CLEAN+=$(JSCHECK)
 endif # DO_CHECKJS
 
 ifeq ($(DO_CHECKHTML),1)
 ALL+=$(HTMLCHECK)
+all: $(ALL)
 CLEAN+=$(HTMLCHECK)
 endif # DO_CHECKHTML
 
 ifeq ($(DO_CHECKCSS),1)
 ALL+=$(CSSCHECK)
+all: $(ALL)
 CLEAN+=$(CSSCHECK)
 endif # DO_CHECKCSS
 
@@ -75,22 +78,12 @@ DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
 ###########
 # targets #
 ###########
-.DEFAULT_GOAL=all
-.PHONY: all
-all: $(ALL)
-	$(info doing [$@])
-
-.PHONY: debug
-debug:
+.PHONY: debug_me
+debug_me:
 	$(info doing [$@])
 	$(foreach v, $(DEFINED_VARS), $(info $(v) = $($(v))))
 
 # clean
-
-.PHONY: clean
-clean:
-	$(info doing [$@])
-	$(Q)git clean -fxd > /dev/null
 
 .PHONY: clean_manual
 clean_manual:
