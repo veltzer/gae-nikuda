@@ -128,17 +128,17 @@ $(CSSCHECK): $(SOURCES_CSS) $(ALL_DEP)
 .PHONY: deploy_local_code
 deploy_local_code: all
 	$(info doing [$@])
-	$(Q)rm -rf $(attr.nikuda_local_root)
-	$(Q)mkdir $(attr.nikuda_local_root)
-	$(Q)cp -r css js js_tp images php php/index.php $(attr.nikuda_local_root)
-	$(Q)cp -f out/config_local.php $(attr.nikuda_local_root)/php/config.php
+	$(Q)rm -rf $(tdefs.nikuda_local_root)
+	$(Q)mkdir $(tdefs.nikuda_local_root)
+	$(Q)cp -r css js js_tp images php php/index.php $(tdefs.nikuda_local_root)
+	$(Q)cp -f out/config_local.php $(tdefs.nikuda_local_root)/php/config.php
 
 .PHONY: deploy_local_db
 deploy_local_db:
 	$(info doing [$@])
-	$(Q)-mysqladmin --host=$(attr.nikuda_local_db_host) --user=$(attr.nikuda_local_db_user) --password=$(attr.nikuda_local_db_password) -f drop $(attr.nikuda_local_db_name) > /dev/null
-	$(Q)mysqladmin --host=$(attr.nikuda_local_db_host) --user=$(attr.nikuda_local_db_user) --password=$(attr.nikuda_local_db_password) create $(attr.nikuda_local_db_name)
-	$(Q)mysql --host=$(attr.nikuda_local_db_host) --user=$(attr.nikuda_local_db_user) --password=$(attr.nikuda_local_db_password) $(attr.nikuda_local_db_name) < db/nikuda.mysqldump
+	$(Q)-mysqladmin --host=$(tdefs.nikuda_local_db_host) --user=$(tdefs.nikuda_local_db_user) --password=$(tdefs.nikuda_local_db_password) -f drop $(tdefs.nikuda_local_db_name) > /dev/null
+	$(Q)mysqladmin --host=$(tdefs.nikuda_local_db_host) --user=$(tdefs.nikuda_local_db_user) --password=$(tdefs.nikuda_local_db_password) create $(tdefs.nikuda_local_db_name)
+	$(Q)mysql --host=$(tdefs.nikuda_local_db_host) --user=$(tdefs.nikuda_local_db_user) --password=$(tdefs.nikuda_local_db_password) $(tdefs.nikuda_local_db_name) < db/nikuda.mysqldump
 
 # notes about deploy:
 # we are not allowed to drop the database and create it so we don't
@@ -155,54 +155,54 @@ deploy_remote: deploy_remote_code deploy_remote_db
 .PHONY: deploy_remote_db
 deploy_remote_db:
 	$(info doing [$@])
-	$(Q)mysql $(attr.nikuda_remote_db_name) --host=$(attr.nikuda_remote_db_host) --user=$(attr.nikuda_remote_db_user) --password=$(attr.nikuda_remote_db_password) < db/nikuda.mysqldump
+	$(Q)mysql $(tdefs.nikuda_remote_db_name) --host=$(tdefs.nikuda_remote_db_host) --user=$(tdefs.nikuda_remote_db_user) --password=$(tdefs.nikuda_remote_db_password) < db/nikuda.mysqldump
 
 .PHONY: deploy_remote_code
 deploy_remote_code:
 	$(info doing [$@])
-	$(Q)scripts/ftp_rmdir.py $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_user) $(attr.nikuda_remote_ftp_password) .
-	$(Q)ncftpput -R -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_dir) css js js_tp images php
-	$(Q)ncftpput -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) out/config_remote.php $(attr.nikuda_remote_ftp_dir)php/config.php
-	$(Q)ncftpput -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) php/index.php $(attr.nikuda_remote_ftp_dir)index.php
+	$(Q)scripts/ftp_rmdir.py $(tdefs.nikuda_remote_ftp_host) $(tdefs.nikuda_remote_ftp_user) $(tdefs.nikuda_remote_ftp_password) .
+	$(Q)ncftpput -R -u $(tdefs.nikuda_remote_ftp_user) -p $(tdefs.nikuda_remote_ftp_password) $(tdefs.nikuda_remote_ftp_host) $(tdefs.nikuda_remote_ftp_dir) css js js_tp images php
+	$(Q)ncftpput -C -u $(tdefs.nikuda_remote_ftp_user) -p $(tdefs.nikuda_remote_ftp_password) $(tdefs.nikuda_remote_ftp_host) out/config_remote.php $(tdefs.nikuda_remote_ftp_dir)php/config.php
+	$(Q)ncftpput -C -u $(tdefs.nikuda_remote_ftp_user) -p $(tdefs.nikuda_remote_ftp_password) $(tdefs.nikuda_remote_ftp_host) php/index.php $(tdefs.nikuda_remote_ftp_dir)index.php
 
 .PHONY: deploy_remote_config
 deploy_remote_config: out/config_remote.php
 	$(info doing [$@])
-	$(Q)ncftpput -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) out/config_remote.php $(attr.nikuda_remote_ftp_dir)config.php
+	$(Q)ncftpput -C -u $(tdefs.nikuda_remote_ftp_user) -p $(tdefs.nikuda_remote_ftp_password) $(tdefs.nikuda_remote_ftp_host) out/config_remote.php $(tdefs.nikuda_remote_ftp_dir)config.php
 
 .PHONY: deploy_under_construction
 deploy_under_construction:
 	$(info doing [$@])
-	$(Q)ncftpput -R -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_dir) under_construction/index.php
+	$(Q)ncftpput -R -u $(tdefs.nikuda_remote_ftp_user) -p $(tdefs.nikuda_remote_ftp_password) $(tdefs.nikuda_remote_ftp_host) $(tdefs.nikuda_remote_ftp_dir) under_construction/index.php
 
 .PHONY: undeploy_under_construction
 undeploy_under_construction:
 	$(info doing [$@])
-	$(Q)ncftpput -R -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) $(attr.nikuda_remote_ftp_dir) php/index.php
+	$(Q)ncftpput -R -u $(tdefs.nikuda_remote_ftp_user) -p $(tdefs.nikuda_remote_ftp_password) $(tdefs.nikuda_remote_ftp_host) $(tdefs.nikuda_remote_ftp_dir) php/index.php
 
 # remote stuff
 
 .PHONY: remote-backup
 remote-backup:
 	$(info doing [$@])
-	$(Q)wget -r ftp://$(attr.nikuda_remote_ftp_host) --ftp-user=$(attr.nikuda_remote_ftp_user) --ftp-password=$(attr.nikuda_remote_ftp_password)
+	$(Q)wget -r ftp://$(tdefs.nikuda_remote_ftp_host) --ftp-user=$(tdefs.nikuda_remote_ftp_user) --ftp-password=$(tdefs.nikuda_remote_ftp_password)
 
 .PHONY: remote-mysql
 remote-mysql:
 	$(info doing [$@])
-	$(Q)mysql --host=$(attr.nikuda_remote_db_host) --user=$(attr.nikuda_remote_db_user) --password=$(attr.nikuda_remote_db_password) $(attr.nikuda_remote_db_name)
+	$(Q)mysql --host=$(tdefs.nikuda_remote_db_host) --user=$(tdefs.nikuda_remote_db_user) --password=$(tdefs.nikuda_remote_db_password) $(tdefs.nikuda_remote_db_name)
 
 .PHONY: remote-ftp
 remote-ftp:
 	$(info doing [$@])
-	$(info put remote user as $(attr.nikuda_remote_ftp_user))
-	$(info put remote password as $(attr.nikuda_remote_ftp_password))
-	#$(Q)ftp $(attr.nikuda_remote_ftp_host)
-	$(Q)lftp $(attr.nikuda_remote_ftp_host) -u $(attr.nikuda_remote_ftp_user),$(attr.nikuda_remote_ftp_password)
+	$(info put remote user as $(tdefs.nikuda_remote_ftp_user))
+	$(info put remote password as $(tdefs.nikuda_remote_ftp_password))
+	#$(Q)ftp $(tdefs.nikuda_remote_ftp_host)
+	$(Q)lftp $(tdefs.nikuda_remote_ftp_host) -u $(tdefs.nikuda_remote_ftp_user),$(tdefs.nikuda_remote_ftp_password)
 
 .PHONY: remote-errorlog
 remote-errorlog:
 	$(info doing [$@])
 	$(Q)rm -f error_log phperrors.txt
-	$(Q)ncftpget -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) /php/error_log error_log
-	$(Q)ncftpget -C -u $(attr.nikuda_remote_ftp_user) -p $(attr.nikuda_remote_ftp_password) $(attr.nikuda_remote_ftp_host) /php/phperrors.txt phperrors.txt
+	$(Q)ncftpget -C -u $(tdefs.nikuda_remote_ftp_user) -p $(tdefs.nikuda_remote_ftp_password) $(tdefs.nikuda_remote_ftp_host) /php/error_log error_log
+	$(Q)ncftpget -C -u $(tdefs.nikuda_remote_ftp_user) -p $(tdefs.nikuda_remote_ftp_password) $(tdefs.nikuda_remote_ftp_host) /php/phperrors.txt phperrors.txt
