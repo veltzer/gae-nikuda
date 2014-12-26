@@ -1,0 +1,3 @@
+- if you want the app to always be served in ssl mode (https) add
+	'secure: always'
+	to all the handlers in the 'handlers:' section in the app.yaml file.
