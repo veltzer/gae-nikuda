@@ -6,19 +6,13 @@ api_version: 1
 handlers:
 - url: /css
   static_dir: css
-  secure: always
 - url: /js
   static_dir: js
-  secure: always
 - url: /images
   static_dir: images
-  secure: always
 - url: /js_tp
   static_dir: js_tp
-  secure: always
 - url: /php/(.+)\.php
   script: /php/\1.php
-  secure: always
 - url: /
   script: php/index.php
-  secure: always
