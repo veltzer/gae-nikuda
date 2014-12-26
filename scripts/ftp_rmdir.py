@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+###########
+# imports #
+###########
 import ftplib # for FTP
 import sys # for argv
 import os.path # for join
@@ -13,7 +16,6 @@ p_debug=False
 #############
 # functions #
 #############
-
 def ftp_rmdir(ftp, folder, remove_toplevel, dontremove):
 	for filename, attr in ftp.mlsd(folder):
 		if attr['type']=='file' and filename not in dontremove:
@@ -27,9 +29,9 @@ def ftp_rmdir(ftp, folder, remove_toplevel, dontremove):
 			print('removing folder [{0}]'.format(folder))
 		ftp.rmd(folder)
 
-################
-# command line #
-################
+########
+# code #
+########
 p_host=sys.argv[1]
 p_user=sys.argv[2]
 p_pass=sys.argv[3]
