@@ -1,19 +1,14 @@
 - add a new page in the site with word bubbles.
 	every word will be connected to similar words
 	(words close in edit distance).
-- do a favicon for nikuda (the current favicon is the jschess
-	favicon I designed)
 - turn all scripts to python instead of shell.
-	Use attr to get the data i need (passwords, hosts, ports, usernames)
-- bring back security in the .attr.conf file.
+	Use tdefs to get the data i need (passwords, hosts, ports, usernames)
+- bring back security in the .tdefs.config file.
 	This will probably be done by writing python scripts to wrap
 	all the ftp and other work that I'm doing.
 - we are not really using MySQL as an RDMBS and it is more expensive to handle
 	and less scalable than other solutions for data storage in the cloud.
 	Maybe we should move to one of those storages?
-- google cloud progress:
-	- handle the domain via google domain (already sent request)
-	- eclipse support is still not there.
 - somehow the do_utf_headers var works on marks machine (local install)
 	and causes the real site to stop working.
 	It is currently enabled for local install and disabled for remote.
