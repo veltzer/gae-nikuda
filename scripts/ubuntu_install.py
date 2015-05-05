@@ -113,7 +113,7 @@ for ppa in opt_ppas:
 	subprocess.check_call([
 		'sudo',
 		'add-apt-repository',
-		'--enable-source', # source code too
+		#'--enable-source', # source code too
 		'--yes', # dont ask questions
 		ppa
 	], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
