@@ -16,3 +16,5 @@ handlers:
   script: /php/\1.php
 - url: /
   script: php/index.php
+- url: /favicon.ico
+  script: images/favicon.ico
