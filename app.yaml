@@ -18,4 +18,4 @@ handlers:
 - url: /
   script: php/index.php
 - url: /favicon.ico
-  script: images/favicon.ico
+  static_files: images/favicon.ico
