@@ -1,5 +1,10 @@
 # google cloud stuff
+export GAE=~/install/google-cloud-sdk
 # The next line updates PATH for the Google Cloud SDK.
-source ~/install/google-cloud-sdk/path.bash.inc
+source $GAE/path.bash.inc
 # The next line enables bash completion for gcloud.
-source ~/install/google-cloud-sdk/completion.bash.inc
+source $GAE/completion.bash.inc
+# this is left out by google's path.bash.inc
+export PATH=$GAE/platform/google_appengine:$PATH
+# this is for our own project
+gcloud config set project nikuda-web
