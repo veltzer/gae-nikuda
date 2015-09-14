@@ -1,8 +1,9 @@
 #!/bin/sh
+. scripts/gcloud_db_details.sh
 mysql\
 	--user admin\
 	--database nikuda\
-	--host 173.194.110.159\
-	--ssl_ca=~/.nikuda/server-ca.pem\
-	--ssl_cert=~/.nikuda/client-cert.pem\
-	--ssl_key=~/.nikuda/client-key.pem
+	--host $IP\
+	--ssl-ca=$HOME/.nikuda/server-ca.pem\
+	--ssl-cert=$HOME/.nikuda/client-cert.pem\
+	--ssl-key=$HOME/.nikuda/client-key.pem
