@@ -54,11 +54,12 @@ opt_packs=[
 	'lftp', # other ftp client
 	'nodejs', # for jslint
 	'npm', # for jslint
-	'node', # for jslint
 
 	# my packages
 	'templar',
 ]
+# update apt
+opt_update=False
 
 #############
 # functions #
@@ -81,18 +82,23 @@ def keys_read():
 def keys_have(key_id):
 	return key_id in all_keys
 
+def get_codename():
+	codename=subprocess.check_output([
+		'lsb_release',
+		'--codename',
+		'--short',
+		]).decode().strip()
+	if opt_debug:
+		print('codename is [{0}]'.format(codename))
+	return codename
+
+
 ########
 # code #
 ########
 keys_read()
+codename=get_codename()
 altered_apt_configuration=False
-codename=subprocess.check_output([
-	'lsb_release',
-	'--codename',
-	'--short',
-	]).decode().strip()
-if opt_debug:
-	print('codename is [{0}]'.format(codename))
 
 # repositories
 
@@ -160,7 +166,7 @@ for srvr, key_id in opt_keys_receive:
 
 # update apt state
 
-if altered_apt_configuration:
+if altered_apt_configuration and opt_update:
 	if opt_progress:
 		print('updating apt states...')
 	subprocess.check_call([
@@ -182,7 +188,14 @@ args=[
 	'sudo',
 	'apt-get',
 	'install',
-	'--assume-yes'
+#	'--assume-yes',
 ]
 args.extend(opt_packs)
-subprocess.check_call(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+try:
+	subprocess.check_call(
+		args,
+		#stdout=subprocess.DEVNULL,
+		#stderr=subprocess.DEVNULL,
+	)
+except:
+	print('error in apt')
