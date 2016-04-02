@@ -7,7 +7,14 @@
 	font-size:12.5em;
 	border-style:none;
 	color:#EFE9DC;
+	draggable:false;
 	z-index:-1;
+	user-drag: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 .access {
 	margin:auto;

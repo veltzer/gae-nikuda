@@ -17,7 +17,7 @@
 		<script src="js/nikuda.js" type="text/javascript"></script>
 	</head>
 	<body dir="rtl">
-		<img class="nikuda_label" src="images/nikuda.gif" alt="נִקֻּדַהּ"/>
+		<img class="nikuda_label" src="images/nikuda.gif" draggable="false" ondragstart="return false;" alt="נִקֻּדַהּ" />
 		<div class="access">
 			<input id="NikudizeButton" type="button" class="access_button" value="נקד פסקה שלמה" title="נקד את כלל המלל בתיבה שמתחת" disabled="disabled" tabindex="2"/>
 			<textarea class="access_text" id="MainText" style="font-size:1em; resize:none" rows="10" cols="50" disabled="disabled" tabindex="1"></textarea>

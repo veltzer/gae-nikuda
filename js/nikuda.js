@@ -67,7 +67,7 @@ function validate_Hebrew(evt) {
   var keynum = get_Key_Code(evt);
 
   var keychar = String.fromCharCode(keynum);
-  if (/\w/.test(keychar)) {
+  if (/\w/.test(keychar) && !evt.ctrlKey) {
     // Do not allow english letters
     show_to_user('אנא השתמש במקלדת עיברית...');
     evt.returnValue = false;
@@ -525,7 +525,9 @@ function insert_Draft(value, letter) {
     }
   }
   else if (value == 'ּ') {
-    if (current.search('[אעהי]') == -1) {
+    // h' is not here because it can have a mapik
+    // the rest of the letters can't accept doubling (except r in very esoteric cases)
+    if (current.search('[אעחר]') == -1) {
       if (current.search(dageshRegExp) == -1) {
         if (current.search('ו') != -1) {
           current = current.replace(nikudRegExp, '');
