@@ -526,7 +526,8 @@ function insert_Draft(value, letter) {
   }
   else if (value == 'ּ') {
     // h' is not here because it can have a mapik
-    // the rest of the letters can't accept doubling (except r in very esoteric cases)
+    // the rest of the letters can't accept doubling
+    // (except r in very esoteric cases)
     if (current.search('[אעחר]') == -1) {
       if (current.search(dageshRegExp) == -1) {
         if (current.search('ו') != -1) {
