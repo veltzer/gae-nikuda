@@ -7,4 +7,4 @@ source $GAE/completion.bash.inc
 # this is left out by google's path.bash.inc
 export PATH=$GAE/platform/google_appengine:$PATH
 # this is for our own project
-gcloud config set project nikuda-web
+gcloud config configurations activate `basename $PWD`
