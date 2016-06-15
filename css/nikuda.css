@@ -10,11 +10,11 @@
 	draggable:false;
 	z-index:-1;
 	user-drag: none;
-	user-select: none;
+	/* user-select: none; this doesnt work in any browser */
 	-moz-user-select: none;
-	-webkit-user-drag: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
+	-webkit-user-drag: none;
 }
 .access {
 	margin:auto;

@@ -26,7 +26,7 @@
 			<input class="access_text" id="Quicky" type="text" disabled="disabled" tabindex="4"/>
 			<div>
 				<div id="SuggestionBox" style="display:none">
-					<table style="width:100%" summary='header'>
+					<table style="width:100%">
 						<tbody>
 							<tr>
 								<td>

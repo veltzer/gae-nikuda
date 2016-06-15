@@ -119,7 +119,7 @@ $(HTMLCHECK): $(SOURCES_HTML) $(ALL_DEP)
 
 $(CSSCHECK): $(SOURCES_CSS) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)make_helper wrapper-css-validator java -jar $(TOOL_CSS_VALIDATOR) --vextwarning=true --output=text $(addprefix file:,$(SOURCES_CSS))
+	$(Q)make_helper wrapper-css-validator java -jar $(TOOL_CSS_VALIDATOR) --profile=css3 --output=text -vextwarning=true --warning=0 $(addprefix file:,$(SOURCES_CSS))
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(CSSCHECK)
 
