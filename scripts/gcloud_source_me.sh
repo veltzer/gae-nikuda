@@ -1,5 +1,5 @@
 # google cloud stuff
-export GAE=~/install/google-cloud-sdk
+export GAE=~/shared_archive/install/google-cloud-sdk
 # The next line updates PATH for the Google Cloud SDK.
 source $GAE/path.bash.inc
 # The next line enables bash completion for gcloud.
