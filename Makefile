@@ -1,12 +1,4 @@
-TEMPLAR_SEC:=0
 include /usr/share/templar/make/Makefile
-
-# remember all built in vars (must be before parameter definitions)
-# this is to remove these and get the variables defined in the rc file
-BUILT_IN_VARS:=$(.VARIABLES)
-
-ALL:=$(TEMPLAR_ALL)
-ALL_DEP:=$(TEMPLAR_ALL_DEP)
 
 ##############
 # parameters #
@@ -16,9 +8,9 @@ DO_MKDBG:=0
 # do you want to check the javascript code?
 DO_CHECKJS:=1
 # do you want to validate html?
-DO_CHECKHTML:=1
+DO_CHECKHTML:=0
 # do you want to validate css?
-DO_CHECKCSS:=1
+DO_CHECKCSS:=0
 
 #########
 # tools #
@@ -27,10 +19,10 @@ TOOL_COMPILER:=~/install/closure/compiler.jar
 TOOL_JSMIN:=~/install/jsmin/jsmin
 TOOL_JSDOC:=~/install/jsdoc/jsdoc
 TOOL_JSL:=~/install/jsl/jsl
+TOOL_JSLINT:=~/install/node_modules/jslint/bin/jslint.js
+TOOL_CSS_VALIDATOR:=~/install/css-validator/css-validator.jar
 TOOL_GJSLINT:=gjslint
 TOOL_YUICOMPRESSOR:=yui-compressor
-TOOL_JSLINT:=jslint
-TOOL_CSS_VALIDATOR:=~/install/css-validator/css-validator.jar
 
 JSCHECK:=jscheck.stamp
 HTMLCHECK:=html.stamp
