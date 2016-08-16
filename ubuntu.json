@@ -1,0 +1,69 @@
+{
+	"packages": [
+		{
+			"name": "tidy",
+			"reason": "for validating html"
+		},
+		{
+			"name": "ncftp",
+			"reason": "for uploading via ftp"
+		},
+		{
+			"name": "python",
+			"reason": "for jsl and other stuff"
+		},
+		{
+			"name": "mysql-server",
+			"reason": "for mysql"
+		},
+		{
+			"name": "apache2",
+			"reason": "for local apache web server"
+		},
+		{
+			"name": "libapache2-mod-php5",
+			"reason": "for php support for apache"
+		},
+		{
+			"name": "php5-mysql",
+			"reason": "for mysql support for php"
+		},
+		{
+			"name": "php5-json",
+			"reason": "for json support for php"
+		},
+		{
+			"name": "openjdk-7-jdk",
+			"reason": "for the css-validator (which is written in java) to work"
+		},
+		{
+			"name": "gpp",
+			"reason": "for templating"
+		},
+		{
+			"name": "php5-cgi",
+			"reason": "for the local gcloud server to be able to do php"
+		},
+		{
+			"name": "lftp",
+			"reason": "other ftp client"
+		},
+		{
+			"name": "nodejs",
+			"reason": "for jslint"
+		},
+		{
+			"name": "npm",
+			"reason": "for jslint"
+		},
+		{
+			"name": "templar",
+			"reason": "for templating"
+		}
+	],
+	"ppas": [
+		{
+			"name": "ppa:mark-veltzer/ppa"
+		}
+	]
+}
