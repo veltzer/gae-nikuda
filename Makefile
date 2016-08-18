@@ -84,9 +84,9 @@ DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
 # targets #
 ###########
 
-$(TOOLS): scripts/tools.py
+$(TOOLS):
 	$(info doing [$@])
-	$(Q)scripts/tools.py
+	$(Q)templar_cmd install_deps
 	$(Q)make_helper touch-mkdir $@
 
 .PHONY: debug_me
