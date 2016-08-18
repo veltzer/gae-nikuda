@@ -11,6 +11,10 @@ DO_CHECKJS:=1
 DO_CHECKHTML:=0
 # do you want to validate css?
 DO_CHECKCSS:=0
+# Do you want to do tools?
+DO_TOOLS:=1
+# do you want dependency on the makefile itself ?
+DO_ALL_DEPS:=1
 
 #########
 # tools #
@@ -18,7 +22,7 @@ DO_CHECKCSS:=0
 TOOL_COMPILER:=~/install/closure/compiler.jar
 TOOL_JSMIN:=~/install/jsmin/jsmin
 TOOL_JSDOC:=~/install/jsdoc/jsdoc
-TOOL_JSL:=~/install/jsl/jsl
+TOOL_JSL:=tools/jsl/jsl
 TOOL_JSLINT:=~/install/node_modules/jslint/bin/jslint.js
 TOOL_CSS_VALIDATOR:=~/install/css-validator/css-validator.jar
 TOOL_GJSLINT:=gjslint
@@ -27,6 +31,8 @@ TOOL_YUICOMPRESSOR:=yui-compressor
 JSCHECK:=jscheck.stamp
 HTMLCHECK:=html.stamp
 CSSCHECK:=css.stamp
+# what is the stamp file for the tools?
+TOOLS:=tools.stamp
 
 ########
 # code #
@@ -65,11 +71,24 @@ SOURCES_HTML:=php/index.php
 #SOURCE_HTML:=$(shell find html -name "*.html")
 SOURCES_CSS:=$(shell find css -name "*.css")
 
-# all variables between the snapshot of BUILD_IN_VARS and this place in the code
+# dependency on the makefile itself
+ifeq ($(DO_ALL_DEPS),1)
+ALL_DEPS:=Makefile
+else
+ALL_DEPS:=
+endif
+
+# all variables between the snapshot of BUILT_IN_VARS and this place in the code
 DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
 ###########
 # targets #
 ###########
+
+$(TOOLS): scripts/tools.py
+	$(info doing [$@])
+	$(Q)scripts/tools.py
+	$(Q)make_helper touch-mkdir $@
+
 .PHONY: debug_me
 debug_me:
 	$(info doing [$@])
@@ -96,20 +115,20 @@ checkhtml: $(HTMLCHECK)
 checkcss: $(CSSCHECK)
 	$(info doing [$@])
 
-$(JSCHECK): $(SOURCES_JS) $(ALL_DEP)
+$(JSCHECK): $(SOURCES_JS) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
 	$(Q)make_helper wrapper-silent $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(JSCHECK)
 
-$(HTMLCHECK): $(SOURCES_HTML) $(ALL_DEP)
+$(HTMLCHECK): $(SOURCES_HTML) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML)
 	$(Q)mkdir -p $(dir $@)
 	$(Q)touch $(HTMLCHECK)
 
-$(CSSCHECK): $(SOURCES_CSS) $(ALL_DEP)
+$(CSSCHECK): $(SOURCES_CSS) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)make_helper wrapper-css-validator java -jar $(TOOL_CSS_VALIDATOR) --profile=css3 --output=text -vextwarning=true --warning=0 $(addprefix file:,$(SOURCES_CSS))
 	$(Q)mkdir -p $(dir $@)

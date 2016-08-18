@@ -21,19 +21,19 @@
 			"reason": "for local apache web server"
 		},
 		{
-			"name": "libapache2-mod-php5",
+			"name": "libapache2-mod-php",
 			"reason": "for php support for apache"
 		},
 		{
-			"name": "php5-mysql",
+			"name": "php-mysql",
 			"reason": "for mysql support for php"
 		},
 		{
-			"name": "php5-json",
+			"name": "php-json",
 			"reason": "for json support for php"
 		},
 		{
-			"name": "openjdk-7-jdk",
+			"name": "oracle-java7-installer",
 			"reason": "for the css-validator (which is written in java) to work"
 		},
 		{
@@ -41,7 +41,7 @@
 			"reason": "for templating"
 		},
 		{
-			"name": "php5-cgi",
+			"name": "php-cgi",
 			"reason": "for the local gcloud server to be able to do php"
 		},
 		{
