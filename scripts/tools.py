@@ -54,7 +54,7 @@ def debug(s):
     if do_debug:
         print(s)
 
-hide=False
+hide=True
 def check_call_print(args):
     if hide:
         p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -257,6 +257,8 @@ def rm_tools():
 
 tp='out/web/thirdparty'
 def install_tp():
+    if not os.path.isfile('templardefs/jschess.py'):
+        return
     sys.path.append(os.getcwd())
     import templardefs.jschess
     if os.path.isdir(tp):
@@ -309,4 +311,4 @@ install_ubuntu()
 install_closure()
 install_jsmin()
 install_jsl()
-#install_tp()
+install_tp()
