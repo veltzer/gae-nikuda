@@ -19,8 +19,8 @@ DO_ALL_DEPS:=1
 #########
 # tools #
 #########
-TOOL_COMPILER:=~/install/closure/compiler.jar
-TOOL_JSMIN:=~/install/jsmin/jsmin
+TOOL_COMPILER:=tools/closure-compiler-v20160713.jar
+TOOL_JSMIN:=tools/jsmin
 TOOL_JSDOC:=~/install/jsdoc/jsdoc
 TOOL_JSL:=tools/jsl/jsl
 TOOL_JSLINT:=~/install/node_modules/jslint/bin/jslint.js
@@ -84,7 +84,7 @@ DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
 # targets #
 ###########
 
-$(TOOLS):
+$(TOOLS): ubuntu.json
 	$(info doing [$@])
 	$(Q)templar_cmd install_deps
 	$(Q)make_helper touch-mkdir $@

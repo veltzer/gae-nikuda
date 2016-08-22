@@ -57,8 +57,8 @@
 			"reason": "for jslint"
 		},
 		{
-			"name": "templar",
-			"reason": "for templating"
+			"name": "closure-linter",
+			"reason": "for gjslint"
 		}
 	],
 	"ppas": [
