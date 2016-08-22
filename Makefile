@@ -8,9 +8,9 @@ DO_MKDBG:=0
 # do you want to check the javascript code?
 DO_CHECKJS:=1
 # do you want to validate html?
-DO_CHECKHTML:=0
+DO_CHECKHTML:=1
 # do you want to validate css?
-DO_CHECKCSS:=0
+DO_CHECKCSS:=1
 # Do you want to do tools?
 DO_TOOLS:=1
 # do you want dependency on the makefile itself ?
@@ -27,6 +27,8 @@ TOOL_JSDOC:=~/install/jsdoc/jsdoc
 TOOL_JSLINT:=node_modules/jslint/bin/jslint.js
 TOOL_GJSLINT:=gjslint
 TOOL_YUICOMPRESSOR:=yui-compressor
+TOOL_HTMLHINT:=node_modules/htmlhint/bin/htmlhint
+TOOL_TIDY=tidy
 
 JSCHECK:=jscheck.stamp
 HTMLCHECK:=html.stamp
@@ -119,20 +121,18 @@ $(JSCHECK): $(SOURCES_JS) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
 	$(Q)make_helper wrapper-silent $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
-	$(Q)mkdir -p $(dir $@)
-	$(Q)touch $(JSCHECK)
+	$(Q)make_helper touch-mkdir $@
 
 $(HTMLCHECK): $(SOURCES_HTML) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)tidy -errors -q -utf8 $(SOURCES_HTML)
-	$(Q)mkdir -p $(dir $@)
-	$(Q)touch $(HTMLCHECK)
+	$(Q)make_helper wrapper-silent $(TOOL_HTMLHINT) $(SOURCES_HTML)
+	$(Q)make_helper touch-mkdir $@
+#$(Q)$(TOOL_TIDY) -errors -q -utf8 $(SOURCES_HTML)
 
 $(CSSCHECK): $(SOURCES_CSS) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)make_helper wrapper-css-validator java -jar $(TOOL_CSS_VALIDATOR) --profile=css3 --output=text -vextwarning=true --warning=0 $(addprefix file:,$(SOURCES_CSS))
-	$(Q)mkdir -p $(dir $@)
-	$(Q)touch $(CSSCHECK)
+	$(Q)make_helper touch-mkdir $@
 
 # deploy
 
