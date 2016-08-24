@@ -10,7 +10,7 @@ DO_CHECKJS:=1
 # do you want to validate html?
 DO_CHECKHTML:=1
 # do you want to validate css?
-DO_CHECKCSS:=1
+DO_CHECKCSS:=0
 # Do you want to do tools?
 DO_TOOLS:=1
 # do you want dependency on the makefile itself ?
@@ -21,7 +21,7 @@ DO_ALL_DEPS:=1
 #########
 TOOL_COMPILER:=tools/closure-compiler-v20160822.jar
 TOOL_JSMIN:=tools/jsmin
-TOOL_CSS_VALIDATOR:=tools/css-validator.jar
+TOOL_CSS_VALIDATOR:=tools/css-validator/css-validator.jar
 TOOL_JSL:=tools/jsl/jsl
 TOOL_JSDOC:=node_modules/jsdoc/jsdoc.js
 TOOL_JSLINT:=node_modules/jslint/bin/jslint.js
