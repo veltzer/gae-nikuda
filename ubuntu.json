@@ -59,6 +59,10 @@
 		{
 			"name": "closure-linter",
 			"reason": "for gjslint"
+		},
+		{
+			"name": "csstidy",
+			"reason": "for csstidy"
 		}
 	],
 	"ppas": [

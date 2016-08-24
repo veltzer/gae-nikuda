@@ -19,16 +19,17 @@ DO_ALL_DEPS:=1
 #########
 # tools #
 #########
-TOOL_COMPILER:=tools/closure-compiler-v20160713.jar
+TOOL_COMPILER:=tools/closure-compiler-v20160822.jar
 TOOL_JSMIN:=tools/jsmin
+TOOL_CSS_VALIDATOR:=tools/css-validator.jar
 TOOL_JSL:=tools/jsl/jsl
-TOOL_CSS_VALIDATOR:=~/install/css-validator/css-validator.jar
-TOOL_JSDOC:=~/install/jsdoc/jsdoc
+TOOL_JSDOC:=node_modules/jsdoc/jsdoc.js
 TOOL_JSLINT:=node_modules/jslint/bin/jslint.js
-TOOL_GJSLINT:=gjslint
-TOOL_YUICOMPRESSOR:=yui-compressor
+TOOL_GJSLINT:=/usr/bin/gjslint
+TOOL_YUICOMPRESSOR:=/usr/bin/yui-compressor
 TOOL_HTMLHINT:=node_modules/htmlhint/bin/htmlhint
-TOOL_TIDY=tidy
+TOOL_TIDY=/usr/bin/tidy
+TOOL_CSSTIDY=/usr/bin/csstidy
 
 JSCHECK:=jscheck.stamp
 HTMLCHECK:=html.stamp
