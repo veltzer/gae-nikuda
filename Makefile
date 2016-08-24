@@ -31,11 +31,11 @@ TOOL_HTMLHINT:=node_modules/htmlhint/bin/htmlhint
 TOOL_TIDY=/usr/bin/tidy
 TOOL_CSSTIDY=/usr/bin/csstidy
 
-JSCHECK:=jscheck.stamp
-HTMLCHECK:=html.stamp
-CSSCHECK:=css.stamp
+JSCHECK:=out/jscheck.stamp
+HTMLCHECK:=out/html.stamp
+CSSCHECK:=out/css.stamp
 # what is the stamp file for the tools?
-TOOLS:=tools.stamp
+TOOLS:=out/tools.stamp
 
 ########
 # code #
