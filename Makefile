@@ -14,7 +14,7 @@ DO_CHECKCSS:=0
 # Do you want to do tools?
 DO_TOOLS:=1
 # do you want dependency on the makefile itself ?
-DO_ALL_DEPS:=1
+DO_ALL_DEP:=1
 
 #########
 # tools #
@@ -75,10 +75,10 @@ SOURCES_HTML:=php/index.php
 SOURCES_CSS:=$(shell find css -name "*.css")
 
 # dependency on the makefile itself
-ifeq ($(DO_ALL_DEPS),1)
-ALL_DEPS:=Makefile
+ifeq ($(DO_ALL_DEP),1)
+ALL_DEP:=Makefile
 else
-ALL_DEPS:=
+ALL_DEP:=
 endif
 
 # all variables between the snapshot of BUILT_IN_VARS and this place in the code
