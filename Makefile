@@ -87,9 +87,9 @@ DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
 # targets #
 ###########
 
-$(TOOLS): ubuntu.json
+$(TOOLS): templardefs/deps.py package.json
 	$(info doing [$@])
-	$(Q)templar_cmd install_deps
+	$(Q)templar install_deps
 	$(Q)make_helper touch-mkdir $@
 
 .PHONY: debug_me

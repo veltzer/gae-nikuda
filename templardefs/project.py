@@ -23,7 +23,7 @@ users to get punctuation for hebrew words, sentences and paragraphs.'''
 
     d.to_php=to_php
 
-def getdeps():
+def get_deps():
     return [
         __file__, # myself
     ]
