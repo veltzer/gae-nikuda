@@ -11,8 +11,6 @@ DO_CHECKJS:=1
 DO_CHECKHTML:=1
 # do you want to validate css?
 DO_CHECKCSS:=0
-# Do you want to do tools?
-DO_TOOLS:=1
 # do you want dependency on the makefile itself ?
 DO_ALL_DEP:=1
 
@@ -76,7 +74,7 @@ SOURCES_CSS:=$(shell find css -name "*.css")
 
 # dependency on the makefile itself
 ifeq ($(DO_ALL_DEP),1)
-ALL_DEP:=Makefile
+ALL_DEP:=Makefile tools.stamp
 else
 ALL_DEP:=
 endif
