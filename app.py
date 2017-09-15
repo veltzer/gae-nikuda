@@ -36,6 +36,7 @@ class Suggest(webapp2.RequestHandler):
         obj = json.loads(self.request.body)
         p_naked = obj['Naked']
         p_id = obj['ID']
+        # the unicode letter at the end of the next line is "taf" in hebrew
         query = Diacritics.query(Diacritics.raw >= p_naked and Diacritics.raw <= p_naked + u'\u05EA')
         results = query.fetch()
         raw_results = [result.raw for result in results]
