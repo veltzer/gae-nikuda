@@ -89,7 +89,7 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
     type: 'POST',
     url: 'app',
     dataType: 'json',
-    data: { Words: sentWords},
+    data: JSON.stringify(sentWords),
     success: function(replyWords) {
       // reset status
       show_to_user('');
