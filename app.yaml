@@ -1,22 +1,13 @@
-application: nikuda-web
-runtime: python
-runtime_config:
-        python_version: 3
+runtime: python27
 threadsafe: true
 
 handlers:
-- url: /css
-  static_dir: css
-- url: /js
-  static_dir: js
-- url: /images
-  static_dir: images
-- url: /js_tp
-  static_dir: js_tp
-- url: /python/(.+)\.py
-  script: /python/\1.py
-- url: /(.*).ico
-  static_files: images/\1.ico
-  upload: images/.*
+- url: /app
+  script: app.app
 - url: /
-  static_dir: html
+  static_files: static/html/index.html
+  upload: static/html/index.html
+  mime_type: text/html
+- url: /(.*)
+  static_files: static/\1
+  upload: static/(.*)
