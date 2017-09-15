@@ -2,7 +2,10 @@ runtime: python27
 threadsafe: true
 
 handlers:
-- url: /app
+- url: /favicon.ico
+  static_files: static/images/favicon.ico
+  upload: static/images/favicon.ico
+- url: /app/(.*)
   script: app.app
 - url: /
   static_files: static/html/index.html

@@ -22,11 +22,32 @@ class Diacritics(ndb.Model):
     raw = ndb.StringProperty()
     possible_diacritics = ndb.StringProperty(repeated=True)
 
+class CatchAll(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write('This is '+self.__class__.__name__+", "+self.request.path)
+
+
+class Suggest(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write('This is '+self.__class__.__name__)
+    def post(self):
+        obj = json.loads(self.request.body)
+        p_naked = obj['Naked']
+        p_id = obj['ID']
+        query = Diacritics.query(Diacritics.raw >= p_naked and Diacritics.raw <= p_naked + u'ת')
+        results = query.fetch()
+        raw_results = [result.raw for result in results]
+        jsonstring = json.dumps(raw_results)
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write(jsonstring)
+
 
 class Naked(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write('This is a response from the get handler of Naked')
+        self.response.write('This is '+self.__class__.__name__)
     def post(self):
         jsonobject = json.loads(self.request.body)
         for obj in jsonobject:
@@ -45,7 +66,9 @@ class Naked(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication(
     [
-        ('.*', Naked),
+        ('/app/naked', Naked),
+        ('/app/suggest', Suggest),
+        ('.*', CatchAll),
     ],
     debug=False,
 )

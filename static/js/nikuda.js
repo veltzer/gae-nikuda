@@ -87,7 +87,7 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
   // Go to the server with words & their respective IDs
   $.ajax({
     type: 'POST',
-    url: 'app',
+    url: 'app/naked',
     dataType: 'json',
     data: JSON.stringify(sentWords),
     success: function(replyWords) {
@@ -150,12 +150,9 @@ function Suggest() {
   // Go to the server with the word & their respective IDs
   $.ajax({
     type: 'POST',
-    url: 'php/nikuda_suggest.php',
+    url: 'app/suggest',
     dataType: 'json',
-    data: {Word: {
-      Naked: inaked,
-      ID: suggestID
-    }},
+    data: JSON.stringify({ Naked: inaked, ID: suggestID }),
     success: function(replyWord) {
       // reset status
       show_to_user('');
