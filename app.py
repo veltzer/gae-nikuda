@@ -36,7 +36,7 @@ class Suggest(webapp2.RequestHandler):
         obj = json.loads(self.request.body)
         p_naked = obj['Naked']
         p_id = obj['ID']
-        query = Diacritics.query(Diacritics.raw >= p_naked and Diacritics.raw <= p_naked + u'ת')
+        query = Diacritics.query(Diacritics.raw >= p_naked and Diacritics.raw <= p_naked + u'\u05EA')
         results = query.fetch()
         raw_results = [result.raw for result in results]
         jsonstring = json.dumps(raw_results)
