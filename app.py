@@ -40,7 +40,8 @@ class Suggest(webapp2.RequestHandler):
         query = Diacritics.query(Diacritics.raw >= p_naked, Diacritics.raw <= p_naked + u'\u05EA')
         results = query.fetch(10)
         raw_results = [result.raw for result in results]
-        jsonstring = json.dumps(raw_results)
+        obj['Nakeds'] = raw_results
+        jsonstring = json.dumps(obj)
         self.response.headers['Content-Type'] = 'text/plain'
         self.response.write(jsonstring)
 
