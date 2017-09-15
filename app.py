@@ -16,7 +16,6 @@ import webapp2
 import os.path
 import json
 import logging
-# from google.cloud import datastore
 from google.appengine.ext import ndb
 
 class Diacritics(ndb.Model):
@@ -30,17 +29,17 @@ class Naked(webapp2.RequestHandler):
         self.response.write('This is a response from the get handler of Naked')
     def post(self):
         jsonobject = json.loads(self.request.body)
-        logging.info("object is {}".format(jsonobject))
         for obj in jsonobject:
             p_naked = obj['Naked']
             p_id = obj['ID']
             query = Diacritics.query(Diacritics.raw == p_naked)
             results = query.fetch()
-            logging.info(results)
-            assert len(results) == 1
-            obj['Nikudim'] = results[0].possible_diacritics
+            assert len(results) <= 1
+            if len(results) == 1:
+                obj['Nikudim'] = results[0].possible_diacritics
+            else:
+                obj['Nikudim'] = []
         jsonstring = json.dumps(jsonobject)
-        logging.info("writing {}".format(jsonstring))
         self.response.headers['Content-Type'] = 'text/plain'
         self.response.write(jsonstring)
 
@@ -48,7 +47,7 @@ app = webapp2.WSGIApplication(
     [
         ('.*', Naked),
     ],
-    debug=True,
+    debug=False,
 )
 
 def main():
@@ -57,4 +56,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
