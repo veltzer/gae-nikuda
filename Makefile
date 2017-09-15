@@ -67,10 +67,9 @@ Q:=@
 #.SILENT:
 endif # DO_MKDBG
 
-SOURCES_JS:=$(shell find js -name "*.js")
-SOURCES_HTML:=php/index.php
-#SOURCE_HTML:=$(shell find html -name "*.html")
-SOURCES_CSS:=$(shell find css -name "*.css")
+SOURCES_JS:=$(shell find static/js -name "*.js")
+SOURCES_HTML:=$(shell find static/html -name "*.html")
+SOURCES_CSS:=$(shell find static/css -name "*.css")
 
 # dependency on the makefile itself
 ifeq ($(DO_ALL_DEP),1)
