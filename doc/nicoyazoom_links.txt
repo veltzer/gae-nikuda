@@ -1,7 +1,0 @@
-controlling access to the db:
-	http://www.nicoyazoom.com:2082/cpsess6990169767/frontend/x3/index.php
-	go to remote administration.
-
-the machines are:
-	192.185.5.192
-	192.185.4.44

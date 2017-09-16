@@ -1,3 +1,14 @@
+1. Dagesh -
+	http://he.wikipedia.org/wiki/%D7%93%D7%92%D7%A9_(%D7%AA%D7%95%D7%9B%D7%A0%D7%94)
+2. Nakdan -
+	This is the most mature solution on the net, owned by Melingo, a Hebrew solution focused software company based in Tel Aviv (Totzeret Haaretz 16) which gives products that specialize in analysis of
+    Hebrew Synatx, etc... among other things they give out an online version of their morphix Hebrew-English dictionary. http://melingo.com/INDEX.HTM 
+	
+	Their solution is based on
+2. Mila
+3. TorahDikduk -
+http://www.torahdikduk.com/
+
 http://culmus.sourceforge.net/dictionary/index.html#raw
 http://culmus.sourceforge.net/dictionary/nakdan.html
 http://he.wiktionary.org/wiki/

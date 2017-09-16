@@ -1,2 +1,0 @@
-why is the index file called .php?
-	so that the server will not allow to cache its content by browsers.

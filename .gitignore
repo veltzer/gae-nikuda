@@ -1,23 +1,10 @@
-*~
-/error_log
-/phperrors.txt
-
-# these are .gitignore statements regarding the python project
-# we want pyc and pyo files ignore in ANY folder
+# python
 *.pyc
 *.pyo
 __pycache__
 
-# output files
-*.out
-
-# generated files
+# generated files and folders
 /out
-
-# templar generated
-/.tdefs.config
-
-# our tools
+*.stamp
 /tools
-/tools.stamp
 /node_modules
