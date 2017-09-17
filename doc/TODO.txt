@@ -1,5 +1,4 @@
-- move the db in gcloud to a "second generation" one.
-	It's supposed to be chaper and have more features.
+- revamp the user interface to a new clean bright colored and easy on the eyes one.
 - add a new page in the site with word bubbles.
 	every word will be connected to similar words
 	(words close in edit distance).
