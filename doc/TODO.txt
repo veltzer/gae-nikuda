@@ -1,3 +1,4 @@
+- implement robots.txt correctly so we won't get crawled.
 - implement the following urls:
 	/apple-touch-icon.png 	16 	100%
 	/apple-touch-icon-precomposed.png 	14 	100%
