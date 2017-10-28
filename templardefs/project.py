@@ -15,7 +15,7 @@ def to_php(x):
     raise ValueError('dont know how to translate type', type(x), x)
 
 def populate(d):
-    d.project_name='nikuda'
+    d.project_name='nIkUdAh'
     d.project_long_description='Nikuda web site'
     d.project_year_started='2004'
     d.project_description='''Nikuda is a web site intended to allow
