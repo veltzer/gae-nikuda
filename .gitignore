@@ -2,7 +2,7 @@
 *.pyc
 *.pyo
 __pycache__
-/.venv
+/.venv/
 
 # generated files and folders
 /out
