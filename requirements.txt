@@ -1,5 +1,7 @@
+# production
 google-cloud-datastore
-mysql-connector==2.1.4
 tqdm
 webtest
 webapp2
+# development tools
+pypitools
