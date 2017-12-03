@@ -1,3 +1,5 @@
+- turn this whole thing to a python hash map instead of big query.
+	This would cut down response times but quite a bit.
 - implement robots.txt correctly so we won't get crawled.
 - implement the following urls:
 	/apple-touch-icon.png 	16 	100%
