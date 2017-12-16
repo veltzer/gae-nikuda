@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-# This does not work
+# noinspection PyPackageRequirements
+from google.cloud import datastore
 
-from google.appengine.ext import db
-entries = Entry.all(keys_only=True)
-db.delete(entries)
+client = datastore.Client()
+client.delete_multi(keys=[])

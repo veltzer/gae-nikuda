@@ -1,15 +1,16 @@
-'''
+"""
 dependencies for this project
-'''
+"""
+
 
 def populate(d):
-    d.tools=[
+    d.tools = [
         'jsl',
         'jsmin',
         'closure',
         'css-validator',
     ]
-    d.packs=[
+    d.packs = [
         # for validating html
         'tidy',
         # for uploading via ftp
@@ -44,7 +45,8 @@ def populate(d):
         'csstidy',
     ]
 
+
 def get_deps():
     return [
-        __file__, # myself
+        __file__,  # myself
     ]

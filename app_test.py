@@ -14,13 +14,13 @@
 
 import webtest
 
-import main
+import app
 
 
 def test_get():
-    app = webtest.TestApp(main.app)
+    application = webtest.TestApp(app.app)
 
-    response = app.get('/')
+    response = application.get('/')
     print("here")
     assert response.status_int == 200
     assert response.body == 'Hello, World!'

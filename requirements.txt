@@ -3,5 +3,5 @@ google-cloud-datastore
 tqdm
 webtest
 webapp2
-# development tools
-pypitools
+mysql-connector==2.1.6
+configparser

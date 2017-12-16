@@ -10,8 +10,8 @@ var sinNikudRegExp = /[ׁׂ]/g;
 var dageshRegExp = /ּ/g;
 var notSinNikudRegExp = /[ְֱֲֳִֵֶַָֹֻ]/g;
 var nikudRegExp = /[ְֱֲֳִֵֶַָֹֻֻּׁׂ]/g;
-var lastLettersRegExp = /[כמנפצ]$/g;
-var firstLettersRegExp = /^[בכלמשהו]/g;
+/* var lastLettersRegExp = /[כמנפצ]$/g; */
+/* var firstLettersRegExp = /^[בכלמשהו]/g; */
 var ABRegExp = /[אבגדהוזחטיכךלמםנןסעפףצץקרשת]/g;
 
 // all dom elements
@@ -192,7 +192,7 @@ function Suggest() {
 function remove_duplicates(words) {
   // Build unique words list from words by 1 pass using a hash table
   var uniqueWords = Array();
-  var hash = new Object;
+  var hash = {};
   for (var i = 0; i < words.length; i++) {
     var word = do_enders(words[i]);
     if (hash[word] != 1) {
@@ -373,7 +373,7 @@ function set_Draft(nikud) {
 
   // Traverse the word breaking it up into letters
   // (and perhaps their punctuations)
-  var pos = 0;
+  var pos;
   var brokenWord = nikud;
   while (true) {
     pos = brokenWord.search(ABRegExp);
@@ -548,6 +548,7 @@ function insert_Draft(value, letter) {
   return undefined;
 }
 
+/*
 function imitate_nikud(from, to) {
   if (!to) {
     to = Draft.text();
@@ -570,10 +571,11 @@ function imitate_nikud(from, to) {
     }
   }
 
+
 // Copy from-> part of to
   else if (undo_enders(toNN).search(undo_enders(fromNN)) != -1) {
     var exp = '';
-    for (i = 0; i < fromNN.length; i++) {
+    for (var i = 0; i < fromNN.length; i++) {
       exp += char_exp(fromNN.charAt(i));
       exp += nikudRegExp;
     }
@@ -596,12 +598,15 @@ function imitate_nikud(from, to) {
   return to;
 }
 
+*/
+
 function trim(str) {
   str = str.replace(/^\s+/, '');
   str = str.replace(/\s+$/, '');
   return str;
 }
 
+/*
 function char_exp(c) {
   if ((c == 'ך') || (c == 'כ')) { return '[כך]'; }
   if ((c == 'ם') || (c == 'מ')) { return '[מם]'; }
@@ -610,7 +615,9 @@ function char_exp(c) {
   if ((c == 'ץ') || (c == 'צ')) { return '[צץ]'; }
   return c;
 }
+*/
 
+/*
 function undo_enders(word) {
   word = word.replace(/ך$/g, 'כ');
   word = word.replace(/ם$/g, 'מ');
@@ -619,6 +626,7 @@ function undo_enders(word) {
   word = word.replace(/ץ$/g, 'צ');
   return word;
 }
+*/
 
 function do_enders(word) {
   word = word.replace(/ך/g, 'כ');
@@ -732,7 +740,7 @@ $(document).ready(function() {
   }
 
   // Opera wants keyup for some reason
-  if (window.opera) {
+  if ("opera" in window) {
     $(document).keyup(keyEventHandler);
   }
   else {

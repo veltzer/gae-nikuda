@@ -1,16 +1,13 @@
 #!/usr/bin/env python
 
-import configparser
-import getpass
-import os.path
+# noinspection PyPackageRequirements
 from google.cloud import datastore
-import mysql.connector
-import tqdm
 
 section = "client-nikuda"
 kind = 'Diacritics'
 
 client = datastore.Client()
+# noinspection PyTypeChecker
 query = client.query(kind=kind)
 results = list(query.fetch())
 count = 0

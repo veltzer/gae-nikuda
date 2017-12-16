@@ -1,11 +1,12 @@
-'''
+"""
 project definitions for templar
-'''
+"""
+
 
 def to_php(x):
-    if type(x)==str:
+    if type(x) == str:
         return '\'{0}\''.format(x)
-    if type(x)==bool:
+    if type(x) == bool:
         if x:
             return 'TRUE'
         else:
@@ -14,16 +15,18 @@ def to_php(x):
         return 'null'
     raise ValueError('dont know how to translate type', type(x), x)
 
+
 def populate(d):
-    d.project_name='nIkUdAh'
-    d.project_long_description='Nikuda web site'
-    d.project_year_started='2004'
-    d.project_description='''Nikuda is a web site intended to allow
+    d.project_name = 'nIkUdAh'
+    d.project_long_description = 'Nikuda web site'
+    d.project_year_started = '2004'
+    d.project_description = '''Nikuda is a web site intended to allow
 users to get punctuation for hebrew words, sentences and paragraphs.'''
 
-    d.to_php=to_php
+    d.to_php = to_php
+
 
 def get_deps():
     return [
-        __file__, # myself
+        __file__,  # myself
     ]

@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-import configparser
-import getpass
 import os.path
-from google.cloud import datastore
+
+import configparser
+# noinspection PyPackageRequirements
 import mysql.connector
-import tqdm
 
 section = "client-nikuda"
+
 
 def get_config():
     d = {}
@@ -24,24 +24,31 @@ def get_config():
     d['database'] = config.get(section, 'database')
     return d
 
+
 def chunks(l, n):
     """Yield successive n-sized chunks from l."""
     for i in range(0, len(l), n):
         yield l[i:i + n]
 
-db = mysql.connector.Connect(**get_config())
-cursor = db.cursor()
-cursor.execute('SELECT Naked, Nikud FROM wordlist')
-d = dict()
-count = 0
-for row in cursor:
-    naked = row[0]
-    nikud = row[1]
-    if naked == '':
-        continue
-    if naked not in d:
-        d[naked] = []
-    d[naked].append(nikud)
-    count += 1
-db.close()
-print(len(d), count)
+
+def main():
+    db = mysql.connector.Connect(**get_config())
+    cursor = db.cursor()
+    cursor.execute('SELECT Naked, Nikud FROM wordlist')
+    d = dict()
+    count = 0
+    for row in cursor:
+        naked = row[0]
+        nikud = row[1]
+        if naked == '':
+            continue
+        if naked not in d:
+            d[naked] = []
+        d[naked].append(nikud)
+        count += 1
+    db.close()
+    print(len(d), count)
+
+
+if __name__ == "__main__":
+    main()

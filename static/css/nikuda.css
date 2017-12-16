@@ -2,14 +2,15 @@
 	position:absolute;
 	top: 10%;
 	right:35%;
+	/*noinspection CssNoGenericFontName*/
 	font-family:David;
 	font-weight:bold;
 	font-size:12.5em;
 	border-style:none;
 	color:#EFE9DC;
-	draggable:false;
+	/* draggable:false; */
 	z-index:-1;
-	user-drag: none;
+	/* user-drag: none; */
 	/* user-select: none; this doesnt work in any browser */
 	-moz-user-select: none;
 	-webkit-user-select: none;
@@ -21,6 +22,7 @@
 	padding: 1%;
 	width: 25%; height:95%;
 	float: right;
+	/*noinspection CssNoGenericFontName*/
 	font-family: David;
 	background: #FFF9EE;
 	color: Black;
@@ -31,6 +33,7 @@
 	width: 100%;
 	text-align: right;
 	vertical-align: top;
+	/*noinspection CssNoGenericFontName*/
 	font-family: David;
 	font-size: 2.0em;
 	border-width: medium;
@@ -70,9 +73,10 @@
 	padding: 1%;
 	float:right;
 	width: 60%; height:92%;
-	border: solid; border-width: 4px; border-color: #FFD585;
+	border: 4px solid #FFD585;
 	background: #FFF5E1;
 	color: Black;
+	/*noinspection CssNoGenericFontName*/
 	font-family: David;
 	z-index: 1;
 	cursor: help;
