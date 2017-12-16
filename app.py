@@ -10,8 +10,8 @@ class Diacritics(ndb.Model):
 
 
 class Suggest(webapp2.RequestHandler):
-    def __init__(self):
-        super(Suggest, self).__init__()
+    def __init__(self, *args, **kwargs):
+        super(Suggest, self).__init__(*args, **kwargs)
         self.cache = dict()
 
     def post(self):
@@ -32,8 +32,8 @@ class Suggest(webapp2.RequestHandler):
 
 
 class Naked(webapp2.RequestHandler):
-    def __init__(self):
-        super(Naked, self).__init__()
+    def __init__(self, *args, **kwargs):
+        super(Naked, self).__init__(*args, **kwargs)
         self.cache = dict()
 
     def post(self):
