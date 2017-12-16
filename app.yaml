@@ -14,3 +14,17 @@ handlers:
 - url: /(.*)
   static_files: static/\1
   upload: static/(.*)
+
+skip_files:
+- /.git/
+- /.idea/
+- /node_modules/
+- /tools/
+- /.venv/
+- /support/
+- /db/
+- /misc/
+- /out/
+- /datastore/
+- /gcloud/
+- /config/

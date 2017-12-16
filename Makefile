@@ -1,4 +1,4 @@
-include /usr/share/templar/make/Makefile
+# include /usr/share/templar/make/Makefile
 
 ##############
 # parameters #
@@ -73,7 +73,7 @@ SOURCES_CSS:=$(shell find static/css -name "*.css")
 
 # dependency on the makefile itself
 ifeq ($(DO_ALL_DEP),1)
-ALL_DEP:=Makefile tools.stamp
+ALL_DEP:=Makefile out/tools.stamp
 else
 ALL_DEP:=
 endif
@@ -84,7 +84,10 @@ DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
 # targets #
 ###########
 
-$(TOOLS): templardefs/deps.py package.json
+all:
+	$(info doing [$@])
+
+$(TOOLS): package.json
 	$(info doing [$@])
 	$(Q)templar install_deps
 	$(Q)make_helper touch-mkdir $@

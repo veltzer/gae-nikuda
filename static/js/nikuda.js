@@ -740,7 +740,7 @@ $(document).ready(function() {
   }
 
   // Opera wants keyup for some reason
-  if ("opera" in window) {
+  if ('opera' in window) {
     $(document).keyup(keyEventHandler);
   }
   else {
