@@ -36,3 +36,5 @@ skip_files:
 - ^package\.json$
 - ^requirements\.txt$
 - ^\.gitignore$
+- ^\.gcloud$
+- ^\.myenv$
