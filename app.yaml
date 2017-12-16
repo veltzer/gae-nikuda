@@ -16,15 +16,23 @@ handlers:
   upload: static/(.*)
 
 skip_files:
-- /.git/
-- /.idea/
-- /node_modules/
-- /tools/
-- /.venv/
-- /support/
-- /db/
-- /misc/
-- /out/
-- /datastore/
-- /gcloud/
-- /config/
+- ^\.git/.*
+- ^.idea/.*
+- ^node_modules/.*
+- ^tools/.*
+- ^\.venv/.*
+- ^support/.*
+- ^db/.*
+- ^misc/.*
+- ^out/.*
+- ^datastore/.*
+- ^gcloud/.*
+- ^config/.*
+- ^tests/.*
+- ^doc/.*
+- ^(.*/)?.*\.py[co]$
+- ^Makefile$
+- ^README\.md$
+- ^package\.json$
+- ^requirements\.txt$
+- ^\.gitignore$
