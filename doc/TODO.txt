@@ -1,15 +1,6 @@
 - move from python2.7 to python3.
 - turn this whole thing to a python hash map instead of big query.
 	This would cut down response times but quite a bit.
-- implement robots.txt correctly so we won't get crawled.
-- implement the following urls:
-	/apple-touch-icon.png 	16 	100%
-	/apple-touch-icon-precomposed.png 	14 	100%
-	/robots.txt 	5 	100%
-	/apple-touch-icon-120x120.png 	1 	100%
-	/apple-touch-icon-120x120-precomposed.png 
-	just put some nikuda icons and a robots.txt file that says that we don't
-	want to be crawled.
 - revamp the user interface to a new clean bright colored and easy on the eyes one.
 - add a new page in the site with word bubbles.
 	every word will be connected to similar words
