@@ -1,30 +1,21 @@
+import bisect
+import os
 import webapp2
 import json
-# noinspection PyPackageRequirements
-from google.appengine.ext import ndb
-
-
-class Diacritics(ndb.Model):
-    raw = ndb.StringProperty()
-    possible_diacritics = ndb.StringProperty(repeated=True)
 
 
 class Suggest(webapp2.RequestHandler):
     def __init__(self, *args, **kwargs):
         super(Suggest, self).__init__(*args, **kwargs)
-        self.cache = dict()
+        path = os.path.join(os.path.split(__file__)[0], 'data/all.json')
+        with open(path, "rt") as fp:
+            self.all = sorted(json.load(fp).keys())
 
     def post(self):
         obj = json.loads(self.request.body)
         p_naked = obj['Naked']
-        if p_naked in self.cache:
-            raw_results = self.cache[p_naked]
-        else:
-            # the unicode letter at the end of the next line is "taf" in hebrew
-            query = Diacritics.query(Diacritics.raw >= p_naked, Diacritics.raw <= p_naked + u'\u05EA')
-            results = query.fetch(10)
-            raw_results = [result.raw for result in results]
-            self.cache[p_naked] = raw_results
+        pos = bisect.bisect_left(self.all, p_naked)
+        raw_results = self.all[pos:pos+10]
         obj['Nakeds'] = raw_results
         jsonstring = json.dumps(obj)
         self.response.headers['Content-Type'] = 'text/plain'
@@ -34,24 +25,18 @@ class Suggest(webapp2.RequestHandler):
 class Naked(webapp2.RequestHandler):
     def __init__(self, *args, **kwargs):
         super(Naked, self).__init__(*args, **kwargs)
-        self.cache = dict()
+        path = os.path.join(os.path.split(__file__)[0], 'data/all.json')
+        with open(path, "rt") as fp:
+            self.all = json.load(fp)
 
     def post(self):
         jsonobject = json.loads(self.request.body)
         for obj in jsonobject:
             p_naked = obj['Naked']
-            if p_naked in self.cache:
-                results = self.cache[p_naked]
+            if p_naked in self.all:
+                results = self.all[p_naked]
             else:
-                query = Diacritics.query(Diacritics.raw == p_naked)
-                results = query.fetch()
-                # there can be no more than one result
-                assert len(results) <= 1, "got more than 1 result"
-                if len(results) == 1:
-                    results = results[0].possible_diacritics
-                else:
-                    results = []
-                self.cache[p_naked] = results
+                results = []
             obj['Nikudim'] = results
         jsonstring = json.dumps(jsonobject)
         self.response.headers['Content-Type'] = 'text/plain'
