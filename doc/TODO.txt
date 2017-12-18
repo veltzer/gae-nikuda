@@ -1,30 +1,16 @@
-- move from python2.7 to python3.
-- turn this whole thing to a python hash map instead of big query.
-	This would cut down response times but quite a bit.
+- when I do 'gcloud_deploy.sh' it curretly upload all files (about 30) of the app
+	to gcloud. It wasn't always so. There was a gcs bucket that held the previous
+	version and only uploaded the diff. How can I get that functionality
+	back?
 - revamp the user interface to a new clean bright colored and easy on the eyes one.
 - add a new page in the site with word bubbles.
 	every word will be connected to similar words
 	(words close in edit distance).
-- turn all scripts to python instead of shell.
-	Use tdefs to get the data i need (passwords, hosts, ports, usernames)
-- bring back security in the .tdefs.config file.
-	This will probably be done by writing python scripts to wrap
-	all the ftp and other work that I'm doing.
-- we are not really using MySQL as an RDMBS and it is more expensive to handle
-	and less scalable than other solutions for data storage in the cloud.
-	Maybe we should move to one of those storages?
-- somehow the do_utf_headers var works on marks machine (local install)
-	and causes the real site to stop working.
-	It is currently enabled for local install and disabled for remote.
 - add google analytics to track comings and goings to the site.
 - all hebrew string should be taken out of the javascript code
 	and then the javascript code should be made ascii again and pass js checks.
+- fix all pycharm warnings about the code.
 - compress the javascript code to make everything run faster.
+	or maybe GAE does this automatically? check this.
 - make sure that jquery is the compressed version.
 - use a new version of jquery.
-- diconnect problems in php should give errors and not return the data as part of the code.
-- see that these errors are shown to the user.
-- make the connect code shared between all the php scripts.
-- make the db name and user name be only in one place, easily overridable.
-- I want to see errors in communication. at all levels. Log to the console if need be.
-- add it so the makefile could dump the database back to a file.
