@@ -1,17 +1,3 @@
-- move the app to https.
-- when I do 'gcloud_deploy.sh' it curretly upload all files (about 30) of the app
-	to gcloud. It wasn't always so. There was a gcs bucket that held the previous
-	version and only uploaded the diff. How can I get that functionality
-	back?
-- revamp the user interface to a new clean bright colored and easy on the eyes one.
-- add a new page in the site with word bubbles.
-	every word will be connected to similar words
-	(words close in edit distance).
-- add google analytics to track comings and goings to the site.
-- all hebrew string should be taken out of the javascript code
-	and then the javascript code should be made ascii again and pass js checks.
-- fix all pycharm warnings about the code.
-- compress the javascript code to make everything run faster.
-	or maybe GAE does this automatically? check this.
-- make sure that jquery is the compressed version.
-- use a new version of jquery.
+Sun Feb 25 01:03:16 IST 2018
+	move the app to https.
+	Mark Veltzer
