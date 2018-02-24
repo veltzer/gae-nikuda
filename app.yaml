@@ -5,15 +5,19 @@ handlers:
 - url: /favicon.ico
   static_files: static/images/favicon.ico
   upload: static/images/favicon.ico
+  secure: always
 - url: /app/(.*)
   script: app.app
+  secure: always
 - url: /
   static_files: static/html/index.html
   upload: static/html/index.html
   mime_type: text/html
+  secure: always
 - url: /(.*)
   static_files: static/\1
   upload: static/(.*)
+  secure: always
 
 skip_files:
 - ^\.git/.*
