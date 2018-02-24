@@ -94,8 +94,8 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
       // reset status
       show_to_user('');
       for (var i = 0; i < replyWords.length; i++) {
-        var nikudim = replyWords[i].Nikudim;
-        var original = replyWords[i].Naked;
+        var nikudim = replyWords[i]["Nikudim"];
+        var original = replyWords[i]["Naked"];
 
         if (nikudim.length > 0) {
           // Make sure we don't have duplicates in the DB
@@ -113,12 +113,12 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
         successHandler(nikudim, replyWords[i].ID);
       }
 
-      if (typeof(doneHandler) == 'function') {
+      if (typeof(doneHandler) === 'function') {
         doneHandler();
       }
     },
     error: function(jqXHR, textStatus, errorThrown) {
-      if (typeof(errorHandler) == 'function') {
+      if (typeof(errorHandler) === 'function') {
         errorHandler(jqXHR, textStatus, errorThrown);
       } else {
         // Update status as failure
@@ -134,7 +134,7 @@ function Suggest() {
   var inaked = Quicky.val();
 
   // Do not suggest when the words are too short or havent changed
-  if (inaked == currentInaked || inaked.length < 3) {
+  if (inaked === currentInaked || inaked.length < 3) {
     SuggestionBox.fadeOut('slow');
     SuggestionList.children('li').remove();
     return;
@@ -160,10 +160,10 @@ function Suggest() {
       // Clear the old
       SuggestionList.children('li').remove();
 
-      var nakeds = replyWord.Nakeds;
+      var nakeds = replyWord["Nakeds"];
       var ID = replyWord.ID;
 
-      if ((ID == suggestID) && (nakeds.length > 0)) {
+      if ((ID === suggestID) && (nakeds.length > 0)) {
         // fade in the suggestion box if it is hidden
         SuggestionBox.fadeIn('slow');
         // Add all suggestions to suggestion list
@@ -195,7 +195,7 @@ function remove_duplicates(words) {
   var hash = {};
   for (var i = 0; i < words.length; i++) {
     var word = do_enders(words[i]);
-    if (hash[word] != 1) {
+    if (hash[word] !== 1) {
       uniqueWords.push(word);
       hash[word] = 1;
     }
@@ -235,11 +235,11 @@ function cycle_nikud() {
   // Find the current punctuation in the punctuations list
   var currentNikud = trim($(origElemRef).text());
   for (var i = 0; i < nikudim.length; i++) {
-    if (nikudim[i] == currentNikud) {
+    if (nikudim[i] === currentNikud) {
       break;
     }
   }
-  var newNikud = ((i == nikudim.length - 1) ? nikudim[0] : nikudim[i + 1]);
+  var newNikud = ((i === nikudim.length - 1) ? nikudim[0] : nikudim[i + 1]);
 
   $(origElemRef).text(newNikud);
 
@@ -250,9 +250,9 @@ function change_nikud(elem) {
   var newNikud = trim($(elem).text());
 
   // If we have an orig element referece then update it
-  if (origElemRef != false) {
+  if (origElemRef !== false) {
     // Check that this is a punctuation of the origElemRef
-    if ($(origElemRef).data('ID') == $(elem).data('ID')) {
+    if ($(origElemRef).data('ID') === $(elem).data('ID')) {
       $(origElemRef).text(newNikud);
     }
   }
@@ -318,7 +318,7 @@ function nikudize(doneHandler) {
         function(nikudim, nikudID) {
         $.each(Answer.children('span'), function(index, element) {
           fake_use(index);
-          if ($.data(element, 'ID') == nikudID) {
+          if ($.data(element, 'ID') === nikudID) {
             $(element).replaceWith(print_nikudim(nikudim));
             return false;
           }
@@ -347,7 +347,7 @@ function set_QuickyAns(nikudim, nikud, ID) {
   QuickyAns.children('span').css('font-weight', 'normal');
   $.each(QuickyAns.children('span'), function(index, element) {
     fake_use(index);
-    if ($(element).text() == nikud) {
+    if ($(element).text() === nikud) {
       draftElemRef = element;
       return false;
     }
@@ -377,11 +377,11 @@ function set_Draft(nikud) {
   var brokenWord = nikud;
   while (true) {
     pos = brokenWord.search(ABRegExp);
-    if (pos == -1) {
+    if (pos === -1) {
       break;
     }
     var posLast = brokenWord.substr(pos + 1).search(ABRegExp);
-    if (posLast == -1) {
+    if (posLast === -1) {
       posLast = brokenWord.length;
     }
     else {
@@ -402,7 +402,7 @@ function set_Draft(nikud) {
   QuickyAns.children('span').css('font-weight', 'normal');
   $.each(QuickyAns.children('span'), function(index, element) {
     fake_use(index);
-    if ($(element).text() == nikud) {
+    if ($(element).text() === nikud) {
       $(element).css('font-weight', 'bold');
       return false;
     }
@@ -435,7 +435,7 @@ function update_Draft() {
   var exists = false;
   $.each(QuickyAns.children('span'), function(index, element) {
     fake_use(index);
-    if ($(element).text() == current) {
+    if ($(element).text() === current) {
       exists = element;
       return false;
     }
@@ -449,7 +449,7 @@ function update_Draft() {
     $(exists).css('font-weight', 'bold');
 
     // Change current nikud of orig element reference
-    if (origElemRef != false) {
+    if (origElemRef !== false) {
       change_nikud($(exists));
     }
 
@@ -467,7 +467,7 @@ function update_Draft() {
   QuickyAns.append(' ');
 
   // If we are working on a word from the current text
-  if (origElemRef != false) {
+  if (origElemRef !== false) {
     currentSpan.data('ID', $(origElemRef).data('ID'));
     $(origElemRef).attr('title', $(origElemRef).attr('title') + ',' + current);
     change_nikud(currentSpan);
@@ -477,7 +477,7 @@ function update_Draft() {
 
 function insert_Draft(value, letter) {
   if (!letter) {
-    if (letterElemRef != false) {
+    if (letterElemRef !== false) {
       letter = letterElemRef;
     }
     else {
@@ -495,20 +495,20 @@ function insert_Draft(value, letter) {
 
   // The idea is that there could be a shin sin sound, a movement and a
   // hiphen at most on any single letter
-  if (value == ' ') {
+  if (value === ' ') {
     current = current.replace(nikudRegExp, '');
   }
-  else if ((value == 'ׂ') || (value == 'ׁ') ||
-      (value == 'ׁׂ') || (value == 'ׁׂ')) {
-    if (current.search('ש') != -1) {
-      if (value.length == 1) {
+  else if ((value === 'ׂ') || (value === 'ׁ') ||
+      (value === 'ׁׂ') || (value === 'ׁׂ')) {
+    if (current.search('ש') !== -1) {
+      if (value.length === 1) {
         current = current.replace(sinNikudRegExp, '');
         current += value;
       }
       // We have an option of alternating shin sin sounds in memory of sagi
       // shagi saval shoval
       else {
-        if (current.search('') != -1) {
+        if (current.search('') !== -1) {
           current = current.replace(sinNikudRegExp, '');
           current += 'ׁ';
         }
@@ -521,13 +521,13 @@ function insert_Draft(value, letter) {
       show_to_user('error?!?');
     }
   }
-  else if (value == 'ּ') {
+  else if (value === 'ּ') {
     // h' is not here because it can have a mapik
     // the rest of the letters can't accept doubling
     // (except r in very esoteric cases)
-    if (current.search('[אעחר]') == -1) {
-      if (current.search(dageshRegExp) == -1) {
-        if (current.search('ו') != -1) {
+    if (current.search('[אעחר]') === -1) {
+      if (current.search(dageshRegExp) === -1) {
+        if (current.search('ו') !== -1) {
           current = current.replace(nikudRegExp, '');
         }
         current += value;
@@ -535,8 +535,8 @@ function insert_Draft(value, letter) {
     }
   }
   else {
-    if (current.search(nikudRegExp) != -1) {
-      if (current.search('ו') != -1) {
+    if (current.search(nikudRegExp) !== -1) {
+      if (current.search('ו') !== -1) {
         current = current.replace(dageshRegExp, '');
       }
       current = current.replace(notSinNikudRegExp, '');
@@ -755,8 +755,8 @@ $(document).ready(function() {
       HelpBox.hide('slow');
 
       // Change the original element reference and bold it
-      if (origElemRef != evt.target) {
-        if (origElemRef != false) {
+      if (origElemRef !== evt.target) {
+        if (origElemRef !== false) {
           $(origElemRef).css('font-weight', 'normal');
         }
 
@@ -791,8 +791,8 @@ $(document).ready(function() {
     if ($(evt.target).is('span')) {
       HelpBox.hide('slow');
 
-      if (letterElemRef != evt.target) {
-        if (letterElemRef != false) {
+      if (letterElemRef !== evt.target) {
+        if (letterElemRef !== false) {
           $(letterElemRef).css('font-weight', 'normal');
         }
 
@@ -813,8 +813,8 @@ $(document).ready(function() {
       fake_use(evt);
       if (Quicky.val().length > 0) {
         HelpBox.hide('slow');
-        if (origElemRef != false) {
-          if (trim(Quicky.val()) !=
+        if (origElemRef !== false) {
+          if (trim(Quicky.val()) !==
               trim($(origElemRef).text()).replace(nikudRegExp, '')) {
             // We are no longer working on a main text word so remove
             // the reference and unbolden it
@@ -830,7 +830,7 @@ $(document).ready(function() {
             function(nikudim, nikudID) {
               // If we get an in time non empty reply for the current
               // requested word
-              if (runningID == nikudID) {
+              if (runningID === nikudID) {
                 if (nikudim.length > minAllowed) {
                   // Set the first possibility for punctuation
                   set_QuickyAns(nikudim, nikudim[0], nikudID);

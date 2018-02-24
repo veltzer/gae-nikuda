@@ -94,12 +94,14 @@
 	padding: 5px;
 	opacity: .9;
 }
-#suggestionList {
+/*
+	#suggestionList {
 	background: White;
 	border: Gray;
 	padding: 0;
 	margin: 0;
 }
+*/
 #SuggestionList li {
 	cursor: pointer;
 	list-style-type: none;
