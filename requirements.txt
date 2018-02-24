@@ -1,7 +1,2 @@
 # production
-google-cloud-datastore
-tqdm
-webtest
 webapp2
-mysql-connector==2.1.6
-configparser
