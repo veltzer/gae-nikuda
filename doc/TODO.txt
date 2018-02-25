@@ -1,3 +1,7 @@
+- stop using unicode directly in nikuda.js. Many text editors and even browsers
+	do not know how to display files like these and allow you to comfortably
+	edit them. instead put the unicode values (\uXXXX).
+	use some tool to do it.
 - fix the warning I get about unicode when I do 'gcloud_deploy.sh'.
 - when I do 'gcloud_deploy.sh' it curretly upload all files (about 30) of the app
 	to gcloud. It wasn't always so. There was a gcs bucket that held the previous
@@ -12,5 +16,6 @@
 	and then the javascript code should be made ascii again and pass js checks.
 - compress the javascript code to make everything run faster.
 	or maybe GAE does this automatically? check this.
+- compress the css and the html too.
 - make sure that jquery is the compressed version.
 - use a new version of jquery.
