@@ -1,3 +1,4 @@
+- fix the warning I get about unicode when I do 'gcloud_deploy.sh'.
 - when I do 'gcloud_deploy.sh' it curretly upload all files (about 30) of the app
 	to gcloud. It wasn't always so. There was a gcs bucket that held the previous
 	version and only uploaded the diff. How can I get that functionality
