@@ -9,7 +9,7 @@ var notNikudABRegExp = /[^אבגדהוזחטיכךלמםנןסעפףצץקרשת
 var sinNikudRegExp = /[ׁׂ]/g;
 var dageshRegExp = /ּ/g;
 var notSinNikudRegExp = /[ְֱֲֳִֵֶַָֹֻ]/g;
-var nikudRegExp = /[ְֱֲֳִֵֶַָֹֻֻּׁׂ]/g;
+var nikudRegExp = /[\u05b0\u05b1\u05b2\u05b3\u05b4\u05b5\u05b6\u05b7\u05b8\u05c2\u05c1\u05b9\u05bc\u05bb]/g;
 /* var lastLettersRegExp = /[כמנפצ]$/g; */
 /* var firstLettersRegExp = /^[בכלמשהו]/g; */
 var ABRegExp = /[אבגדהוזחטיכךלמםנןסעפףצץקרשת]/g;
@@ -629,17 +629,50 @@ function undo_enders(word) {
 */
 
 function do_enders(word) {
-  word = word.replace(/ך/g, 'כ');
-  word = word.replace(/ם/g, 'מ');
-  word = word.replace(/ן/g, 'נ');
-  word = word.replace(/ף/g, 'פ');
-  word = word.replace(/ץ/g, 'צ');
-  word = word.replace(/כ[ְֱֲֳִֵֶַֹֻֻּׁׂ]*$/, 'ך');
-  word = word.replace(/כָ$/, 'ךָ');
-  word = word.replace(/מ[ְֱֲֳִֵֶַָֹֻֻּׁׂ]*$/, 'ם');
-  word = word.replace(/נ[ְֱֲֳִֵֶַָֹֻֻּׁׂ]*$/, 'ן');
-  word = word.replace(/פ[ְֱֲֳִֵֶַָֹֻֻּׁׂ]*$/, 'ף');
-  word = word.replace(/צ[ְֱֲֳִֵֶַָֹֻֻּׁׂ]*$/, 'ץ');
+  word = word.replace(
+      /\u05da/g,
+      '\u05db'
+  );
+  word = word.replace(
+      /\u05dd/g,
+      '\u05de'
+  );
+  word = word.replace(
+      /\u05df/g,
+      '\u05e0'
+  );
+  word = word.replace(
+      /\u05e3/g,
+      '\u05e4'
+  );
+  word = word.replace(
+      /\u05e5/g,
+      '\u05e6'
+  );
+  word = word.replace(
+      /\u05DB[\u05B0\u05B1\u05B2\u05B3\u05B4\u05B5\u05B6\u05B7\u05C2\u05C1\u05B9\u05BC\u05BB]*$/,
+      '\u05DA'
+  );
+  word = word.replace(
+      /\u05DB\u05B8$/,
+      '\u05DA\u05B8'
+  );
+  word = word.replace(
+      /\u05DE[\u05B0\u05B1\u05B2\u05B3\u05B4\u05B5\u05B6\u05B7\u05B8\u05C2\u05C1\u05B9\u05BC\u05BB]*$/,
+      '\u05DD'
+  );
+  word = word.replace(
+      /\u05E0[\u05B0\u05B1\u05B2\u05B3\u05B4\u05B5\u05B6\u05B7\u05B8\u05C2\u05C1\u05B9\u05BC\u05BB]*$/,
+      '\u05DF'
+  );
+  word = word.replace(
+      /\u05E4[\u05B0\u05B1\u05B2\u05B3\u05B4\u05B5\u05B6\u05B7\u05B8\u05C2\u05C1\u05B9\u05BC\u05BB]*$/,
+      '\u05E3'
+  );
+  word = word.replace(
+      /\u05E6[\u05B0\u05B1\u05B2\u05B3\u05B4\u05B5\u05B6\u05B7\u05B8\u05C2\u05C1\u05B9\u05BC\u05BB]*$/,
+      '\u05E5'
+  );
   return word;
 }
 
