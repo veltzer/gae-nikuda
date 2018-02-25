@@ -9,7 +9,8 @@ var notNikudABRegExp = /[^אבגדהוזחטיכךלמםנןסעפףצץקרשת
 var sinNikudRegExp = /[ׁׂ]/g;
 var dageshRegExp = /ּ/g;
 var notSinNikudRegExp = /[ְֱֲֳִֵֶַָֹֻ]/g;
-var nikudRegExp = /[\u05b0\u05b1\u05b2\u05b3\u05b4\u05b5\u05b6\u05b7\u05b8\u05c2\u05c1\u05b9\u05bc\u05bb]/g;
+var nikudRegExp =
+    /[\u05b0\u05b1\u05b2\u05b3\u05b4\u05b5\u05b6\u05b7\u05b8\u05c2\u05c1\u05b9\u05bc\u05bb]/g;
 /* var lastLettersRegExp = /[כמנפצ]$/g; */
 /* var firstLettersRegExp = /^[בכלמשהו]/g; */
 var ABRegExp = /[אבגדהוזחטיכךלמםנןסעפףצץקרשת]/g;
@@ -94,8 +95,8 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
       // reset status
       show_to_user('');
       for (var i = 0; i < replyWords.length; i++) {
-        var nikudim = replyWords[i]["Nikudim"];
-        var original = replyWords[i]["Naked"];
+        var nikudim = replyWords[i]['Nikudim'];
+        var original = replyWords[i]['Naked'];
 
         if (nikudim.length > 0) {
           // Make sure we don't have duplicates in the DB
@@ -160,7 +161,7 @@ function Suggest() {
       // Clear the old
       SuggestionList.children('li').remove();
 
-      var nakeds = replyWord["Nakeds"];
+      var nakeds = replyWord['Nakeds'];
       var ID = replyWord.ID;
 
       if ((ID === suggestID) && (nakeds.length > 0)) {
@@ -631,48 +632,37 @@ function undo_enders(word) {
 function do_enders(word) {
   word = word.replace(
       /\u05da/g,
-      '\u05db'
-  );
+      '\u05db');
   word = word.replace(
       /\u05dd/g,
-      '\u05de'
-  );
+      '\u05de');
   word = word.replace(
       /\u05df/g,
-      '\u05e0'
-  );
+      '\u05e0');
   word = word.replace(
       /\u05e3/g,
-      '\u05e4'
-  );
+      '\u05e4');
   word = word.replace(
       /\u05e5/g,
-      '\u05e6'
-  );
+      '\u05e6');
   word = word.replace(
       /\u05DB[\u05B0\u05B1\u05B2\u05B3\u05B4\u05B5\u05B6\u05B7\u05C2\u05C1\u05B9\u05BC\u05BB]*$/,
-      '\u05DA'
-  );
+      '\u05DA');
   word = word.replace(
       /\u05DB\u05B8$/,
-      '\u05DA\u05B8'
-  );
+      '\u05DA\u05B8');
   word = word.replace(
       /\u05DE[\u05B0\u05B1\u05B2\u05B3\u05B4\u05B5\u05B6\u05B7\u05B8\u05C2\u05C1\u05B9\u05BC\u05BB]*$/,
-      '\u05DD'
-  );
+      '\u05DD');
   word = word.replace(
       /\u05E0[\u05B0\u05B1\u05B2\u05B3\u05B4\u05B5\u05B6\u05B7\u05B8\u05C2\u05C1\u05B9\u05BC\u05BB]*$/,
-      '\u05DF'
-  );
+      '\u05DF');
   word = word.replace(
       /\u05E4[\u05B0\u05B1\u05B2\u05B3\u05B4\u05B5\u05B6\u05B7\u05B8\u05C2\u05C1\u05B9\u05BC\u05BB]*$/,
-      '\u05E3'
-  );
+      '\u05E3');
   word = word.replace(
       /\u05E6[\u05B0\u05B1\u05B2\u05B3\u05B4\u05B5\u05B6\u05B7\u05B8\u05C2\u05C1\u05B9\u05BC\u05BB]*$/,
-      '\u05E5'
-  );
+      '\u05E5');
   return word;
 }
 
