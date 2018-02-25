@@ -4,3 +4,6 @@ Sun Feb 25 01:03:16 IST 2018
 Sun Feb 25 09:05:25 IST 2018
 	fix all pycharm warnings about the code.
 	Mark Veltzer
+Sun Feb 25 09:18:56 IST 2018
+	'make' now works.
+	Mark Veltzer
