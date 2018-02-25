@@ -9,7 +9,6 @@
 - add google analytics to track comings and goings to the site.
 - all hebrew string should be taken out of the javascript code
 	and then the javascript code should be made ascii again and pass js checks.
-- fix all pycharm warnings about the code.
 - compress the javascript code to make everything run faster.
 	or maybe GAE does this automatically? check this.
 - make sure that jquery is the compressed version.

@@ -1,3 +1,6 @@
 Sun Feb 25 01:03:16 IST 2018
 	move the app to https.
 	Mark Veltzer
+Sun Feb 25 09:05:25 IST 2018
+	fix all pycharm warnings about the code.
+	Mark Veltzer
