@@ -1,1 +1,2 @@
 virtual_env_python=/usr/bin/python2.7
+gcloud_configuration_name=nikuda
