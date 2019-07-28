@@ -1,3 +1,7 @@
+- move this project from 27 to 37 python on GCP.
+- the makefile does not work because I don't have a make_helper.
+	get a make_helper to work with python module pymakehelper.
+
 - stop using unicode directly in nikuda.js. Many text editors and even browsers
 	do not know how to display files like these and allow you to comfortably
 	edit them. instead put the unicode values (\uXXXX).

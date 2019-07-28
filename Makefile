@@ -32,7 +32,6 @@ TOOL_CSSTIDY=/usr/bin/csstidy
 JSCHECK:=out/jscheck.stamp
 HTMLCHECK:=out/html.stamp
 CSSCHECK:=out/css.stamp
-# what is the stamp file for the tools?
 TOOLS:=out/tools.stamp
 
 ########
