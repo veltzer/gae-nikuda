@@ -1,4 +1,2 @@
 # production
-webapp2
-# debug
-webtest
+flask

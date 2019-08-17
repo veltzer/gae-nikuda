@@ -1,56 +1,44 @@
 import bisect
 import os
-import webapp2
 import json
+import flask
 
 
+# the app object
+app = flask.Flask(__name__, static_url_path='')
+
+# setup
 path = os.path.join(os.path.split(__file__)[0], 'data/all.json')
 with open(path, "rt") as fp:
     all_dict = json.load(fp)
     all_sorted = sorted(all_dict.keys())
 
+# this route is not needed in production
+@app.route('/', methods=['GET'])
+def index():
+    return app.send_static_file("html/index.html")
 
-class Suggest(webapp2.RequestHandler):
-    def post(self):
-        obj = json.loads(self.request.body)
+@app.route('/app/naked', methods=['POST'])
+def naked():
+    obj = request.json
+    p_naked = obj['Naked']
+    pos = bisect.bisect_left(all_sorted, p_naked)
+    raw_results = all_sorted[pos:pos+10]
+    obj['Nakeds'] = raw_results
+    return flask.jsonify(obj)
+
+
+@app.route('/app/suggest', methods=['POST'])
+def suggest():
+    jsonobject = request.json
+    for obj in jsonobject:
         p_naked = obj['Naked']
-        pos = bisect.bisect_left(all_sorted, p_naked)
-        raw_results = all_sorted[pos:pos+10]
-        obj['Nakeds'] = raw_results
-        jsonstring = json.dumps(obj)
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write(jsonstring)
+        if p_naked in all_dict:
+            results = all_dict[p_naked]
+        else:
+            results = []
+        obj['Nikudim'] = results
+    return flask.jsonify(osonobject)
 
-
-class Naked(webapp2.RequestHandler):
-    def post(self):
-        jsonobject = json.loads(self.request.body)
-        for obj in jsonobject:
-            p_naked = obj['Naked']
-            if p_naked in all_dict:
-                results = all_dict[p_naked]
-            else:
-                results = []
-            obj['Nikudim'] = results
-        jsonstring = json.dumps(jsonobject)
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write(jsonstring)
-
-
-app = webapp2.WSGIApplication(
-    [
-        ('/app/naked', Naked),
-        ('/app/suggest', Suggest),
-    ],
-    debug=False,
-)
-
-
-# def main():
-#     # noinspection PyPackageRequirements
-#     from paste import httpserver
-#     httpserver.serve(app, host='127.0.0.1', port='8080')
-#
-#
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080, debug=True)

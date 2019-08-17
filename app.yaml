@@ -1,5 +1,4 @@
-runtime: python27
-threadsafe: true
+runtime: python37
 
 handlers:
 - url: /favicon.ico
