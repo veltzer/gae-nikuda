@@ -6,7 +6,7 @@ handlers:
   upload: static/images/favicon.ico
 - url: /app/.*
   script: auto
-- url: /static/html/index.html
+- url: /
   static_files: static/html/index.html
   upload: static/html/index.html
   mime_type: text/html
