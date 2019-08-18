@@ -20,7 +20,9 @@ runtime: python37
 # handers and add them back.
 
 # cache expiration time, default is 10 min
-default_expiration: "10d"
+# watch out! you cannot remove stuff from the cache so avoid the temptation to
+# put stuff in the cache for way too long. see document above.
+# default_expiration: "10m"
 
 handlers:
 - url: /static/
