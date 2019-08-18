@@ -1,6 +1,3 @@
-- move this project from 27 to 37 python on GCP.
-- move to .gcloudignore instead of "skip_files" in app.yaml
-
 - the makefile does not work because I don't have a make_helper.
 	get a make_helper to work with python module pymakehelper.
 
