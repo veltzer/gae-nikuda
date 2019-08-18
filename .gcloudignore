@@ -1,0 +1,24 @@
+# ignore this file
+/.gcloudignoe
+# ignore the entire git folder
+/.git
+# ignore the git ignore file
+/.gitignore
+# ignore everything that .gitignore ignores
+#!include:.gitignore
+
+# ignore the entire .idea folder
+/.idea
+/db
+/misc
+/out
+/gcloud
+/config
+/tests
+/doc
+/support
+/Makefile
+/README.md
+/package.json
+/.myenv
+/requirements.txt
