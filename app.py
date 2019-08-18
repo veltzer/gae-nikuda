@@ -18,9 +18,9 @@ with open(path, "rt") as fp:
 def index():
     return app.send_static_file("html/index.html")
 
-@app.route('/app/naked', methods=['POST'])
-def naked():
-    obj = request.json
+@app.route('/app/suggest', methods=['POST'])
+def suggest():
+    obj = flask.request.get_json()
     p_naked = obj['Naked']
     pos = bisect.bisect_left(all_sorted, p_naked)
     raw_results = all_sorted[pos:pos+10]
@@ -28,9 +28,9 @@ def naked():
     return flask.jsonify(obj)
 
 
-@app.route('/app/suggest', methods=['POST'])
-def suggest():
-    jsonobject = request.json
+@app.route('/app/naked', methods=['POST'])
+def naked():
+    jsonobject = flask.request.get_json()
     for obj in jsonobject:
         p_naked = obj['Naked']
         if p_naked in all_dict:
@@ -38,7 +38,7 @@ def suggest():
         else:
             results = []
         obj['Nikudim'] = results
-    return flask.jsonify(osonobject)
+    return flask.jsonify(jsonobject)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)

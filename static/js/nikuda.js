@@ -89,6 +89,7 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
   $.ajax({
     type: 'POST',
     url: 'app/naked',
+    contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: JSON.stringify(sentWords),
     success: function(replyWords) {
@@ -152,6 +153,7 @@ function Suggest() {
   $.ajax({
     type: 'POST',
     url: 'app/suggest',
+    contentType: 'application/json; charset=utf-8',
     dataType: 'json',
     data: JSON.stringify({ Naked: inaked, ID: suggestID }),
     success: function(replyWord) {
