@@ -1,10 +1,15 @@
+# see how to configure thigns here in:
+# https://cloud.google.com/appengine/docs/standard/python3/config/appref
 runtime: python37
 
+# cache expiration time, default is 10 min
+default_expiration: "10d"
+
 handlers:
-- url: /static
+- url: /static/
   static_dir: static/
   secure: always
-- url: /app/.*
+- url: /app/
   script: auto
   secure: always
 - url: /favicon.ico
