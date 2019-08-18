@@ -1,8 +1,8 @@
 performance optimization:
+- can I control types of machines and their number?
 - maybe I need to compress the files I upload (the svg files say).
 - maybe I need to remove the parts of the app that I don't need.
 	(main.py).
-- maybe I need to remove the app routing at all.
 - gunicorn is run by gae by default. Is there a better one?
 - I wrote the app with flask, is there a faster one.
 - find a way to list all files deployed to the app so that I could
