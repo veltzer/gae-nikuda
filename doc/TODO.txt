@@ -1,3 +1,6 @@
+- find a way to list all files deployed to the app so that I could
+	see that I'm not deploying any files I am not supposed to.
+
 - the makefile does not work because I don't have a make_helper.
 	get a make_helper to work with python module pymakehelper.
 
