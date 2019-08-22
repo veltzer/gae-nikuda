@@ -31,6 +31,11 @@ var DraftUpdateButton = undefined;
 //var SelectAll = undefined;
 var Status = undefined;
 
+$.ajaxSetup({
+  contentType: "application/json; charset=utf-8",
+  dataType: 'json',
+});
+
 // General purpose methods
 
 function show_to_user(text) {
@@ -86,11 +91,8 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
   // Update status
   show_to_user('מנקד...');
   // Go to the server with words & their respective IDs
-  $.ajax({
-    type: 'POST',
+  $.post({
     url: 'app/naked',
-    contentType: 'application/json; charset=utf-8',
-    dataType: 'json',
     data: JSON.stringify(sentWords),
     success: function(replyWords) {
       // reset status
@@ -150,11 +152,8 @@ function Suggest() {
   // request to appropriate reply
   suggestID = suggestID + 1;
   // Go to the server with the word & their respective IDs
-  $.ajax({
-    type: 'POST',
+  $.post({
     url: 'app/suggest',
-    contentType: 'application/json; charset=utf-8',
-    dataType: 'json',
     data: JSON.stringify({ Naked: inaked, ID: suggestID }),
     success: function(replyWord) {
       // reset status
