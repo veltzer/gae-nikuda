@@ -1,0 +1,2 @@
+we are using jquery 3.4.1 downloaded from here:
+	https://jquery.com/download/
