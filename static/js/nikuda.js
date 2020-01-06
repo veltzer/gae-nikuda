@@ -32,8 +32,8 @@ var DraftUpdateButton = undefined;
 var Status = undefined;
 
 $.ajaxSetup({
-  contentType: "application/json; charset=utf-8",
-  dataType: 'json',
+  contentType: 'application/json; charset=utf-8',
+  dataType: 'json'
 });
 
 // General purpose methods
