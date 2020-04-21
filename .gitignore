@@ -9,4 +9,3 @@ __pycache__
 *.stamp
 /tools
 /node_modules
-/.idea/workspace.xml
