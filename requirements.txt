@@ -1,4 +1,5 @@
-# production
+# THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
+# production requirements
 flask
-# development
+# dev requirements
 pydmt
