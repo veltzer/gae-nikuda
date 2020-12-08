@@ -120,12 +120,12 @@ checkcss: $(CSSCHECK)
 $(JSCHECK): $(SOURCES_JS) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-	$(Q)make_helper wrapper-silent $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+	$(Q)pymakehelper only_print_on_error $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 	$(Q)pymakehelper touch_mkdir $@
 
 $(HTMLCHECK): $(SOURCES_HTML) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)make_helper wrapper-silent $(TOOL_HTMLHINT) $(SOURCES_HTML)
+	$(Q)pymakehelper only_print_on_error $(TOOL_HTMLHINT) $(SOURCES_HTML)
 	$(Q)pymakehelper touch_mkdir $@
 #$(Q)$(TOOL_TIDY) -errors -q -utf8 $(SOURCES_HTML)
 
