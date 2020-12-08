@@ -89,7 +89,7 @@ all:
 $(TOOLS): package.json
 	$(info doing [$@])
 	$(Q)templar install_deps
-	$(Q)make_helper touch-mkdir $@
+	$(Q)pymakehelper touch_mkdir $@
 
 .PHONY: debug_me
 debug_me:
@@ -121,15 +121,15 @@ $(JSCHECK): $(SOURCES_JS) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
 	$(Q)make_helper wrapper-silent $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
-	$(Q)make_helper touch-mkdir $@
+	$(Q)pymakehelper touch_mkdir $@
 
 $(HTMLCHECK): $(SOURCES_HTML) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)make_helper wrapper-silent $(TOOL_HTMLHINT) $(SOURCES_HTML)
-	$(Q)make_helper touch-mkdir $@
+	$(Q)pymakehelper touch_mkdir $@
 #$(Q)$(TOOL_TIDY) -errors -q -utf8 $(SOURCES_HTML)
 
 $(CSSCHECK): $(SOURCES_CSS) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
 	$(Q)make_helper wrapper-css-validator java -jar $(TOOL_CSS_VALIDATOR) --profile=css3 --output=text -vextwarning=true --warning=0 $(addprefix file:,$(SOURCES_CSS))
-	$(Q)make_helper touch-mkdir $@
+	$(Q)pymakehelper touch_mkdir $@
