@@ -3,3 +3,4 @@
 flask
 # dev requirements
 pydmt
+pymakehelper

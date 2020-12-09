@@ -17,6 +17,7 @@ test_requires = [
 
 dev_requires = [
     'pydmt',  # for templating
+    'pymakehelper',  # for the makefile
 ]
 
 install_requires = list(setup_requires)

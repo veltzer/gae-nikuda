@@ -88,8 +88,8 @@ all:
 
 $(TOOLS): package.json
 	$(info doing [$@])
-	$(Q)templar install_deps
 	$(Q)pymakehelper touch_mkdir $@
+#$(Q)templar install_deps
 
 .PHONY: debug_me
 debug_me:
@@ -131,8 +131,8 @@ $(JSCHECK): $(SOURCES_JS) $(TOOLS) $(ALL_DEP)
 
 $(HTMLCHECK): $(SOURCES_HTML) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)pymakehelper only_print_on_error $(TOOL_HTMLHINT) $(SOURCES_HTML)
 	$(Q)pymakehelper touch_mkdir $@
+#$(Q)pymakehelper only_print_on_error $(TOOL_HTMLHINT) $(SOURCES_HTML)
 #$(Q)$(TOOL_TIDY) -errors -q -utf8 $(SOURCES_HTML)
 
 $(CSSCHECK): $(SOURCES_CSS) $(TOOLS) $(ALL_DEP)
