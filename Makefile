@@ -131,5 +131,5 @@ $(HTMLCHECK): $(SOURCES_HTML) $(TOOLS) $(ALL_DEP)
 
 $(CSSCHECK): $(SOURCES_CSS) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)make_helper wrapper-css-validator java -jar $(TOOL_CSS_VALIDATOR) --profile=css3 --output=text -vextwarning=true --warning=0 $(addprefix file:,$(SOURCES_CSS))
+	$(Q)pymakehelper wrapper_css_validator java -jar $(TOOL_CSS_VALIDATOR) --profile=css3 --output=text -vextwarning=true --warning=0 $(addprefix file:,$(SOURCES_CSS))
 	$(Q)pymakehelper touch_mkdir $@
