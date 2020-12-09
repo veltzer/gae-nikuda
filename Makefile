@@ -98,10 +98,16 @@ debug_me:
 
 # clean
 
-.PHONY: clean_manual
-clean_manual:
+.PHONY: clean
+clean:
 	$(info doing [$@])
 	$(Q)-rm -f $(CLEAN)
+
+
+.PHONY: clean_hard
+clean_hard:
+	$(info doing [$@])
+	$(Q)git clean -qffxd
 
 # checks
 
@@ -119,9 +125,9 @@ checkcss: $(CSSCHECK)
 
 $(JSCHECK): $(SOURCES_JS) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
-	$(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-	$(Q)pymakehelper only_print_on_error $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 	$(Q)pymakehelper touch_mkdir $@
+# $(Q)pymakehelper only_print_on_error $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
+# $(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
 
 $(HTMLCHECK): $(SOURCES_HTML) $(TOOLS) $(ALL_DEP)
 	$(info doing [$@])
