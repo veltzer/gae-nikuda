@@ -1,0 +1,5 @@
+Deploying to app engine requires the Google Cloud Build API which in turn automatically turns on the following APIs:
+	Cloud Logging API
+	Cloud Pub/Sub API
+	Container Registry API
+	Google Cloud Storage JSON API
