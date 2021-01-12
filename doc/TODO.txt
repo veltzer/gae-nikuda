@@ -1,5 +1,12 @@
+- If you look at nikuda.co.il on two different browsers:
+	say firefox and google-chrome
+	you wil see that hebrew is rendeded in different fonts in those browsers.
+	fix that, dictate my font.
+	document it.
+
 performance optimization:
 - can I control types of machines and their number?
+	yes you can I already have a limit on the number of machines in the app.yaml.
 - maybe I need to compress the files I upload (the svg files say).
 - maybe I need to remove the parts of the app that I don't need.
 	(main.py).
