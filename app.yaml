@@ -1,4 +1,4 @@
-# see how to configure thigns here in:
+# see how to configure things here in:
 # https://cloud.google.com/appengine/docs/standard/python3/config/appref
 runtime: python37
 
@@ -18,11 +18,15 @@ runtime: python37
 # - I didn't find a way to just say "secure: all" or something so to add and
 # remove https you must add and remove all 'secure' tags attached to all url
 # handers and add them back.
-
-# cache expiration time, default is 10 min
+#
+# - cache expiration time, default is 10 min
 # watch out! you cannot remove stuff from the cache so avoid the temptation to
 # put stuff in the cache for way too long. see document above.
 # default_expiration: "10m"
+
+
+automatic_scaling:
+  max_instances: 2
 
 handlers:
 - url: /static/
