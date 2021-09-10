@@ -1,5 +1,3 @@
-# include /usr/share/templar/make/Makefile
-
 ##############
 # parameters #
 ##############
@@ -89,7 +87,6 @@ all:
 $(TOOLS): package.json
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
-#$(Q)templar install_deps
 
 .PHONY: debug_me
 debug_me:
