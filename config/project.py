@@ -12,4 +12,4 @@ project_copyright_years = ", ".join(
 if str(config.general.general_current_year) == project_year_started:
     project_copyright_years = config.general.general_current_year
 else:
-    project_copyright_years = "{0}-{1}".format(project_year_started, config.general.general_current_year)
+    project_copyright_years = f"{project_year_started} - {config.general.general_current_year}"
