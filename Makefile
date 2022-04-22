@@ -10,7 +10,7 @@ DO_CHECKHTML:=1
 # do you want to validate css?
 DO_CHECKCSS:=0
 # do you want dependency on the makefile itself ?
-DO_ALL_DEP:=1
+DO_ALLDEP:=1
 
 #########
 # tools #
@@ -69,10 +69,8 @@ SOURCES_HTML:=$(shell find static/html -name "*.html")
 SOURCES_CSS:=$(shell find static/css -name "*.css")
 
 # dependency on the makefile itself
-ifeq ($(DO_ALL_DEP),1)
-ALL_DEP:=Makefile out/tools.stamp
-else
-ALL_DEP:=
+ifeq ($(DO_ALLDEP),1)
+.EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
 endif
 
 # all variables between the snapshot of BUILT_IN_VARS and this place in the code
@@ -80,59 +78,44 @@ DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
 ###########
 # targets #
 ###########
-
+.PHONY: all
 all:
 	$(info doing [$@])
-
 $(TOOLS): package.json
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
-
 .PHONY: debug_me
 debug_me:
 	$(info doing [$@])
 	$(foreach v, $(DEFINED_VARS), $(info $(v) = $($(v))))
-
-# clean
-
 .PHONY: clean
 clean:
 	$(info doing [$@])
 	$(Q)-rm -f $(CLEAN)
-
-
 .PHONY: clean_hard
 clean_hard:
 	$(info doing [$@])
 	$(Q)git clean -qffxd
-
-# checks
-
 .PHONY: checkjs
 checkjs: $(JSCHECK)
 	$(info doing [$@])
-
 .PHONY: checkhtml
 checkhtml: $(HTMLCHECK)
 	$(info doing [$@])
-
 .PHONY: checkcss
 checkcss: $(CSSCHECK)
 	$(info doing [$@])
-
-$(JSCHECK): $(SOURCES_JS) $(TOOLS) $(ALL_DEP)
+$(JSCHECK): $(SOURCES_JS) $(TOOLS)
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
 # $(Q)pymakehelper only_print_on_error $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 # $(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-
-$(HTMLCHECK): $(SOURCES_HTML) $(TOOLS) $(ALL_DEP)
+$(HTMLCHECK): $(SOURCES_HTML) $(TOOLS)
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
 #$(Q)pymakehelper only_print_on_error $(TOOL_HTMLHINT) $(SOURCES_HTML)
 #$(Q)$(TOOL_TIDY) -errors -q -utf8 $(SOURCES_HTML)
-
-$(CSSCHECK): $(SOURCES_CSS) $(TOOLS) $(ALL_DEP)
+$(CSSCHECK): $(SOURCES_CSS) $(TOOLS)
 	$(info doing [$@])
 	$(Q)pymakehelper wrapper_css_validator java -jar $(TOOL_CSS_VALIDATOR) --profile=css3 --output=text -vextwarning=true --warning=0 $(addprefix file:,$(SOURCES_CSS))
 	$(Q)pymakehelper touch_mkdir $@
