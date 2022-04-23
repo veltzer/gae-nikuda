@@ -80,7 +80,7 @@ DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
 ###########
 .PHONY: all
 all:
-	$(info doing [$@])
+	@true
 $(TOOLS): package.json
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
