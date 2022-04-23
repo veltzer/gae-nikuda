@@ -84,8 +84,8 @@ all:
 $(TOOLS): package.json
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
-.PHONY: debug_me
-debug_me:
+.PHONY: debug
+debug:
 	$(info doing [$@])
 	$(foreach v, $(DEFINED_VARS), $(info $(v) = $($(v))))
 .PHONY: clean
