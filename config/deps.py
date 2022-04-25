@@ -1,10 +1,4 @@
-tools = [
-    'jsl',
-    'jsmin',
-    'closure',
-    'css-validator',
-]
-packs = [
+packages = [
     # for validating html
     'tidy',
     # for uploading via ftp
@@ -37,4 +31,10 @@ packs = [
     'closure-linter',
     # for csstidy
     'csstidy',
+]
+tools = [
+    'jsl',
+    'jsmin',
+    'closure',
+    'css-validator',
 ]
