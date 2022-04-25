@@ -71,7 +71,7 @@ SOURCES_CSS:=$(shell find static/css -name "*.css")
 # dependency on the makefile itself
 ifeq ($(DO_ALLDEP),1)
 .EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
-endif
+endif # DO_ALLDEP
 
 # all variables between the snapshot of BUILT_IN_VARS and this place in the code
 DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
