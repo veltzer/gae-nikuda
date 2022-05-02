@@ -102,17 +102,17 @@ checkhtml: $(HTMLCHECK)
 .PHONY: checkcss
 checkcss: $(CSSCHECK)
 	$(info doing [$@])
-$(JSCHECK): $(SOURCES_JS) $(TOOLS)
+$(JSCHECK): $(SOURCES_JS)
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
 # $(Q)pymakehelper only_print_on_error $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
 # $(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-$(HTMLCHECK): $(SOURCES_HTML) $(TOOLS)
+$(HTMLCHECK): $(SOURCES_HTML)
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
 #$(Q)pymakehelper only_print_on_error $(TOOL_HTMLHINT) $(SOURCES_HTML)
 #$(Q)$(TOOL_TIDY) -errors -q -utf8 $(SOURCES_HTML)
-$(CSSCHECK): $(SOURCES_CSS) $(TOOLS)
+$(CSSCHECK): $(SOURCES_CSS)
 	$(info doing [$@])
 	$(Q)pymakehelper wrapper_css_validator java -jar $(TOOL_CSS_VALIDATOR) --profile=css3 --output=text -vextwarning=true --warning=0 $(addprefix file:,$(SOURCES_CSS))
 	$(Q)pymakehelper touch_mkdir $@
