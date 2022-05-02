@@ -30,7 +30,6 @@ TOOL_CSSTIDY=/usr/bin/csstidy
 JSCHECK:=out/jscheck.stamp
 HTMLCHECK:=out/html.stamp
 CSSCHECK:=out/css.stamp
-TOOLS:=out/tools.stamp
 
 ########
 # code #
@@ -79,11 +78,9 @@ DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
 # targets #
 ###########
 .PHONY: all
-all:
+all: $(ALL)
 	@true
-$(TOOLS): packages.txt config/deps.py package.json
-	$(info doing [$@])
-	$(Q)pymakehelper touch_mkdir $@
+
 .PHONY: debug
 debug:
 	$(info doing [$@])
