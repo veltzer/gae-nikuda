@@ -20,5 +20,8 @@
   "devDependencies": {
     "htmlhint": "^0.9.13",
     "jsdoc": "^3.4.0"
+  },
+  "dependencies": {
+    "package.json": "^2.0.1"
   }
 }
