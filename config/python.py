@@ -2,7 +2,7 @@ import config.project
 
 package_name = config.project.project_name
 
-run_requires = [
+install_requires = [
     "flask",  # for a web framework
 ]
 dev_requires = [
