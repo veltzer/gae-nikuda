@@ -2,8 +2,7 @@ import config.project
 
 package_name = config.project.project_name
 
-dev_requires = [
-    "pydmt",
+make_requires = [
     "pymakehelper",
 ]
 install_requires = [
