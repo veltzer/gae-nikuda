@@ -1,6 +1,3 @@
 # THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
 # production requirements
 flask
-# dev requirements
-pydmt
-pymakehelper
