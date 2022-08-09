@@ -1,5 +1,5 @@
 # ignore this file
-/.gcloudignoe
+/.gcloudignore
 # ignore the entire git folder
 /.git
 # ignore the git ignore file
