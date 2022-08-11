@@ -1,9 +1,11 @@
-﻿.nikuda_label {
+﻿body {
+	font-family: arial;
+}
+.nikuda_label {
 	position:absolute;
 	top: 10%;
 	right:35%;
 	/*noinspection CssNoGenericFontName*/
-	font-family:David;
 	font-weight:bold;
 	font-size:12.5em;
 	border-style:none;
@@ -23,7 +25,6 @@
 	width: 25%; height:95%;
 	float: right;
 	/*noinspection CssNoGenericFontName*/
-	font-family: David;
 	background: #FFF9EE;
 	color: Black;
 	border: 1px solid Black;
@@ -34,7 +35,6 @@
 	text-align: right;
 	vertical-align: top;
 	/*noinspection CssNoGenericFontName*/
-	font-family: David;
 	font-size: 2.0em;
 	border-width: medium;
 	margin: 0;
@@ -77,7 +77,6 @@
 	background: #FFF5E1;
 	color: Black;
 	/*noinspection CssNoGenericFontName*/
-	font-family: David;
 	z-index: 1;
 	cursor: help;
 	overflow: auto;
