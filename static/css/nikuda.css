@@ -1,4 +1,5 @@
-﻿body {
+﻿/* this is the right way to set a property on all elements */
+* {
 	font-family: arial;
 }
 .nikuda_label {
