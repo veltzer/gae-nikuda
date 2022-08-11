@@ -31,9 +31,10 @@
 	overflow: auto;
 }
 .access_text {
+	display:inline;
 	width: 100%;
-	text-align: right;
 	vertical-align: top;
+	text-align: right;
 	/*noinspection CssNoGenericFontName*/
 	font-size: 2.0em;
 	border-width: medium;
@@ -44,7 +45,10 @@
 	display:inline;
 	width: 100%;
 	vertical-align: top;
+	text-align: center;
+	/*noinspection CssNoGenericFontName*/
 	font-size:1em;
+	border-width: medium;
 	font-weight: bold;
 	cursor: pointer;
 	background: #FFE7BA;
