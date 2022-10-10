@@ -1,6 +1,8 @@
 make_requires = [
     "pymakehelper",
+    "pydmt",
+    "pyclassifiers",
 ]
 install_requires = [
-    "flask",  # for a web framework
+    "flask",
 ]
