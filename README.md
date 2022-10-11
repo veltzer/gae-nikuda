@@ -1,14 +1,14 @@
-## gae-nikuda
+## nikuda
 
 version: 0.0.1
 
 description: Nikuda web site
 
-website: https://veltzer.github.io/gae-nikuda
+website: https://veltzer.github.io/nikuda
 
 ## build
 
-![build](https://github.com/veltzer/gae-nikuda/workflows/build/badge.svg)
+![build](https://github.com/veltzer/nikuda/workflows/build/badge.svg)
 
 Nikuda is a web site intended to allow
 users to get punctuation for hebrew words, sentences and paragraphs.
