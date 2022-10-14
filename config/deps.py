@@ -1,16 +1,16 @@
 packages = [
     # for validating html
-    'tidy',
+    "tidy",
     # for jslint
-    'nodejs',
+    "nodejs",
     # for jslint
-    'npm',
+    "npm",
     # for csstidy
-    'csstidy',
+    "csstidy",
 ]
 tools = [
-    'jsl',
-    'jsmin',
-    'closure',
-    'css-validator',
+    "jsl",
+    "jsmin",
+    "closure",
+    "css-validator",
 ]
