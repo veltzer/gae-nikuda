@@ -1,7 +1,11 @@
+config_requires = []
+dev_requires = []
+install_requires = [
+    "flask",
+]
 make_requires = [
     "pymakehelper",
     "pydmt",
 ]
-install_requires = [
-    "flask",
-]
+test_requires = []
+requires = config_requires + install_requires + make_requires + test_requires
