@@ -1,6 +1,6 @@
 # see how to configure things here in:
 # https://cloud.google.com/appengine/docs/standard/python3/config/appref
-runtime: python37
+runtime: python312
 
 # NOTES:
 # - we can add a section like this:
