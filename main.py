@@ -9,7 +9,7 @@ app = flask.Flask(__name__, static_url_path='')
 
 # setup
 path = os.path.join(os.path.split(__file__)[0], 'data/all.json')
-with open(path, "rt") as fp:
+with open(path, "rt", encoding="UTF8") as fp:
     all_dict = json.load(fp)
     all_sorted = sorted(all_dict.keys())
 
