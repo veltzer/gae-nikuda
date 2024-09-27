@@ -23,7 +23,6 @@ TOOL_JSDOC:=node_modules/jsdoc/jsdoc.js
 TOOL_JSLINT:=node_modules/jslint/bin/jslint.js
 TOOL_GJSLINT:=/usr/bin/gjslint
 TOOL_YUICOMPRESSOR:=/usr/bin/yui-compressor
-TOOL_HTMLHINT:=node_modules/htmlhint/bin/htmlhint
 TOOL_TIDY=/usr/bin/tidy
 TOOL_CSSTIDY=/usr/bin/csstidy
 
@@ -110,7 +109,7 @@ $(JSCHECK): $(SOURCES_JS)
 $(HTMLCHECK): $(SOURCES_HTML)
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
-#$(Q)pymakehelper only_print_on_error $(TOOL_HTMLHINT) $(SOURCES_HTML)
+#$(Q)pymakehelper only_print_on_error node_modules/.bin/htmlhint $(SOURCES_HTML)
 #$(Q)$(TOOL_TIDY) -errors -q -utf8 $(SOURCES_HTML)
 $(CSSCHECK): $(SOURCES_CSS)
 	$(info doing [$@])
