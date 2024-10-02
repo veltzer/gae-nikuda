@@ -3,14 +3,14 @@
 ##############
 # do you want to see the commands executed ?
 DO_MKDBG:=0
+# do you want dependency on the makefile itself ?
+DO_ALLDEP:=1
 # do you want to check the javascript code?
 DO_CHECKJS:=1
 # do you want to validate html?
 DO_CHECKHTML:=1
 # do you want to validate css?
 DO_CHECKCSS:=0
-# do you want dependency on the makefile itself ?
-DO_ALLDEP:=1
 
 #########
 # tools #
@@ -66,11 +66,6 @@ SOURCES_JS:=$(shell find static/js -type f -and -name "*.js")
 SOURCES_HTML:=$(shell find static/html -type f -and -name "*.html")
 SOURCES_CSS:=$(shell find static/css -type f -and -name "*.css")
 
-# dependency on the makefile itself
-ifeq ($(DO_ALLDEP),1)
-.EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
-endif # DO_ALLDEP
-
 # all variables between the snapshot of BUILT_IN_VARS and this place in the code
 DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
 ###########
@@ -115,3 +110,10 @@ $(CSSCHECK): $(SOURCES_CSS)
 	$(info doing [$@])
 	$(Q)pymakehelper wrapper_css_validator java -jar $(TOOL_CSS_VALIDATOR) --profile=css3 --output=text -vextwarning=true --warning=0 $(addprefix file:,$(SOURCES_CSS))
 	$(Q)pymakehelper touch_mkdir $@
+
+##########
+# alldep #
+##########
+ifeq ($(DO_ALLDEP),1)
+.EXTRA_PREREQS+=$(foreach mk, ${MAKEFILE_LIST},$(abspath ${mk}))
+endif # DO_ALLDEP
