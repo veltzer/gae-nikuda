@@ -10,11 +10,11 @@ DO_CHECKJS:=1
 # do you want to validate html?
 DO_CHECKHTML:=1
 # do you want to validate css?
-DO_CHECKCSS:=0
+DO_CHECKCSS:=1
 
-#########
-# tools #
-#########
+########
+# code #
+########
 TOOL_COMPILER:=tools/closure-compiler-v20160822.jar
 TOOL_JSMIN:=tools/jsmin
 TOOL_CSS_VALIDATOR:=tools/css-validator/css-validator.jar
@@ -30,9 +30,7 @@ JSCHECK:=out/jscheck.stamp
 HTMLCHECK:=out/html.stamp
 CSSCHECK:=out/css.stamp
 
-########
-# code #
-########
+ALL:=
 CLEAN:=
 
 ifeq ($(DO_CHECKJS),1)
@@ -66,11 +64,9 @@ SOURCES_JS:=$(shell find static/js -type f -and -name "*.js")
 SOURCES_HTML:=$(shell find static/html -type f -and -name "*.html")
 SOURCES_CSS:=$(shell find static/css -type f -and -name "*.css")
 
-# all variables between the snapshot of BUILT_IN_VARS and this place in the code
-DEFINED_VARS:=$(filter-out $(BUILT_IN_VARS) BUILT_IN_VARS, $(.VARIABLES))
-###########
-# targets #
-###########
+#########
+# rules #
+#########
 .PHONY: all
 all: $(ALL)
 	@true
@@ -78,7 +74,6 @@ all: $(ALL)
 .PHONY: debug
 debug:
 	$(info doing [$@])
-	$(foreach v, $(DEFINED_VARS), $(info $(v) = $($(v))))
 .PHONY: clean
 clean:
 	$(info doing [$@])
@@ -96,6 +91,10 @@ checkhtml: $(HTMLCHECK)
 .PHONY: checkcss
 checkcss: $(CSSCHECK)
 	$(info doing [$@])
+
+############
+# patterns #
+############
 $(JSCHECK): $(SOURCES_JS)
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
@@ -109,6 +108,8 @@ $(HTMLCHECK): $(SOURCES_HTML)
 $(CSSCHECK): $(SOURCES_CSS)
 	$(info doing [$@])
 	$(Q)pymakehelper wrapper_css_validator java -jar $(TOOL_CSS_VALIDATOR) --profile=css3 --output=text -vextwarning=true --warning=0 $(addprefix file:,$(SOURCES_CSS))
+	$(Q)pymakehelper touch_mkdir $@
+	$(Q)pymakehelper only_print_on_error node_modules/.bin/stylelint $<
 	$(Q)pymakehelper touch_mkdir $@
 
 ##########
