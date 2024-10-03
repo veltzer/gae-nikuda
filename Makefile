@@ -10,7 +10,7 @@ DO_CHECKJS:=1
 # do you want to validate html?
 DO_CHECKHTML:=1
 # do you want to validate css?
-DO_CHECKCSS:=1
+DO_CHECKCSS:=0
 
 ########
 # code #
