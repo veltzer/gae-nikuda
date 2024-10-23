@@ -60,9 +60,9 @@ Q:=@
 #.SILENT:
 endif # DO_MKDBG
 
-SOURCES_JS:=$(shell find static/js -type f -and -name "*.js")
-SOURCES_HTML:=$(shell find static/html -type f -and -name "*.html")
-SOURCES_CSS:=$(shell find static/css -type f -and -name "*.css")
+SOURCES_JS:=$(shell find static/js -type f -and -name "*.js" 2> /dev/null)
+SOURCES_HTML:=$(shell find static/html -type f -and -name "*.html" 2> /dev/null)
+SOURCES_CSS:=$(shell find static/css -type f -and -name "*.css" 2> /dev/null)
 
 #########
 # rules #
