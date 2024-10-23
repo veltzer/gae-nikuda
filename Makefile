@@ -5,51 +5,53 @@
 DO_MKDBG:=0
 # do you want dependency on the makefile itself ?
 DO_ALLDEP:=1
+
+# do you want to check python code with pylint?
+DO_PY_LINT:=1
+# do you want to check bash syntax?
+DO_BASH_CHECK:=1
 # do you want to check the javascript code?
-DO_CHECKJS:=1
+DO_JS_CHECK:=1
 # do you want to validate html?
-DO_CHECKHTML:=1
+DO_HTML_CHECK:=1
 # do you want to validate css?
-DO_CHECKCSS:=0
+DO_CSS_CHECK:=0
 
 ########
 # code #
 ########
-TOOL_COMPILER:=tools/closure-compiler-v20160822.jar
-TOOL_JSMIN:=tools/jsmin
-TOOL_CSS_VALIDATOR:=tools/css-validator/css-validator.jar
-TOOL_JSL:=tools/jsl/jsl
-TOOL_JSDOC:=node_modules/jsdoc/jsdoc.js
-TOOL_JSLINT:=node_modules/jslint/bin/jslint.js
-TOOL_GJSLINT:=/usr/bin/gjslint
-TOOL_YUICOMPRESSOR:=/usr/bin/yui-compressor
-TOOL_TIDY=/usr/bin/tidy
-TOOL_CSSTIDY=/usr/bin/csstidy
-
-JSCHECK:=out/jscheck.stamp
-HTMLCHECK:=out/html.stamp
-CSSCHECK:=out/css.stamp
-
 ALL:=
-CLEAN:=
 
-ifeq ($(DO_CHECKJS),1)
-ALL+=$(JSCHECK)
-all: $(ALL)
-CLEAN+=$(JSCHECK)
-endif # DO_CHECKJS
+PY_SRC:=$(shell find scripts -type f -and -name "*.py" 2> /dev/null)
+PY_LINT=$(addprefix out/, $(addsuffix .lint, $(basename $(PY_SRC))))
+BASH_SRC:=$(shell find scripts -type f -and -name "*.sh" 2> /dev/null)
+BASH_CHECK:=$(addprefix out/, $(addsuffix .check, $(basename $(BASH_SRC))))
+JS_SRC:=$(shell find static/js -type f -and -name "*.js" 2> /dev/null)
+JS_CHECK:=$(addprefix out/, $(addsuffix .check, $(basename $(JS_SRC))))
+HTML_SRC:=$(shell find static/html -type f -and -name "*.html" 2> /dev/null)
+HTML_CHECK:=$(addprefix out/, $(addsuffix .check, $(basename $(HTML_SRC))))
+CSS_SRC:=$(shell find static/css -type f -and -name "*.css" 2> /dev/null)
+CSS_CHECK:=$(addprefix out/, $(addsuffix .check, $(basename $(CSS_SRC))))
 
-ifeq ($(DO_CHECKHTML),1)
-ALL+=$(HTMLCHECK)
-all: $(ALL)
-CLEAN+=$(HTMLCHECK)
-endif # DO_CHECKHTML
+ifeq ($(DO_PY_LINT),1)
+ALL+=$(PY_LINT)
+endif # DO_PY_LINT
 
-ifeq ($(DO_CHECKCSS),1)
-ALL+=$(CSSCHECK)
-all: $(ALL)
-CLEAN+=$(CSSCHECK)
-endif # DO_CHECKCSS
+ifeq ($(DO_BASH_CHECK),1)
+ALL+=$(BASH_CHECK)
+endif # DO_BASH_CHECK
+
+ifeq ($(DO_JS_CHECK),1)
+ALL+=$(JS_CHECK)
+endif # DO_JS_CHECK
+
+ifeq ($(DO_HTML_CHECK),1)
+ALL+=$(HTML_CHECK)
+endif # DO_HTML_CHECK
+
+ifeq ($(DO_CSS_CHECK),1)
+ALL+=$(CSS_CHECK)
+endif # DO_CSS_CHECK
 
 # silent stuff
 ifeq ($(DO_MKDBG),1)
@@ -59,10 +61,6 @@ else # DO_MKDBG
 Q:=@
 #.SILENT:
 endif # DO_MKDBG
-
-SOURCES_JS:=$(shell find static/js -type f -and -name "*.js" 2> /dev/null)
-SOURCES_HTML:=$(shell find static/html -type f -and -name "*.html" 2> /dev/null)
-SOURCES_CSS:=$(shell find static/css -type f -and -name "*.css" 2> /dev/null)
 
 #########
 # rules #
@@ -74,41 +72,46 @@ all: $(ALL)
 .PHONY: debug
 debug:
 	$(info doing [$@])
+	$(info PY_SRC is $(PY_SRC))
+	$(info PY_LINT is $(PY_LINT))
+	$(info BASH_SRC is $(BASH_SRC))
+	$(info BASH_CHECK is $(BASH_CHECK))
+	$(info JS_SRC is $(JS_SRC))
+	$(info JS_CHECK is $(JS_CHECK))
+	$(info HTML_SRC is $(HTML_SRC))
+	$(info HTML_CHECK is $(HTML_CHECK))
+	$(info CSS_SRC is $(CSS_SRC))
+	$(info CSS_CHECK is $(CSS_CHECK))
 .PHONY: clean
 clean:
 	$(info doing [$@])
-	$(Q)-rm -f $(CLEAN)
+	$(Q)-rm -f $(ALL)
 .PHONY: clean_hard
 clean_hard:
 	$(info doing [$@])
 	$(Q)git clean -qffxd
-.PHONY: checkjs
-checkjs: $(JSCHECK)
-	$(info doing [$@])
-.PHONY: checkhtml
-checkhtml: $(HTMLCHECK)
-	$(info doing [$@])
-.PHONY: checkcss
-checkcss: $(CSSCHECK)
-	$(info doing [$@])
 
 ############
 # patterns #
 ############
-$(JSCHECK): $(SOURCES_JS)
+$(PY_LINT): out/%.lint: %.py .pylintrc
+	$(info doing [$@])
+	$(Q)pymakehelper error_on_print python -m pylint --reports=n --score=n $<
+	$(Q)pymakehelper touch_mkdir $@
+$(BASH_CHECK): out/%.check: %.sh .shellcheckrc
+	$(info doing [$@])
+	$(Q)shellcheck --severity=error --shell=bash --external-sources --source-path="$$HOME" $<
+	$(Q)pymakehelper touch_mkdir $@
+$(JS_CHECK): out/%.check: %.js
 	$(info doing [$@])
 	$(Q)pymakehelper touch_mkdir $@
-# $(Q)pymakehelper only_print_on_error $(TOOL_GJSLINT) --flagfile support/gjslint.cfg $(SOURCES_JS)
-# $(Q)$(TOOL_JSL) --conf=support/jsl.conf --quiet --nologo --nosummary --nofilelisting $(SOURCES_JS)
-$(HTMLCHECK): $(SOURCES_HTML)
+$(HTML_CHECK): out/%.check: %.html
 	$(info doing [$@])
+	$(Q)pymakehelper only_print_on_error node_modules/.bin/htmlhint $<
+	$(Q)scripts/run_tidy.py $<
 	$(Q)pymakehelper touch_mkdir $@
-#$(Q)pymakehelper only_print_on_error node_modules/.bin/htmlhint $(SOURCES_HTML)
-#$(Q)$(TOOL_TIDY) -errors -q -utf8 $(SOURCES_HTML)
-$(CSSCHECK): $(SOURCES_CSS)
+$(CSS_CHECK): out/%.check: %.css
 	$(info doing [$@])
-	$(Q)pymakehelper wrapper_css_validator java -jar $(TOOL_CSS_VALIDATOR) --profile=css3 --output=text -vextwarning=true --warning=0 $(addprefix file:,$(SOURCES_CSS))
-	$(Q)pymakehelper touch_mkdir $@
 	$(Q)pymakehelper only_print_on_error node_modules/.bin/stylelint $<
 	$(Q)pymakehelper touch_mkdir $@
 
