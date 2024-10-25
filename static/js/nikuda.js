@@ -15,22 +15,6 @@ var nikudRegExp =
 /* var firstLettersRegExp = /^[בכלמשהו]/g; */
 var ABRegExp = /[אבגדהוזחטיכךלמםנןסעפףצץקרשת]/g;
 
-// all dom elements
-var MainText = undefined;
-var MeNaked = undefined;
-var Quicky = undefined;
-var SuggestionBox = undefined;
-var SuggestionList = undefined;
-var QuickyAns = undefined;
-var Draft = undefined;
-var Answer = undefined;
-var HelpBox = undefined;
-var NikudizeButton = undefined;
-var QuickyButton = undefined;
-var DraftUpdateButton = undefined;
-//var SelectAll = undefined;
-var Status = undefined;
-
 $.ajaxSetup({
   contentType: 'application/json; charset=utf-8',
   dataType: 'json'
@@ -98,8 +82,8 @@ function naked(sentWords, successHandler, doneHandler, errorHandler) {
       // reset status
       show_to_user('');
       for (var i = 0; i < replyWords.length; i++) {
-        var nikudim = replyWords[i]['Nikudim'];
-        var original = replyWords[i]['Naked'];
+        var nikudim = replyWords[i].Nikudim;
+        var original = replyWords[i].Naked;
 
         if (nikudim.length > 0) {
           // Make sure we don't have duplicates in the DB
@@ -162,7 +146,7 @@ function Suggest() {
       // Clear the old
       SuggestionList.children('li').remove();
 
-      var nakeds = replyWord['Nakeds'];
+      var nakeds = replyWord.Nakeds;
       var ID = replyWord.ID;
 
       if ((ID === suggestID) && (nakeds.length > 0)) {
