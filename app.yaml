@@ -3,3 +3,5 @@ entrypoint: gunicorn -b :$PORT src.main:app
 handlers:
 - url: /.*
   script: auto
+automatic_scaling:
+  max_instances: 2
