@@ -6,11 +6,12 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-# setup
-path = os.path.join(os.path.split(__file__)[0], "data/all.json")
-with open(path, "rt", encoding="UTF8") as fp:
-    all_dict = json.load(fp)
-    all_sorted = sorted(all_dict.keys())
+def load_data():
+    path = os.path.join(os.path.split(__file__)[0], "data/all.json")
+    with open(path, "rt", encoding="UTF8") as fp:
+        d = json.load(fp)
+        app.config["dict"] = d
+        app.config["sorted"] = sorted(d.keys())
 
 # this route is not needed in production
 @app.route("/", methods=["GET"])
@@ -21,8 +22,8 @@ def index():
 def suggest():
     obj = request.get_json()
     p_naked = obj["Naked"]
-    pos = bisect.bisect_left(all_sorted, p_naked)
-    raw_results = all_sorted[pos:pos+10]
+    pos = bisect.bisect_left(app.config["sorted"], p_naked)
+    raw_results = app.config["sorted"][pos:pos+10]
     obj["Nakeds"] = raw_results
     return jsonify(obj)
 
@@ -32,8 +33,9 @@ def naked():
     jsonobject = request.get_json()
     for obj in jsonobject:
         p_naked = obj["Naked"]
-        if p_naked in all_dict:
-            results = all_dict[p_naked]
+        d = app.config["dict"]
+        if p_naked in d:
+            results = d[p_naked]
         else:
             results = []
         obj["Nikudim"] = results
