@@ -1,17 +1,15 @@
 import bisect
-# import json
+import json
 from flask import Flask, request, jsonify
 
 
 app = Flask(__name__, static_folder="", static_url_path="/static")
 
-"""
 def load_data():
     with open("data/all.json", "rt", encoding="UTF8") as fp:
         d = json.load(fp)
         app.config["dict"] = d
         app.config["sorted"] = sorted(d.keys())
-"""
 
 # this route is not needed in production
 @app.route("/", methods=["GET"])
