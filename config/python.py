@@ -2,6 +2,7 @@ config_requires = []
 dev_requires = []
 install_requires = [
     "flask",
+    "gunicorn",
 ]
 build_requires = [
     "pymakehelper",
