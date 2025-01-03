@@ -22,13 +22,13 @@ DO_CSS_CHECK:=0
 ########
 ALL:=
 
-PY_SRC:=$(shell find scripts -type f -and -name "*.py" 2> /dev/null)
+PY_SRC:=$(shell find src scripts -type f -and -name "*.py" 2> /dev/null)
 PY_LINT=$(addprefix out/, $(addsuffix .lint, $(basename $(PY_SRC))))
 BASH_SRC:=$(shell find scripts -type f -and -name "*.sh" 2> /dev/null)
 BASH_CHECK:=$(addprefix out/, $(addsuffix .check, $(basename $(BASH_SRC))))
-JS_SRC:=$(shell find static/js -type f -and -name "*.js" 2> /dev/null)
+JS_SRC:=$(shell find src -type f -and -name "*.js" 2> /dev/null)
 JS_CHECK:=$(addprefix out/, $(addsuffix .check, $(basename $(JS_SRC))))
-HTML_SRC:=$(shell find static/html -type f -and -name "*.html" 2> /dev/null)
+HTML_SRC:=$(shell find src -type f -and -name "*.html" 2> /dev/null)
 HTML_CHECK:=$(addprefix out/, $(addsuffix .check, $(basename $(HTML_SRC))))
 CSS_SRC:=$(shell find static/css -type f -and -name "*.css" 2> /dev/null)
 CSS_CHECK:=$(addprefix out/, $(addsuffix .check, $(basename $(CSS_SRC))))
