@@ -1,10 +1,10 @@
 import bisect
 import os
 import json
-from flask import Flask
+from flask import Flask, request, jsonify
 
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 
 # setup
 path = os.path.join(os.path.split(__file__)[0], "data/all.json")
@@ -19,17 +19,17 @@ def index():
 
 @app.route("/app/suggest", methods=["POST"])
 def suggest():
-    obj = flask.request.get_json()
+    obj = request.get_json()
     p_naked = obj["Naked"]
     pos = bisect.bisect_left(all_sorted, p_naked)
     raw_results = all_sorted[pos:pos+10]
     obj["Nakeds"] = raw_results
-    return flask.jsonify(obj)
+    return jsonify(obj)
 
 
 @app.route("/app/naked", methods=["POST"])
 def naked():
-    jsonobject = flask.request.get_json()
+    jsonobject = request.get_json()
     for obj in jsonobject:
         p_naked = obj["Naked"]
         if p_naked in all_dict:
@@ -37,7 +37,7 @@ def naked():
         else:
             results = []
         obj["Nikudim"] = results
-    return flask.jsonify(jsonobject)
+    return jsonify(jsonobject)
 
 
 if __name__ == "__main__":
