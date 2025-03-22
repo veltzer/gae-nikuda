@@ -1,3 +1,8 @@
+"""
+Main code of the nikua website
+"""
+
+
 import bisect
 import json
 from flask import Flask, request, jsonify
