@@ -5,10 +5,9 @@ This script runs anything for you and ignores the run if the file has a tag
 that you specify.
 
 What is the reason for this script?
-We want the option not to run tidy on files which have:
-        FLAGS: NOTIDY
-in them to enable us to write not-well-structured HTML files
-to demo various things
+We want the option not to run a tool on files which have:
+        FLAGS: NOTOOL
+to enable a certain tool to run on them to demo various things
 """
 
 import sys
@@ -21,7 +20,7 @@ def get_flags(filename: str) -> set[str]:
     with open(filename, encoding="utf-8") as stream:
         for line in stream:
             line = line.strip()
-            if line.startswith("FLAGS:"):
+            if line.find("FLAGS:") != -1:
                 all_flags = line.split(":")[1]
                 for flag in all_flags.split(","):
                     flags.add(flag.strip())
