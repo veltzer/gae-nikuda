@@ -102,9 +102,9 @@ $(BASH_CHECK): out/%.check: %.sh .shellcheckrc
 	$(info doing [$@])
 	$(Q)shellcheck --severity=error --shell=bash --external-sources --source-path="$$HOME" $<
 	$(Q)pymakehelper touch_mkdir $@
-$(JS_CHECK): out/%.check: %.js .jshintrc scripts/run_with_ignore.py
+$(JS_CHECK): out/%.check: %.js .jshintrc
 	$(info doing [$@])
-	$(Q)pymakehelper only_print_on_error scripts/run_with_ignore.py $< NOJSHINT node_modules/.bin/jshint $<
+	$(Q)pymakehelper run_with_ignore $< NOJSHINT node_modules/.bin/jshint $<
 	$(Q)pymakehelper touch_mkdir $@
 $(HTML_CHECK): out/%.check: %.html scripts/run_tidy.py
 	$(info doing [$@])
