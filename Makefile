@@ -100,7 +100,7 @@ $(PY_LINT): out/%.lint: %.py .pylintrc
 	$(Q)pymakehelper touch_mkdir $@
 $(BASH_CHECK): out/%.check: %.sh .shellcheckrc
 	$(info doing [$@])
-	$(Q)shellcheck --severity=error --shell=bash --external-sources --source-path="$$HOME" $<
+	$(Q)shellcheck --severity=error --shell=bash --external-sources --source-path="$${HOME}" $<
 	$(Q)pymakehelper touch_mkdir $@
 $(JS_CHECK): out/%.check: %.js .jshintrc
 	$(info doing [$@])
