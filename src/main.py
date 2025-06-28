@@ -12,7 +12,7 @@ app = Flask(__name__, static_folder="", static_url_path="/static")
 
 @app.before_request
 def load_data():
-    with open("src/data/all.json", "rt", encoding="UTF8") as fp:
+    with open("src/data/all.json", encoding="UTF8") as fp:
         d = json.load(fp)
         app.config["dict"] = d
         app.config["sorted"] = sorted(d.keys())
