@@ -1,6 +1,10 @@
 # THIS IS AN AUTO-GENERATED FILE. DO NOT EDIT!
 flask
 gunicorn
+mypy
+pycmdtools
 pydmt
 pylint
 pymakehelper
+pytest
+ruff
