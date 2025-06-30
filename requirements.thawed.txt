@@ -2,6 +2,7 @@
 flask
 gunicorn
 mypy
+pyclassifiers
 pycmdtools
 pydmt
 pylint
